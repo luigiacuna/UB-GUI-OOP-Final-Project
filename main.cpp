@@ -2,7 +2,7 @@
 
 #include <QApplication>
 //Testing if working on git hub April 24 2022
-//Take 2 LOL
+
 
 int main(int argc, char *argv[])
 {
