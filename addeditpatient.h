@@ -12,7 +12,7 @@ class AddEditPatient : public QDialog
     Q_OBJECT
 
 public:
-    explicit AddEditPatient(QWidget *parent = nullptr);
+    explicit AddEditPatient(int senario,QWidget *parent = nullptr);
     ~AddEditPatient();
 
 private:

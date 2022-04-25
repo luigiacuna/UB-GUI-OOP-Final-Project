@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QPixmap>
+#include "addeditpatient.h"
 
 namespace Ui {
 class DoctorView;
@@ -15,6 +16,9 @@ class DoctorView : public QMainWindow
 public:
     explicit DoctorView(QWidget *parent = nullptr);
     ~DoctorView();
+private slots:
+    void createNewPatient();
+    void editPatient();
 
 private:
     Ui::DoctorView *ui;
