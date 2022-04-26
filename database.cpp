@@ -158,3 +158,11 @@ void Database::resetPassword(QString)
     QSqlQuery qry;
     qry.prepare("UPDATE users SET password=:? WHERE username=:?");
 }
+
+void Database::deleteUser(QString username)
+{
+    QSqlQuery qry;
+    qry.prepare("DELETE FROM users WHERE username=:use;");
+    qry.bindValue(":use",username);
+    qry.exec();
+}

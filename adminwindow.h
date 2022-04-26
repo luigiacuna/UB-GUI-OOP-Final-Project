@@ -24,6 +24,7 @@ private slots:
     void about();
     void updateTime();//might need to use in other windows
     void startResetUser();
+    void deleteUser();
 
     //void on_tableView_activated(const QModelIndex &index);
 

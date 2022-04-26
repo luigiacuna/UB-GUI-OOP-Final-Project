@@ -1,5 +1,6 @@
 #include "adminwindow.h"
 #include "ui_adminwindow.h"
+#include <QMessageBox>
 
 AdminWindow::AdminWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -39,6 +40,7 @@ AdminWindow::AdminWindow(QWidget *parent) :
 
     connect(ui->resetUserPasswordButton,SIGNAL(clicked()),this,SLOT(startResetUser()));
     connect(ui->actionAbout,SIGNAL(triggered()),this,SLOT(about()));
+    connect(ui->DeleteUser,SIGNAL(clicked()),this,SLOT(deleteUser()));
 }
 
 AdminWindow::~AdminWindow()
@@ -63,6 +65,29 @@ void AdminWindow::startResetUser()//was going to be lazy and use QInputDialog an
     //going to open a new class just to reset a password that feels so ineffcient but oh well going to code it right with two inputs and verify
     ResetPassword *reset=new ResetPassword();
     reset->exec();
+}
+
+void AdminWindow::deleteUser()
+{
+    qDebug()<<"User that may be or not deleted: "<<val;
+    QMessageBox delUser;
+    delUser.setText("Are you sure that you want to delete user "+val);
+    delUser.setInformativeText("This cannot be undone");
+    delUser.setStandardButtons(QMessageBox::Yes|QMessageBox::No);
+    delUser.setDefaultButton(QMessageBox::No);
+    int ans = delUser.exec();
+
+    switch(ans)
+    {
+        case QMessageBox::Yes:
+            db.deleteUser(val);
+            qDebug()<<val<<" was 'deleted'";
+            break;
+    case QMessageBox::No:
+        break;
+
+    }
+
 }
 
 //had to use the auto connect cause like i couldn't figure out to write it lol idk

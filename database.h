@@ -16,6 +16,7 @@ public:
     QString getRole(QString);//used in Login Class
     QSqlQueryModel* adminTable(int); //admin window to show username
     void resetPassword(QString);//reset user password at the admin window
+    void deleteUser(QString);
 };
 
 #endif // DATABASE_H
