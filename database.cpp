@@ -136,7 +136,7 @@ QSqlQueryModel* Database::adminTable(int num)//updates the two table widgets in 
     {
         QSqlQuery *qry = new QSqlQuery();
         QSqlQueryModel *model=new QSqlQueryModel();
-        qry->prepare("SELECT username FROM users;");
+        qry->prepare("SELECT id FROM users;");
         qry->exec();
         model->setQuery(std::move(*qry));
         return model;
@@ -145,7 +145,7 @@ QSqlQueryModel* Database::adminTable(int num)//updates the two table widgets in 
     {
         QSqlQuery *qry = new QSqlQuery();
         QSqlQueryModel *model=new QSqlQueryModel();
-        qry->prepare("SELECT fname,lname,type FROM users;");
+        qry->prepare("SELECT fname,lname,type,username,password FROM users;");
         qry->exec();
         model->setQuery(std::move(*qry));
         return model;
@@ -162,7 +162,7 @@ void Database::resetPassword(QString)//setfunction
 void Database::deleteUser(QString username)
 {
     QSqlQuery qry;
-    qry.prepare("DELETE FROM users WHERE username=:use;");
-    qry.bindValue(":use",username);
+    qry.prepare("DELETE FROM users WHERE id=:id;");
+    qry.bindValue(":id",username);
     qry.exec();
 }

@@ -40,7 +40,6 @@ AdminWindow::AdminWindow(QWidget *parent) :
 
     connect(ui->resetUserPasswordButton,SIGNAL(clicked()),this,SLOT(startResetUser()));
     connect(ui->actionAbout,SIGNAL(triggered()),this,SLOT(about()));
-    connect(ui->DeleteUser,SIGNAL(clicked()),this,SLOT(deleteUser()));
 }
 
 AdminWindow::~AdminWindow()
@@ -67,29 +66,6 @@ void AdminWindow::startResetUser()//was going to be lazy and use QInputDialog an
     reset->exec();
 }
 
-void AdminWindow::deleteUser()
-{
-    qDebug()<<"User that may be or not deleted: "<<val;
-    QMessageBox delUser;
-    delUser.setText("Are you sure that you want to delete user "+val);
-    delUser.setInformativeText("This cannot be undone");
-    delUser.setStandardButtons(QMessageBox::Yes|QMessageBox::No);
-    delUser.setDefaultButton(QMessageBox::No);
-    int ans = delUser.exec();
-
-    switch(ans)
-    {
-        case QMessageBox::Yes:
-            db.deleteUser(val);
-            qDebug()<<val<<" was 'deleted'";
-            break;
-    case QMessageBox::No:
-        break;
-
-    }
-
-}
-
 //had to use the auto connect cause like i couldn't figure out to write it lol idk
 void AdminWindow::on_usernameView_activated(const QModelIndex &index)
 {
@@ -102,3 +78,18 @@ void AdminWindow::on_usernameView_activated(const QModelIndex &index)
     //renable the buttons here so the admin can either edit or reset the selected user's account
 }
 
+//Delets a user that is selected
+void AdminWindow::on_DeleteUser_clicked()
+{
+    QModelIndexList ids;
+    ids = ui->usernameView->selectionModel()->selectedRows();
+
+    for(int i = 0; i < ids.size(); i++)
+    {
+        val = ui->usernameView->model()->data(ui->usernameView->model()->index(ids[i].data().toInt() - 1,0)).toString();
+        //Uncomment this to acutally delete a user
+        //db.deleteUser(val);
+        qDebug()<<val;
+    }
+
+}
