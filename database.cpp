@@ -9,7 +9,7 @@ Database::Database()
     *Only quries will be done on need to run basis*/
 }
 
-bool Database::userNameAvaliabity(QString username)
+bool Database::userNameAvaliabity(QString username)//get function
 {
     //used in the NewUser Classn and Login this will check if the username inputted by the user
     //is avalibale for use in the database as a valid username
@@ -43,7 +43,7 @@ bool Database::userNameAvaliabity(QString username)
 
 }
 
-bool Database::addUser(QString username, QString firstName, QString lastName, QString password, QString type)
+bool Database::addUser(QString username, QString firstName, QString lastName, QString password, QString type)//setfunction
 {
     //this function is executed by the newUser class and is the final query that is done in this class
     //this is run when all checks by the newUser class has passed and all parameters
@@ -85,7 +85,7 @@ bool Database::addUser(QString username, QString firstName, QString lastName, QS
     }
 }
 
-bool Database::checkCredentials(QString username, QString password)
+bool Database::checkCredentials(QString username, QString password)//get funtion
 {
     //This function is used in the login class
     //checking if username is avaliable going to use userNameAvaliabity() since it can already do that but however use false as the answer
@@ -118,7 +118,7 @@ bool Database::checkCredentials(QString username, QString password)
     }
 }
 
-QString Database::getRole(QString username)
+QString Database::getRole(QString username)//getfuntion
 {
     //Returns the role of the user that is currently logged in. This function is called from the openRole() function in Login Class
     QSqlQuery qry;
@@ -130,7 +130,7 @@ QString Database::getRole(QString username)
 }
 
 
-QSqlQueryModel* Database::adminTable(int num)//updates the two table widgets in the admin window
+QSqlQueryModel* Database::adminTable(int num)//updates the two table widgets in the admin window getfuntion
 {
     if(num == 1)
     {
@@ -153,7 +153,7 @@ QSqlQueryModel* Database::adminTable(int num)//updates the two table widgets in 
 
 }
 
-void Database::resetPassword(QString)
+void Database::resetPassword(QString)//setfunction
 {
     QSqlQuery qry;
     qry.prepare("UPDATE users SET password=:? WHERE username=:?");

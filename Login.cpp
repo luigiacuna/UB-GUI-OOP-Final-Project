@@ -17,7 +17,7 @@ Login::~Login()
     delete ui;
 }
 
-void Login::onOK()
+void Login::onOK()//works like a set function
 {
 
     //using a nested if to check one for a critera then the other if it checks out
@@ -108,7 +108,7 @@ void Login::openRole(QString username)
     }
     else
     {
-        qDebug()<<"It should get here at all all checks has passed validation and inserted in the database with no null values";
+        qDebug()<<"It should not get here at all all checks has passed validation and inserted in the database with no null values";
     }
 }
 
