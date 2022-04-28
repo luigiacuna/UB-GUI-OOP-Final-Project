@@ -33,7 +33,7 @@ EditUser::~EditUser()
 
 void EditUser::okButtonPressed()
 {
-
+    //need to create db function or mod addUsers to account for changes;
 }
 
 void EditUser::cancelButtonPressed()
