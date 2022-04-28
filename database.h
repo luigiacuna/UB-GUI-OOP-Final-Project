@@ -17,6 +17,7 @@ public:
     QSqlQueryModel* adminTable(int); //admin window to show username
     void resetPassword(QString);//reset user password at the admin window
     void deleteUser(QString);
+    QStringList getUserInformation(QString);
 };
 
 #endif // DATABASE_H

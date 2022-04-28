@@ -8,6 +8,7 @@
 #include <QInputDialog>//unused
 #include "database.h"
 #include "resetpassword.h"
+#include "edituser.h"
 
 namespace Ui {
 class AdminWindow;
@@ -24,6 +25,7 @@ private slots:
     void about();
     void updateTime();//might need to use in other windows
     void startResetUser();
+    void editUser();
 
     //void on_tableView_activated(const QModelIndex &index);
 

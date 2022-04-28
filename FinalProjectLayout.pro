@@ -13,6 +13,7 @@ SOURCES += \
     adminwindow.cpp \
     database.cpp \
     doctorview.cpp \
+    edituser.cpp \
     main.cpp \
     Login.cpp \
     newuser.cpp \
@@ -25,6 +26,7 @@ HEADERS += \
     adminwindow.h \
     database.h \
     doctorview.h \
+    edituser.h \
     newuser.h \
     nurseview.h \
     resetpassword.h
@@ -34,6 +36,7 @@ FORMS += \
     addeditpatient.ui \
     adminwindow.ui \
     doctorview.ui \
+    edituser.ui \
     newuser.ui \
     nurseview.ui \
     resetpassword.ui

@@ -16,7 +16,8 @@ AdminWindow::AdminWindow(QWidget *parent) :
     ui->usernameView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);//fit all the contents of the sql query to fit on the table width
     ui->usernameView->setSelectionBehavior(QAbstractItemView::SelectItems);//allows only one item to be selected at a time
     ui->usernameView->setSelectionMode(QAbstractItemView::SingleSelection);//whatever was selected becomes deselectd and the new item clicked becomes seleceted
-    //ui->usernameView->setHorizontalHeaderLabels()//prettu up the headers later for that
+
+    //ui->usernameView->setHorizontalHeaderLabels()//pretty up the headers later for that
     ui->usernameView->setModel(db.adminTable(1));//this will pull only the usernames and make that selectable
 
     //setting properties of the everything else view
@@ -39,6 +40,11 @@ AdminWindow::AdminWindow(QWidget *parent) :
 
 
     connect(ui->resetUserPasswordButton,SIGNAL(clicked()),this,SLOT(startResetUser()));
+
+    //connect for editing a user
+    connect(ui->editUser,SIGNAL(clicked()),this,SLOT(editUser()));
+
+
     connect(ui->actionAbout,SIGNAL(triggered()),this,SLOT(about()));
 }
 
@@ -64,6 +70,15 @@ void AdminWindow::startResetUser()//was going to be lazy and use QInputDialog an
     //going to open a new class just to reset a password that feels so ineffcient but oh well going to code it right with two inputs and verify
     ResetPassword *reset=new ResetPassword();
     reset->exec();
+}
+
+void AdminWindow::editUser()
+{
+    //this slot will pass in all the selected user info and pass in the editUser Class
+    EditUser edit(val);
+    edit.setModal(true);
+    edit.exec();
+
 }
 
 //had to use the auto connect cause like i couldn't figure out to write it lol idk

@@ -166,3 +166,40 @@ void Database::deleteUser(QString username)
     qry.bindValue(":id",username);
     qry.exec();
 }
+
+QStringList Database::getUserInformation(QString username)
+{
+    QStringList data;
+    QSqlQuery qry;
+    //qry.prepare("SELECT username,fname,lname,type FROM users WHERE id=:id");//doing only one query only pushes the first result into the QStringlist
+    //haveing to do 4 seperate queries to push all the info needed into the QStringlist
+    qry.prepare("SELECT username FROM users WHERE id=:id");
+    qry.bindValue(":id",username);
+    qry.exec();
+    while(qry.next())
+        data<<qry.value(0).toString();
+    qry.clear();
+
+    qry.prepare("SELECT fname FROM users WHERE id=:id");
+    qry.bindValue(":id",username);
+    qry.exec();
+    while(qry.next())
+        data<<qry.value(0).toString();
+    qry.clear();
+
+    qry.prepare("SELECT lname FROM users WHERE id=:id");
+    qry.bindValue(":id",username);
+    qry.exec();
+    while(qry.next())
+        data<<qry.value(0).toString();
+    qry.clear();
+
+    qry.prepare("SELECT type FROM users WHERE id=:id");
+    qry.bindValue(":id",username);
+    qry.exec();
+    while(qry.next())
+        data<<qry.value(0).toString();
+    qry.clear();
+    return data;
+
+}
