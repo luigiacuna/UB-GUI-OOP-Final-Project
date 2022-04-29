@@ -26,7 +26,7 @@ NewUser::~NewUser()
     delete ui;
 }
 
-void NewUser::onOk()
+void NewUser::onOk() //THIS NEEDS TO MOVE TO A BASE CLASS SINCE IT THE SAME EXACT CODE WILL BE USED IN THE EDIT USER CLASS
 {
     bool credsCheck = false;
 
@@ -128,7 +128,7 @@ void NewUser::onOk()
        if(okFirstName==true&&okLastName==true&&okUsername==true&&okPassword==true)
        {
            credsCheck=true;
-           db.addUser(ui->userNameInput->text(),ui->firstNameInput->text(),ui->lastNameInput->text(),ui->passwordInput->text(),"",1);
+           db.addUser(0,ui->userNameInput->text(),ui->firstNameInput->text(),ui->lastNameInput->text(),ui->passwordInput->text(),"",1);
            this->close();
            Login log;
            log.setModal(true);

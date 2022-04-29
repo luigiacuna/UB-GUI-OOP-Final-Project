@@ -2,12 +2,13 @@
 #define EDITUSER_H
 
 #include <QDialog>
+#include "database.h"
 
 namespace Ui {
-class EditUser;
+class EditUser ;
 }
 
-class EditUser : public QDialog
+class EditUser : public QDialog, public Database
 {
     Q_OBJECT
 
@@ -20,6 +21,8 @@ private slots:
 
 private:
     Ui::EditUser *ui;
+    QStringList data;
+    int idNum;
 };
 
 #endif // EDITUSER_H

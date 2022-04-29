@@ -43,7 +43,7 @@ bool Database::userNameAvaliabity(QString username)//get function
 
 }
 
-bool Database::addUser(QString username, QString firstName, QString lastName, QString password, QString type, int choice)//setfunction
+bool Database::addUser(int id,QString username, QString firstName, QString lastName, QString password, QString type, int choice)//setfunction
 {
     //this function is executed by the newUser class and is the final query that is done in this class
     //this is run when all checks by the newUser class has passed and all parameters
@@ -79,11 +79,14 @@ bool Database::addUser(QString username, QString firstName, QString lastName, QS
     }
     else if(choice == 2)//used by the editUser Class
     {
-        qry.prepare("UPDATE users SET username=:use, fname=:first, lname=:last, type=:tipo");
-        qry.bindValue(":use",username);
+        qDebug()<<type;
+        //QString idToString = id
+        qry.prepare("UPDATE users SET fname=:first, lname=:last, username=:use, type=:tipo WHERE id=:intNum;");
         qry.bindValue(":first",firstName);
         qry.bindValue(":last",lastName);
+        qry.bindValue(":use",username);
         qry.bindValue(":tipo",type);
+        qry.bindValue(":intNum",id);
     }
 
     if(qry.exec())
@@ -150,7 +153,7 @@ QSqlQueryModel* Database::adminTable(int num)//updates the two table widgets in 
     {
         QSqlQuery *qry = new QSqlQuery();
         QSqlQueryModel *model=new QSqlQueryModel();
-        qry->prepare("SELECT id FROM users;");
+        qry->prepare("SELECT id FROM users ORDER BY id ASC;");
         qry->exec();
         model->setQuery(std::move(*qry));
         return model;
@@ -215,5 +218,16 @@ QStringList Database::getUserInformation(QString username)
         data<<qry.value(0).toString();
     qry.clear();
     return data;
+
+}
+
+QString Database::getPassword(QString username)//used in the editUser Class to grab the current User selected's password
+{
+    QSqlQuery qry;
+    qry.prepare("SELECT password FROM users WHERE username=:use");
+    qry.bindValue(":use",username);
+    qry.exec();
+    qry.next();
+    return qry.value(0).toString();
 
 }
