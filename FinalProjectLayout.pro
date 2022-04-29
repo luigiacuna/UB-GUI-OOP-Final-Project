@@ -11,6 +11,7 @@ CONFIG += c++17
 SOURCES += \
     addeditpatient.cpp \
     adminwindow.cpp \
+    baseclass.cpp \
     database.cpp \
     doctorview.cpp \
     edituser.cpp \
@@ -24,6 +25,7 @@ HEADERS += \
     Login.h \
     addeditpatient.h \
     adminwindow.h \
+    baseclass.h \
     database.h \
     doctorview.h \
     edituser.h \

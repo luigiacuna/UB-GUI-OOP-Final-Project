@@ -43,11 +43,14 @@ bool Database::userNameAvaliabity(QString username)//get function
 
 }
 
-bool Database::addUser(QString username, QString firstName, QString lastName, QString password, QString type)//setfunction
+bool Database::addUser(QString username, QString firstName, QString lastName, QString password, QString type, int choice)//setfunction
 {
     //this function is executed by the newUser class and is the final query that is done in this class
     //this is run when all checks by the newUser class has passed and all parameters
     //passed in are valid and ready to be passed in the database itself
+
+    //UPDATE April 28 2022 - going to add another paramter to add an update query since the original add function does the same exact same thing code wise
+    //1 will be for adding user and 2 will be updating user records
 
     QSqlQuery qry;
     //need to get a count of how many users are avaliable to add the correct count to the database
@@ -61,26 +64,37 @@ bool Database::addUser(QString username, QString firstName, QString lastName, QS
     qDebug()<<"Number of users in the database: "<<usersCount;
 
     //Everything checksout now to actually add to the database
-    qry.prepare("INSERT INTO users(id,username,fname,lname,password,type) VALUES(?,?,?,?,?,?);");
-    qry.addBindValue(usersCount+1);
-    qry.addBindValue(username);
-    qry.addBindValue(firstName);
-    qry.addBindValue(lastName);
-    qry.addBindValue(password);
-    if(type=="")
-        qry.addBindValue("nurse");
-    else
-        qry.addBindValue(type);
+    if(choice == 1)//used at the newUser class
+    {
+         qry.prepare("INSERT INTO users(id,username,fname,lname,password,type) VALUES(?,?,?,?,?,?);");
+         qry.addBindValue(usersCount+1);
+         qry.addBindValue(username);
+         qry.addBindValue(firstName);
+         qry.addBindValue(lastName);
+         qry.addBindValue(password);
+         if(type=="")
+             qry.addBindValue("nurse");
+         else
+             qry.addBindValue(type);
+    }
+    else if(choice == 2)//used by the editUser Class
+    {
+        qry.prepare("UPDATE users SET username=:use, fname=:first, lname=:last, type=:tipo");
+        qry.bindValue(":use",username);
+        qry.bindValue(":first",firstName);
+        qry.bindValue(":last",lastName);
+        qry.bindValue(":tipo",type);
+    }
 
     if(qry.exec())
     {
-        qDebug()<<"New User added.";
+        qDebug()<<"New User added/updated.";
         return true;
 
     }
     else
     {
-        qDebug()<<"Insert failed";
+        qDebug()<<"Insert/Updated failed";
         return false;
     }
 }
