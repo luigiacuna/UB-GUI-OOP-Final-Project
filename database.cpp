@@ -117,6 +117,7 @@ bool Database::checkCredentials(QString username, QString password)//get funtion
         qry.exec();
         while(qry.next())
             dbPassword=qry.value(0).toString();//and pass it to QString for validiation
+        qDebug()<<dbPassword;
         if(dbPassword==password)//said validation
         {
             qDebug()<<"Its Gucci";
@@ -139,7 +140,7 @@ QString Database::getRole(QString username)//getfuntion
 {
     //Returns the role of the user that is currently logged in. This function is called from the openRole() function in Login Class
     QSqlQuery qry;
-    qry.prepare("SELECT type FROM users WHERE username=:use;");
+    qry.prepare("SELECT role FROM users WHERE username=:use;");
     qry.bindValue(":use",username);
     qry.exec();
     qry.next();
@@ -162,7 +163,8 @@ QSqlQueryModel* Database::adminTable(int num)//updates the two table widgets in 
     {
         QSqlQuery *qry = new QSqlQuery();
         QSqlQueryModel *model=new QSqlQueryModel();
-        qry->prepare("SELECT fname,lname,type,username,password FROM users;");
+        //qry->prepare("SELECT fname,lname,type,username,password FROM users;"); //dummy db query
+        qry->prepare("SELECT username, role FROM users");
         qry->exec();
         model->setQuery(std::move(*qry));
         return model;
@@ -188,30 +190,53 @@ QStringList Database::getUserInformation(QString username)
 {
     QStringList data;
     QSqlQuery qry;
+    QString roleCheck;
+    qDebug()<<"Username value comming in is "<<username;
+
+    //first to grab the role to understand which table information to grab and present to the user
+    qry.prepare("SELECT role FROM users WHERE id=:id");
+    qry.bindValue(":id",username);
+    qry.exec();
+    qry.next();
+    roleCheck = qry.value(0).toString();
+    qry.clear();
+
+    //once the role is found and set and since the username hold the id number of the user and it is the same from the users and doctos/nurses table
+
     //qry.prepare("SELECT username,fname,lname,type FROM users WHERE id=:id");//doing only one query only pushes the first result into the QStringlist
     //haveing to do 4 seperate queries to push all the info needed into the QStringlist
+    //qry.prepare("SELECT username FROM users WHERE id=:id");//dummy db
+    //qry.prepare("SELECT firstname FROM role=:role WHERE id=:id;");
+    qry.prepare("SELECT firstname FROM :role WHERE nurse_id=:id;");
+    qry.bindValue(":role",roleCheck);
+    qry.bindValue(":id",username);
+
+    if(!qry.exec())
+    {
+        qDebug()<<qry.lastError().text();
+    }
+    while(qry.next())
+        roleCheck = qry.value(0).toString();
+    qry.clear();
+    qDebug()<<"Role that has been selected is: "<<roleCheck;
+
+
+    qry.prepare("SELECT lastname FROM role=:role WHERE nurse_id=:id");
+    qry.bindValue(":role",roleCheck);
+    qry.bindValue(":id",username);
+    qry.exec();
+    while(qry.next())
+        data<<qry.value(0).toString();
+    qry.clear();
+
+    qry.prepare("SELECT role FROM users WHERE id=:id");
+    qry.bindValue(":id",username);
+    qry.exec();
+    while(qry.next())
+        data<<qry.value(0).toString();
+    qry.clear();
+
     qry.prepare("SELECT username FROM users WHERE id=:id");
-    qry.bindValue(":id",username);
-    qry.exec();
-    while(qry.next())
-        data<<qry.value(0).toString();
-    qry.clear();
-
-    qry.prepare("SELECT fname FROM users WHERE id=:id");
-    qry.bindValue(":id",username);
-    qry.exec();
-    while(qry.next())
-        data<<qry.value(0).toString();
-    qry.clear();
-
-    qry.prepare("SELECT lname FROM users WHERE id=:id");
-    qry.bindValue(":id",username);
-    qry.exec();
-    while(qry.next())
-        data<<qry.value(0).toString();
-    qry.clear();
-
-    qry.prepare("SELECT type FROM users WHERE id=:id");
     qry.bindValue(":id",username);
     qry.exec();
     while(qry.next())
