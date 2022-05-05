@@ -37,6 +37,15 @@ EditUser::~EditUser()
 
 void EditUser::okButtonPressed()
 {
+    /*The ok button in the editUser class need to modified to take in account for upating the user fields
+     * and also removing / adding from the original table that they belong too
+     * moving nurse to doctor to another position
+     * this button will need also to check what if the user press ok and nothing changes.
+     * plan of action use data as the orginal blueprint and use that to make the neccessary updates
+     * use the id number to distinguish the id and hence the user information to the apporiate table
+     * */
+
+
     //need to create db function or mod addUsers to account for changes;
     //first to check if nothing is empty then push forward with the update
     qDebug()<<getPassword(data[0]);

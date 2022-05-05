@@ -181,6 +181,13 @@ void Database::resetPassword(QString)//setfunction
 void Database::deleteUser(QString username)
 {
     QSqlQuery qry;
+    //first get the role of the user plays in the database
+    qry.prepare("SELECT role FROM users WHERE id=:id");
+    qry.bindValue(":id",username);
+
+    //delete the user from the table that it belongs to either nurse/doctor/admin
+
+    //delete the user from the user table
     qry.prepare("DELETE FROM users WHERE id=:id;");
     qry.bindValue(":id",username);
     qry.exec();
