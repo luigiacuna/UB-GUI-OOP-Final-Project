@@ -191,7 +191,6 @@ QStringList Database::getUserInformation(QString username)
     QStringList data;
     QSqlQuery qry;
     QString roleCheck;
-    qDebug()<<"Username value comming in is "<<username;
 
     //first to grab the role to understand which table information to grab and present to the user
     qry.prepare("SELECT role FROM users WHERE id=:id");
@@ -200,35 +199,68 @@ QStringList Database::getUserInformation(QString username)
     qry.next();
     roleCheck = qry.value(0).toString();
     qry.clear();
+    qDebug()<<"Username value comming in is "<<username;
+    qDebug()<<"Role Check value is: "<<roleCheck;
 
-    //once the role is found and set and since the username hold the id number of the user and it is the same from the users and doctos/nurses table
-
-    //qry.prepare("SELECT username,fname,lname,type FROM users WHERE id=:id");//doing only one query only pushes the first result into the QStringlist
-    //haveing to do 4 seperate queries to push all the info needed into the QStringlist
-    //qry.prepare("SELECT username FROM users WHERE id=:id");//dummy db
-    //qry.prepare("SELECT firstname FROM role=:role WHERE id=:id;");
-    qry.prepare("SELECT firstname FROM :role WHERE nurse_id=:id;");
-    qry.bindValue(":role",roleCheck);
-    qry.bindValue(":id",username);
-
-    if(!qry.exec())
+    //I wanted originally to use bind value in the FROM area of the query but the queryt would bever work so this if else statement will decide which one will execute based of role Check
+    //firstly grab the first name
+    if(roleCheck == "admin")
     {
-        qDebug()<<qry.lastError().text();
-    }
-    while(qry.next())
-        roleCheck = qry.value(0).toString();
-    qry.clear();
-    qDebug()<<"Role that has been selected is: "<<roleCheck;
-
-
-    qry.prepare("SELECT lastname FROM role=:role WHERE nurse_id=:id");
-    qry.bindValue(":role",roleCheck);
-    qry.bindValue(":id",username);
-    qry.exec();
-    while(qry.next())
+        qry.prepare("SELECT firstname FROM admin WHERE id=:id");
+        qry.bindValue(":id",username);
+        qry.exec();
+        qry.next();
         data<<qry.value(0).toString();
-    qry.clear();
+        qry.clear();
+    }
+    else if (roleCheck == "doctor")
+    {
+        qry.prepare("SELECT firstname FROM doctor WHERE id=:id");
+        qry.bindValue(":id",username);
+        qry.exec();
+        qry.next();
+        data<<qry.value(0).toString();
+        qry.clear();
+    }
+    else if (roleCheck == "nurse")
+    {
+        qry.prepare("SELECT firstname FROM nurse WHERE id=:id");
+        qry.bindValue(":id",username);
+        qry.exec();
+        qry.next();
+        data<<qry.value(0).toString();
+        qry.clear();
+    }
+    //now get the lastname
 
+    if(roleCheck == "admin")
+    {
+        qry.prepare("SELECT lastname FROM admin WHERE id=:id");
+        qry.bindValue(":id",username);
+        qry.exec();
+        qry.next();
+        data<<qry.value(0).toString();
+        qry.clear();
+    }
+    else if (roleCheck == "doctor")
+    {
+        qry.prepare("SELECT lastname FROM doctor WHERE id=:id");
+        qry.bindValue(":id",username);
+        qry.exec();
+        qry.next();
+        data<<qry.value(0).toString();
+        qry.clear();
+    }
+    else if (roleCheck == "nurse")
+    {
+        qry.prepare("SELECT lastname FROM nurse WHERE id=:id");
+        qry.bindValue(":id",username);
+        qry.exec();
+        qry.next();
+        data<<qry.value(0).toString();
+        qry.clear();
+    }
+    //everything else that is needed comes from the users table
     qry.prepare("SELECT role FROM users WHERE id=:id");
     qry.bindValue(":id",username);
     qry.exec();

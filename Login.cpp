@@ -99,7 +99,7 @@ void Login::openRole(QString username)
         NurseView *nurse=new NurseView();
         nurse->show();
     }
-    else if(db.getRole(username)=="docto")
+    else if(db.getRole(username)=="doctor")
     {
         qDebug()<<"mid tier nugget (doctor) has logged in";
         this->close();

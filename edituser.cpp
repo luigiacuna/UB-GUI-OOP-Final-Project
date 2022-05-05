@@ -12,17 +12,18 @@ EditUser::EditUser(QString username,QWidget *parent) :
     ui->firstNameEmptyLabel->hide();
     ui->lastNameEmptyLabel->hide();
     ui->usernameNotValidLabel->hide();
-    qDebug()<<getUserInformation(username);//checking if all user information is executed
     data = getUserInformation(username);
+    qDebug()<<data;
+
     //pushing all that info to the various fields
-    ui->usernameInput->setText(data[0]);
-    ui->firstNameInput->setText(data[1]);
-    ui->lastNameInput->setText(data[2]);
-    if(data[3] == "admin")
+    ui->usernameInput->setText(data[3]);
+    ui->firstNameInput->setText(data[0]);
+    ui->lastNameInput->setText(data[1]);
+    if(data[2] == "admin")
         ui->roleComboBox->setCurrentIndex(2);
-    else if(data[3] == "nurse")
+    else if(data[2] == "nurse")
         ui->roleComboBox->setCurrentIndex(1);
-    else if(data[3] == "docto")
+    else if(data[2] == "doctor")
         ui->roleComboBox->setCurrentIndex(0);
 
     connect(ui->okButton,SIGNAL(clicked()),this,SLOT(okButtonPressed()));
