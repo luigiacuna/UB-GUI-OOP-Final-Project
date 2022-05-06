@@ -88,6 +88,13 @@
         </widget>
        </item>
        <item>
+        <widget class="QPushButton" name="addMeds">
+         <property name="text">
+          <string>Add Medicine</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="QPushButton" name="reportsButton">
          <property name="text">
           <string>Reports</string>

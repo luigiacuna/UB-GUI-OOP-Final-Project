@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QPixmap>
 #include "addeditpatient.h"
+#include "addmedicine.h"
 
 namespace Ui {
 class DoctorView;
@@ -19,6 +20,7 @@ public:
 private slots:
     void createNewPatient();
     void editPatient();
+    void addMedicine();
 
 private:
     Ui::DoctorView *ui;

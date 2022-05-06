@@ -46,6 +46,7 @@ AdminWindow::AdminWindow(QWidget *parent) :
 
 
     connect(ui->actionAbout,SIGNAL(triggered()),this,SLOT(about()));
+
 }
 
 AdminWindow::~AdminWindow()

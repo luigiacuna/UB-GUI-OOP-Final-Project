@@ -10,6 +10,7 @@ DoctorView::DoctorView(QWidget *parent) :
     ui->companyLogo->setPixmap(pix);
     connect(ui->addPatient,SIGNAL(clicked()),this,SLOT(createNewPatient()));
     connect(ui->viewPatient,SIGNAL(clicked()),this,SLOT(editPatient()));
+    connect(ui->addMeds,SIGNAL(clicked()),this,SLOT(addMedicine()));
 
 }
 
@@ -30,4 +31,11 @@ void DoctorView::editPatient()
     AddEditPatient openSen1(2);
     openSen1.setModal(true);
     openSen1.exec();
+}
+
+void DoctorView::addMedicine()
+{
+    AddMedicine meds;
+    meds.setModal(true);
+    meds.exec();
 }

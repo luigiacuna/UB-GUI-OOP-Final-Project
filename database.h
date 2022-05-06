@@ -19,6 +19,10 @@ public:
     void deleteUser(QString);
     QStringList getUserInformation(QString);
     QString getPassword(QString);//get the password for a specfic user used in the edit user
+    void addMeds(QString);
+    QStringList listAvaliableMeds();//a check to see if a med that is going to be added doesn't exist already
+    QSqlQueryModel* showAvaliableMeds();//show on the table what are avaliable meds
+    void removeMed(QString);//remove seleted med
 };
 
 #endif // DATABASE_H

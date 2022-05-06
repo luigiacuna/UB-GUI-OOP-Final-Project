@@ -306,3 +306,53 @@ QString Database::getPassword(QString username)//used in the editUser Class to g
     return qry.value(0).toString();
 
 }
+
+void Database::addMeds(QString medicine)
+{
+    //create the med_code value
+    QString medCode = medicine.chopped(3);
+    qDebug()<<"The med code that will be created is "<<medCode<<" which comes from "<<medicine;
+
+    //actually push the values with an insert query
+    QSqlQuery qry;
+    qry.prepare("INSERT INTO medicine(med_id,med_name) VALUES(?,?);");
+    qry.addBindValue(medCode);
+    qry.addBindValue(medicine);
+    if(qry.exec())
+    {
+        qDebug()<<"Medicine was added";
+    }
+    else
+    {
+        qDebug()<<qry.lastError().text();
+    }
+}
+
+QStringList Database::listAvaliableMeds()
+{
+    QStringList data;
+    QSqlQuery qry;
+    qry.prepare("SELECT med_name FROM medicine");
+    qry.exec();
+    while(qry.next())
+        data<<qry.value(0).toString();
+    return data;
+}
+
+QSqlQueryModel* Database::showAvaliableMeds()
+{
+    QSqlQuery *qry = new QSqlQuery();
+    QSqlQueryModel *model = new QSqlQueryModel();
+    qry->prepare("SELECT med_name FROM medicine");
+    qry->exec();
+    model->setQuery(std::move(*qry));
+    return model;
+}
+
+void Database::removeMed(QString med)
+{
+    QSqlQuery qry;
+    qry.prepare("DELETE FROM medicine WHERE med_name=:med");
+    qry.bindValue(":med",med);
+    qry.exec();
+}

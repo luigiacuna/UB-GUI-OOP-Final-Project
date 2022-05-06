@@ -55,8 +55,7 @@ CREATE TABLE schedule(schedule_id int,
 );#the schedule table will actually hold the scheduling information needed to create the actual pill distributio 
 
 CREATE TABLE medicine(med_id varchar(5),
-					  med_name varchar(25),
-					  FOREIGN KEY (med_id) REFERENCES schedule (med_id)
+					  med_name varchar(25)
 );
 #the meds table will hold all the meds that can be prescribed by the doctor, also the doctor can also add meds that are not in this TABLE
 

@@ -10,6 +10,7 @@ CONFIG += c++17
 
 SOURCES += \
     addeditpatient.cpp \
+    addmedicine.cpp \
     adminwindow.cpp \
     database.cpp \
     doctorview.cpp \
@@ -23,6 +24,7 @@ SOURCES += \
 HEADERS += \
     Login.h \
     addeditpatient.h \
+    addmedicine.h \
     adminwindow.h \
     database.h \
     doctorview.h \
@@ -34,6 +36,7 @@ HEADERS += \
 FORMS += \
     Login.ui \
     addeditpatient.ui \
+    addmedicine.ui \
     adminwindow.ui \
     doctorview.ui \
     edituser.ui \
