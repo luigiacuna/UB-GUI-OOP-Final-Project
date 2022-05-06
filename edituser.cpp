@@ -28,6 +28,14 @@ EditUser::EditUser(QString username,QWidget *parent) :
 
     connect(ui->okButton,SIGNAL(clicked()),this,SLOT(okButtonPressed()));
     connect(ui->cancelButton,SIGNAL(clicked()),this,SLOT(cancelButtonPressed()));
+
+    //data QList fill as such
+    //data[0] = first Name
+    //data[1] = Last Name
+    //data[2] = username
+    //data[3] = username
+
+
 }
 
 EditUser::~EditUser()

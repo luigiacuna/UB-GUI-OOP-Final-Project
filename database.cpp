@@ -172,10 +172,21 @@ QSqlQueryModel* Database::adminTable(int num)//updates the two table widgets in 
 
 }
 
-void Database::resetPassword(QString)//setfunction
+void Database::resetPassword(QString id, QString newPassword)//setfunction
 {
     QSqlQuery qry;
-    qry.prepare("UPDATE users SET password=:? WHERE username=:?");
+    qry.prepare("UPDATE users SET password=:pass WHERE id=:id");
+    qry.bindValue(":pass",newPassword);
+    qry.bindValue(":id",id);
+    if(qry.exec())
+    {
+        qDebug()<<"Passwords has been reset";
+    }
+    else
+    {
+        qDebug()<<qry.lastError().text();
+    }
+
 }
 
 void Database::deleteUser(QString username)

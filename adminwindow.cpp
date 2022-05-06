@@ -68,8 +68,9 @@ void AdminWindow::updateTime()
 void AdminWindow::startResetUser()//was going to be lazy and use QInputDialog and use one input but couldn't control cancel button sigh...
 {
     //going to open a new class just to reset a password that feels so ineffcient but oh well going to code it right with two inputs and verify
-    ResetPassword *reset=new ResetPassword();
+    ResetPassword *reset=new ResetPassword(val);
     reset->exec();
+
 }
 
 void AdminWindow::editUser()

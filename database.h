@@ -15,7 +15,7 @@ public:
     bool checkCredentials(QString, QString);//used in Login Class
     QString getRole(QString);//used in Login Class
     QSqlQueryModel* adminTable(int); //admin window to show username
-    void resetPassword(QString);//reset user password at the admin window
+    void resetPassword(QString,QString);//reset user password at the admin window
     void deleteUser(QString);
     QStringList getUserInformation(QString);
     QString getPassword(QString);//get the password for a specfic user used in the edit user
