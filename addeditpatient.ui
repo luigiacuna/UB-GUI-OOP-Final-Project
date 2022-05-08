@@ -6,283 +6,278 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>618</height>
+    <width>311</width>
+    <height>696</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QLabel" name="currentPatientLabel">
-   <property name="geometry">
-    <rect>
-     <x>110</x>
-     <y>30</y>
-     <width>211</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Patient Data this will add or edit</string>
-   </property>
-  </widget>
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>290</y>
-     <width>371</width>
-     <height>71</height>
+     <y>10</y>
+     <width>291</width>
+     <height>322</height>
     </rect>
    </property>
-   <layout class="QVBoxLayout" name="medicineDurationLayout">
+   <layout class="QVBoxLayout" name="mainLayout">
     <item>
-     <layout class="QHBoxLayout" name="medincineLabels">
-      <item>
-       <widget class="QLabel" name="medicineLabelAssign">
-        <property name="text">
-         <string>Medcine to Assign</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="intervalsLabel">
-        <property name="text">
-         <string>Intervals</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </item>
-    <item>
-     <layout class="QHBoxLayout" name="intervalsInput">
-      <item>
-       <widget class="QComboBox" name="medicineComboBox"/>
-      </item>
-      <item>
-       <spacer name="horizontalSpacer">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
-       <widget class="QComboBox" name="numberIntervals">
-        <item>
-         <property name="text">
-          <string>1</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>2</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>3</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>4</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>5</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>6</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>7</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>8</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>9</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>10</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>11</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>12</string>
-         </property>
-        </item>
-       </widget>
-      </item>
-      <item>
-       <widget class="QComboBox" name="hrsInterval">
-        <item>
-         <property name="text">
-          <string>Hours</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Days</string>
-         </property>
-        </item>
-       </widget>
-      </item>
-     </layout>
-    </item>
-   </layout>
-  </widget>
-  <widget class="QWidget" name="layoutWidget">
-   <property name="geometry">
-    <rect>
-     <x>12</x>
-     <y>120</y>
-     <width>371</width>
-     <height>171</height>
-    </rect>
-   </property>
-   <layout class="QHBoxLayout" name="inputLayout">
-    <item>
-     <layout class="QVBoxLayout" name="patinetlabels">
-      <item>
-       <widget class="QLabel" name="firstNameLabel">
-        <property name="text">
-         <string>First Name:</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="lastNameLabel">
-        <property name="text">
-         <string>Last Name:</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="dobLabel">
-        <property name="text">
-         <string>DOB:</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="genderLabel">
-        <property name="text">
-         <string>Gender:</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </item>
-    <item>
-     <layout class="QVBoxLayout" name="patientInputs">
-      <item>
-       <widget class="QLineEdit" name="firstNameInput"/>
-      </item>
-      <item>
-       <widget class="QLineEdit" name="lastNameInput"/>
-      </item>
-      <item>
-       <widget class="QLineEdit" name="dobInputMaybe"/>
-      </item>
-      <item>
-       <widget class="QComboBox" name="genderComboBox">
-        <item>
-         <property name="text">
-          <string>Male</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Female</string>
-         </property>
-        </item>
-       </widget>
-      </item>
-     </layout>
-    </item>
-   </layout>
-  </widget>
-  <widget class="QWidget" name="layoutWidget">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>370</y>
-     <width>371</width>
-     <height>226</height>
-    </rect>
-   </property>
-   <layout class="QVBoxLayout" name="verticalLayout">
-    <item>
-     <widget class="QTableWidget" name="scheduleTableWidget"/>
-    </item>
-    <item>
-     <layout class="QHBoxLayout" name="selectionLabels">
-      <item>
-       <widget class="QPushButton" name="okButton">
-        <property name="text">
-         <string>OK</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="cancelButton">
-        <property name="text">
-         <string>Cancel</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </item>
-   </layout>
-  </widget>
-  <widget class="QWidget" name="layoutWidget">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>70</y>
-     <width>371</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <layout class="QHBoxLayout" name="horizontalLayout">
-    <item>
-     <widget class="QLabel" name="selectedPatientLabel">
+     <widget class="QLabel" name="mainTitle">
       <property name="text">
-       <string>Patient:</string>
+       <string>Patient Data</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
       </property>
      </widget>
     </item>
     <item>
-     <widget class="QComboBox" name="selectedPatientCombo"/>
+     <layout class="QHBoxLayout" name="patientData">
+      <item>
+       <layout class="QVBoxLayout" name="patinetlabels">
+        <item>
+         <widget class="QLabel" name="selectedPatientLabel">
+          <property name="text">
+           <string>Patient:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="firstNameLabel">
+          <property name="text">
+           <string>First Name:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="lastNameLabel">
+          <property name="text">
+           <string>Last Name:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="ageLabel">
+          <property name="text">
+           <string>Age</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="phoneLabel">
+          <property name="text">
+           <string>Phone:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="genderLabel">
+          <property name="text">
+           <string>Gender:</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="dobLabel">
+          <property name="text">
+           <string>DOB:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="ssNumLabel">
+          <property name="text">
+           <string>SS Number</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label">
+          <property name="text">
+           <string>Nurse:</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="patientInputs">
+        <item>
+         <widget class="QComboBox" name="selectedPatientCombo"/>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="firstNameInput"/>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="lastNameInput"/>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="ageInput"/>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="phoneInput"/>
+        </item>
+        <item>
+         <widget class="QComboBox" name="genderComboBox">
+          <item>
+           <property name="text">
+            <string>Male</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Female</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="dobInputMaybe"/>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="ssNumInput"/>
+        </item>
+        <item>
+         <widget class="QComboBox" name="nurseAssignComboBox"/>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="QPushButton" name="createButton">
+      <property name="text">
+       <string>Create</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="layoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>340</y>
+     <width>291</width>
+     <height>341</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="mainMedsLayout">
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <layout class="QVBoxLayout" name="medsLabels">
+        <item>
+         <widget class="QLabel" name="medicineLabelAssign">
+          <property name="text">
+           <string>Medcine to Assign</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="dosageLabel">
+          <property name="text">
+           <string>Dosage</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="intervalsLabel">
+          <property name="text">
+           <string>Intervals</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="medsInputs">
+        <item>
+         <widget class="QComboBox" name="medicineComboBox"/>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="dosageLayout">
+          <item>
+           <widget class="QLineEdit" name="dosageInt">
+            <property name="text">
+             <string>Value</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="dosageUnits">
+            <property name="text">
+             <string>Units</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="intervalLayout">
+          <item>
+           <widget class="QLineEdit" name="intervalValue">
+            <property name="text">
+             <string>Value</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="intervalComboBox">
+            <item>
+             <property name="text">
+              <string>Hours</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Days</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Minutes</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Seconds</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="QPushButton" name="addToSchedule">
+      <property name="text">
+       <string>Add</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QTableWidget" name="scheduleTableWidget"/>
     </item>
    </layout>
   </widget>

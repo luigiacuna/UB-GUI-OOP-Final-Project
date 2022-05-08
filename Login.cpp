@@ -89,21 +89,21 @@ void Login::openRole(QString username)
     {
         qDebug()<<"The big boss has logged in";
         this->close();
-        AdminWindow *adminWin= new AdminWindow(this);
+        AdminWindow *adminWin= new AdminWindow(ui->userNameInput->text(),"admin");
         adminWin->show();
     }
     else if(db.getRole(username)=="nurse")
     {
         qDebug()<<"a peasant nurse has logged in";
         this->close();
-        NurseView *nurse=new NurseView();
+        NurseView *nurse= new NurseView();
         nurse->show();
     }
     else if(db.getRole(username)=="doctor")
     {
         qDebug()<<"mid tier nugget (doctor) has logged in";
         this->close();
-        DoctorView *doc=new DoctorView();
+        DoctorView *doc= new DoctorView(ui->userNameInput->text(),"doctor");
         doc->show();
     }
     else

@@ -2,10 +2,13 @@
 #include "ui_adminwindow.h"
 #include <QMessageBox>
 
-AdminWindow::AdminWindow(QWidget *parent) :
+AdminWindow::AdminWindow(QString username, QString role, QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::AdminWindow)
 {
+    qDebug()<<"User currently logged in "<<username;
+    qDebug()<<"Just checking if the role is correct = "<<role;
+    qDebug()<<"Full name of this user is: "<<getFullName(username,role);
     ui->setupUi(this);
 
     ui->editUser->setEnabled(false);
@@ -31,10 +34,11 @@ AdminWindow::AdminWindow(QWidget *parent) :
     QTimer *timer = new QTimer(this);
     timer->start(1000);
     connect(timer,SIGNAL(timeout()),this,SLOT(updateTime()));
-    QString msg = "Logged in as: "+val;
-    ui->statusbar->showMessage("Logged in as: ",0);
     ui->statusbar->addPermanentWidget(ui->currrenTimeLabel);
     ui->statusbar->addPermanentWidget(ui->actualTimeLabel);
+
+    //add to the statusbar the current user thats logged in name
+    ui->statusbar->showMessage("Logged in as: "+ getFullName(username,role));
 
 
 

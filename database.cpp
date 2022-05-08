@@ -310,7 +310,8 @@ QString Database::getPassword(QString username)//used in the editUser Class to g
 void Database::addMeds(QString medicine)
 {
     //create the med_code value
-    QString medCode = medicine.chopped(3);
+    int medCount = listAvaliableMeds().count();
+    QString medCode = QString::number(medCount)+medicine.left(3);
     qDebug()<<"The med code that will be created is "<<medCode<<" which comes from "<<medicine;
 
     //actually push the values with an insert query
@@ -355,4 +356,52 @@ void Database::removeMed(QString med)
     qry.prepare("DELETE FROM medicine WHERE med_name=:med");
     qry.bindValue(":med",med);
     qry.exec();
+}
+
+QStringList Database::listAvaliableNurses()
+{
+    //This will list the avalibale nurses that will be shown when adding a patient
+    //since in the database nurse table the first name and last name is seperated this will need to be combined somehow
+    QSqlQuery qry;
+    QStringList data;
+    qry.prepare("SELECT firstname,lastname FROM nurse");//only grabs whatever was called first and is able to pass in to a StringList
+    qry.exec();
+    while(qry.next())
+        data<<qry.value(0).toString() + " " + qry.value(1).toString();
+    qDebug()<<"List of Avaliable Nurses: "<<data;
+    return data;
+
+}
+
+QString Database::getFullName(QString username, QString role)
+{
+    QSqlQuery qry;
+    if(role == "admin")
+    {
+        qry.prepare("SELECT firstname,lastname FROM admin WHERE username=:use ");
+        qry.addBindValue(role);
+        qry.bindValue(":use",username);
+        qry.exec();
+        qry.next();
+        return qry.value(0).toString()+" "+qry.value(1).toString();
+    }
+    else if(role == "nurse")
+    {
+        qry.prepare("SELECT firstname,lastname FROM nurse WHERE username=:use ");
+        qry.addBindValue(role);
+        qry.bindValue(":use",username);
+        qry.exec();
+        qry.next();
+        return qry.value(0).toString()+" "+qry.value(1).toString();
+    }
+    else if(role == "doctor")
+    {
+        qry.prepare("SELECT firstname,lastname FROM doctor WHERE username=:use ");
+        qry.addBindValue(role);
+        qry.bindValue(":use",username);
+        qry.exec();
+        qry.next();
+        return qry.value(0).toString()+" "+qry.value(1).toString();
+    }
+
 }

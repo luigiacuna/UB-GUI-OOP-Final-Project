@@ -14,12 +14,12 @@ namespace Ui {
 class AdminWindow;
 }
 
-class AdminWindow : public QMainWindow
+class AdminWindow : public QMainWindow, public Database
 {
     Q_OBJECT
 
 public:
-    explicit AdminWindow(QWidget *parent = nullptr);
+    explicit AdminWindow(QString username, QString role, QWidget *parent = nullptr);
     ~AdminWindow();
 private slots:
     void about();
