@@ -11,7 +11,12 @@ EditPatient::EditPatient(QString patient, QWidget *parent) :
     ui->medComboBox->addItems(listAvaliableMeds());
     //filling the patient combo box with the avaliable patients that have been created
     ui->patientComboBox->addItem("Select a patient");
-    //ui->patientComboBox->addItems();//to be grabbed from the patient data portion need to create db function
+    ui->patientComboBox->addItems(listAvaliablePatients());//to be grabbed from the patient data portion need to create db function
+    if(patient == "")
+    {
+        ui->patientComboBox->setCurrentIndex(0);
+        ui->updateButton->setEnabled(false);
+    }
 }
 
 EditPatient::~EditPatient()

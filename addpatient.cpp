@@ -61,15 +61,18 @@ void AddPatient::createButtonPressed()
 
     if(firstNameOK==true&&lastNameOK == true)
     {
-        db.addPatient(ui->firstNameInput->text(),
+        addPatient(ui->firstNameInput->text(),
                       ui->lastNameInput->text(),
                       ui->ageInput->text(),
                       ui->phoneNumberInput->text(),
                       ui->genderComboBox->currentText(),
                       ui->dateEdit->text(),
                       ui->ssNumInput->text(),
-                      doctorUsername);
+                      getUserID(doctorUsername));
         this->close();
+        EditPatient editPat("");
+        editPat.setModal(true);
+        editPat.exec();
     }
 
 
