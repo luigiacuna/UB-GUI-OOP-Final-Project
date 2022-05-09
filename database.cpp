@@ -66,7 +66,7 @@ bool Database::addUser(int id,QString username, QString firstName, QString lastN
     }
     qDebug()<<"Number of users in the database: "<<usersCount;
 
-    //Everything checksout now to actually add to the database
+    //Sheeeeeeeeeeeeeeeeeeeeeeeeesh
         if(choice == 1)//used at the newUser class
         {
             //Made these two queries because i wanted to see if i add a doctor if his information will show up on the admin table
