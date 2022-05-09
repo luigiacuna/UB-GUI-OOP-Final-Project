@@ -51,17 +51,24 @@ void AddPatient::createButtonPressed()
         lastNameOK=true;
 
 
-    qDebug()<<"Preflight Check for adding a patient to the database";
+    /*qDebug()<<"Preflight Check for adding a patient to the database";
     qDebug()<<"First Name: "<<firstName;
     qDebug()<<"Last Name: "<<lastName;
     qDebug()<<"Age: "<<age;
     qDebug()<<"Phone Number: "<<phoneNumber;
     qDebug()<<"Gender: "<<gender;
-    qDebug()<<"Date of Birth: "<<dob;
+    qDebug()<<"Date of Birth: "<<dob;*/
 
     if(firstNameOK==true&&lastNameOK == true)
     {
-        db.addPatient(firstName, lastName, age, phoneNumber, gender, dob);
+        db.addPatient(ui->firstNameInput->text(),
+                      ui->lastNameInput->text(),
+                      ui->ageInput->text(),
+                      ui->phoneNumberInput->text(),
+                      ui->genderComboBox->currentText(),
+                      ui->dateEdit->text(),
+                      ui->ssNumInput->text(),
+                      doctorUsername);
         this->close();
     }
 

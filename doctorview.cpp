@@ -13,6 +13,7 @@ DoctorView::DoctorView(QString username, QString role, QWidget *parent) :
     connect(ui->addMeds,SIGNAL(clicked()),this,SLOT(addMedicine()));
 
     ui->statusbar->showMessage("Logged in as: Dr. "+db.getFullName(username,role));
+    doctorUsername = username;
 
 
 }

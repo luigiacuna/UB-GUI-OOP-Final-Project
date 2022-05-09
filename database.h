@@ -17,7 +17,7 @@ public:
     QSqlQueryModel* adminTable(int); //admin window to show username
     void resetPassword(QString, QString);//reset user password at the admin window
     void deleteUser(QString);
-    void addPatient(QString,QString,QString,QString,QString,QString);
+    void addPatient(QString,QString,QString,QString,QString,QString,QString,QString);
     QStringList getUserInformation(QString);
     QString getPassword(QString);
     QSqlQueryModel *medList();

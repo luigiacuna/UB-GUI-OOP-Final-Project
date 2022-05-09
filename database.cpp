@@ -201,8 +201,9 @@ void Database::deleteUser(QString username)
     qry.exec();
 }
 
-void Database::addPatient(QString firstName, QString lastName, QString age, QString phoneNumber, QString gender, QString dob)
+void Database::addPatient(QString firstName, QString lastName, QString age, QString phoneNumber, QString gender, QString dob, QString ss,QString doctor)
 {
+    qDebug()<<"Doctor parameter: "<<doctor;
     QSqlQuery qry;
     qry.prepare("SELECT COUNT(*) FROM patients;");
     qry.exec();
@@ -213,15 +214,17 @@ void Database::addPatient(QString firstName, QString lastName, QString age, QStr
     qry.clear();
 
     //QSqlQuery qry;
-    qry.prepare("INSERT INTO patients(id firstName, lastName, age, phonenumber, gender, dob)"
-                " VALUES(:id, :firstName, :lastName, :age, :phonenumber, :gender, :dob);");
+    qry.prepare("INSERT INTO patients(id, firstName, lastName, age, phonenumber, gender, dob,socialsecruity,doctor_id)"
+                " VALUES(:id, :firstName, :lastName, :age, :phonenumber, :gender, :dob, :ss, :doc);");
     qry.bindValue(":id", patientID);
     qry.bindValue(":firstName",firstName);
     qry.bindValue(":lastName",lastName);
     qry.bindValue(":age",age);
     qry.bindValue(":phonenumber",phoneNumber);
     qry.bindValue(":gender",gender);
-    qry.bindValue(":dob",dob);//im thinking ill have to pass it as QDate or something
+    qry.bindValue(":dob",dob);
+    qry.bindValue(":ss",ss);
+    qry.bindValue(":doc",doctor);
     if(!qry.exec())
     {
         qDebug()<<qry.lastError().text();
