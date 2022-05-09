@@ -22,6 +22,8 @@ int main(int argc, char *argv[])
     {
         qDebug()<<"Connection Successfull at newUser Class";
     }
+    //for demo purposes only
+
 
     QApplication a(argc, argv);
     Login w;
