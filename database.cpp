@@ -53,6 +53,9 @@ bool Database::addUser(int id,QString username, QString firstName, QString lastN
     //1 will be for adding user and 2 will be updating user records
 
     QSqlQuery qry;
+    QSqlQuery qry2;
+    QSqlQuery qry3;
+    QSqlQuery qry4;
     //need to get a count of how many users are avaliable to add the correct count to the database
     qry.prepare("SELECT * FROM users;");
     qry.exec();
@@ -64,42 +67,71 @@ bool Database::addUser(int id,QString username, QString firstName, QString lastN
     qDebug()<<"Number of users in the database: "<<usersCount;
 
     //Everything checksout now to actually add to the database
-    if(choice == 1)//used at the newUser class
-    {
-        qry.prepare("INSERT INTO users(id,username,fname,lname,password,type) VALUES(?,?,?,?,?,?);");
-        qry.addBindValue(usersCount+1);
-        qry.addBindValue(username);
-        qry.addBindValue(firstName);
-        qry.addBindValue(lastName);
-        qry.addBindValue(password);
-        if(type=="")
-            qry.addBindValue("nurse");
+        if(choice == 1)//used at the newUser class
+        {
+            //Made these two queries because i wanted to see if i add a doctor if his information will show up on the admin table
+            qry.prepare("INSERT INTO users(id,username,password,role) VALUES(:id,:username,:password,:role);");
+            qry2.prepare("INSERT INTO doctor(id, username, firstname, lastname) VALUES(:id, :username, :firstname, :lastname);");
+            qry3.prepare("INSERT INTO admin(id, username, firstname, lastname) VALUES(:id, :username, :firstname, :lastname);");
+            qry4.prepare("INSERT INTO nurse(id, username, firstname, lastname) VALUES(:id, :username, :firstname, :lastname);");
+
+            qry.addBindValue(usersCount+1);
+            qry.bindValue(":username", username);
+            qry.bindValue(":password", password);
+            qry.bindValue(":role", type);
+
+            if(type == "Doctor")
+            {
+                qry2.addBindValue(usersCount+1);
+                qry2.bindValue(":username", username);
+                qry2.bindValue(":firstname", firstName);
+                qry2.bindValue(":lastname", lastName);
+
+                qry2.exec();
+            }
+            else if(type == "Admin")
+            {
+                qry3.addBindValue(usersCount+1);
+                qry3.bindValue(":username", username);
+                qry3.bindValue(":firstname", firstName);
+                qry3.bindValue(":lastname", lastName);
+
+                qry3.exec();
+            }
+            else if(type == "Nurse")
+            {
+                qry4.addBindValue(usersCount+1);
+                qry4.bindValue(":username", username);
+                qry4.bindValue(":firstname", firstName);
+                qry4.bindValue(":lastname", lastName);
+
+                qry4.exec();
+            }
+
+        }
+        else if(choice == 2)//used by the editUser Class
+        {
+            qDebug()<<type;
+            //QString idToString = id
+            qry.prepare("UPDATE users SET fname=:first, lname=:last, username=:use, type=:tipo WHERE id=:intNum;");
+            qry.bindValue(":first",firstName);
+            qry.bindValue(":last",lastName);
+            qry.bindValue(":use",username);
+            qry.bindValue(":tipo",type);
+            qry.bindValue(":intNum",id);
+        }
+
+        if(qry.exec())
+        {
+            qDebug()<<"New User added/updated.";
+            return true;
+
+        }
         else
-            qry.addBindValue(type);
-    }
-    else if(choice == 2)//used by the editUser Class
-    {
-        qDebug()<<type;
-        //QString idToString = id
-        qry.prepare("UPDATE users SET fname=:first, lname=:last, username=:use, type=:tipo WHERE id=:intNum;");
-        qry.bindValue(":first",firstName);
-        qry.bindValue(":last",lastName);
-        qry.bindValue(":use",username);
-        qry.bindValue(":tipo",type);
-        qry.bindValue(":intNum",id);
-    }
-
-    if(qry.exec())
-    {
-        qDebug()<<"New User added/updated.";
-        return true;
-
-    }
-    else
-    {
-        qDebug()<<"Insert/Updated failed";
-        return false;
-    }
+        {
+            qDebug()<<qry.lastError().text();
+            return false;
+        }
 }
 
 bool Database::checkCredentials(QString username, QString password)//get funtion
