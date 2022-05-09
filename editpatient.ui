@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>EditPatient</class>
+ <widget class="QDialog" name="EditPatient">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>766</width>
+    <height>812</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <widget class="QWidget" name="layoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>441</width>
+     <height>296</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="patientInfoLayout">
+    <item>
+     <widget class="QLabel" name="patientInformation">
+      <property name="text">
+       <string>Patient Information</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <layout class="QVBoxLayout" name="labelLayout">
+        <item>
+         <widget class="QLabel" name="patientNameLabel">
+          <property name="text">
+           <string>Patient</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="firstNameLabel">
+          <property name="text">
+           <string>First Name</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="lastNameLabel">
+          <property name="text">
+           <string>Last Name</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="ageLabel">
+          <property name="text">
+           <string>Age</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="phoneNumberLabel">
+          <property name="text">
+           <string>Phone Number</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="genderLabel">
+          <property name="text">
+           <string>Gender</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="dobLabel">
+          <property name="text">
+           <string>DOB</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="ssNumLabel">
+          <property name="text">
+           <string>Social Security Number</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="inputsLayout">
+        <item>
+         <widget class="QComboBox" name="patientComboBox"/>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="firstNameEdit"/>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="lastNameEdit"/>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="ageInput"/>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="phoneNumberEdit"/>
+        </item>
+        <item>
+         <widget class="QComboBox" name="genderComboBox"/>
+        </item>
+        <item>
+         <widget class="QDateEdit" name="dobEdit"/>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="socialSecurityNumberInput"/>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="QPushButton" name="updateButton">
+      <property name="text">
+       <string>Update</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QTableView" name="tableView">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>320</y>
+     <width>741</width>
+     <height>481</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QWidget" name="">
+   <property name="geometry">
+    <rect>
+     <x>460</x>
+     <y>10</y>
+     <width>291</width>
+     <height>291</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="mainSceduleLayout">
+    <item>
+     <widget class="QLabel" name="scheduleTitle">
+      <property name="text">
+       <string>Add to Pil Schedule</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="subSceduleLayout">
+      <item>
+       <layout class="QVBoxLayout" name="scheduleLabels">
+        <item>
+         <widget class="QLabel" name="assignedNurseLabel">
+          <property name="text">
+           <string>Assigned Nurse</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="medLabel">
+          <property name="text">
+           <string>Medicine</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="dosageLabel">
+          <property name="text">
+           <string>Dosage</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="intervalLabel">
+          <property name="text">
+           <string>Intervals</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="dateBeginLabel">
+          <property name="text">
+           <string>Begin</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="dateEndLabel">
+          <property name="text">
+           <string>End</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="sceduleInputsLayout">
+        <item>
+         <widget class="QComboBox" name="assignedNurseComboBox"/>
+        </item>
+        <item>
+         <widget class="QComboBox" name="medComboBox"/>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="dosageInputLayout">
+          <item>
+           <widget class="QLineEdit" name="dosageValueInNum">
+            <property name="text">
+             <string>Value</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="dosageValueInUnits">
+            <property name="text">
+             <string>Units</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="intervalLayout">
+          <item>
+           <widget class="QLineEdit" name="intervaValueNum"/>
+          </item>
+          <item>
+           <widget class="QComboBox" name="intervalValueComboBox"/>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QDateEdit" name="dateBeginLabel_2"/>
+        </item>
+        <item>
+         <widget class="QDateEdit" name="dateEndInput"/>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="scheduleButtons">
+      <item>
+       <widget class="QPushButton" name="addToSchedule">
+        <property name="text">
+         <string>Add</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="removeFromSchedule">
+        <property name="text">
+         <string>Remove</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

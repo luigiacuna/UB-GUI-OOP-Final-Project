@@ -9,11 +9,12 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    addeditpatient.cpp \
     addmedicine.cpp \
+    addpatient.cpp \
     adminwindow.cpp \
     database.cpp \
     doctorview.cpp \
+    editpatient.cpp \
     edituser.cpp \
     main.cpp \
     Login.cpp \
@@ -23,11 +24,12 @@ SOURCES += \
 
 HEADERS += \
     Login.h \
-    addeditpatient.h \
     addmedicine.h \
+    addpatient.h \
     adminwindow.h \
     database.h \
     doctorview.h \
+    editpatient.h \
     edituser.h \
     newuser.h \
     nurseview.h \
@@ -35,10 +37,11 @@ HEADERS += \
 
 FORMS += \
     Login.ui \
-    addeditpatient.ui \
     addmedicine.ui \
+    addpatient.ui \
     adminwindow.ui \
     doctorview.ui \
+    editpatient.ui \
     edituser.ui \
     newuser.ui \
     nurseview.ui \

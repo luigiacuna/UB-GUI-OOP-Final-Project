@@ -405,3 +405,8 @@ QString Database::getFullName(QString username, QString role)
     }
 
 }
+
+void Database::addPatient(QString, QString, QString, QString, QString, QString, QString)
+{
+
+}

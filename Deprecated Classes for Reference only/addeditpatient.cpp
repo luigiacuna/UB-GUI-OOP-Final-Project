@@ -12,6 +12,7 @@ AddEditPatient::AddEditPatient(int senario,QString username,QWidget *parent) :
     ui->nurseAssignComboBox->addItems(listAvaliableNurses());
     //if in the case there is a med that is not listed allow the user to choose the option "Add Medicine" to quickly add one of course within the boundaries set by addMedicine class
     ui->medicineComboBox->addItem("Add Medicine");
+    qDebug()<<"Current Senario in use : "<<senario;
     connect(ui->createButton,SIGNAL(clicked()),this,SLOT(openSenarioTwo()));
 
     if(senario == 1)
@@ -33,6 +34,7 @@ AddEditPatient::AddEditPatient(int senario,QString username,QWidget *parent) :
          ui->scheduleTableWidget->hide();
          ui->addToSchedule->hide();
          setGeometry(0,0,311,336);
+
          //now on the Create button do checks and go to senario 2
 
 
@@ -46,6 +48,18 @@ AddEditPatient::AddEditPatient(int senario,QString username,QWidget *parent) :
         //This implies that the doctor wants to edit an existing patient
         //This will change the ok button to say update
         //a combo box will be viewable allowing the doctor to pick which patient to edit
+        setGeometry(0,0,311,696);
+        ui->dosageInt->show();
+        ui->dosageLabel->show();
+        ui->dosageUnits->show();
+        ui->intervalComboBox->show();
+        ui->intervalValue->show();
+        ui->medicineComboBox->show();
+        ui->dosageLabel->show();
+        ui->intervalsLabel->show();
+        ui->medicineLabelAssign->show();
+        ui->scheduleTableWidget->show();
+        ui->addToSchedule->show();
         ui->createButton->hide();
         //do fancy stuff
     }
@@ -62,10 +76,10 @@ AddEditPatient::~AddEditPatient()
     delete ui;
 }
 
-void AddEditPatient::openSenarioTwo()
+void AddEditPatient::openSenarioTwo()//need to figure this out too tired to continue
 {
     new AddEditPatient(2,doctoruser);
-    this->close();
+    // this->close();
 }
 
 void AddEditPatient::on_medicineComboBox_textActivated(const QString &arg1)//using auto connect cause i couldn't get it working on my own lol

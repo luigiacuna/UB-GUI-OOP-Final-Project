@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>AddPatient</class>
+ <widget class="QDialog" name="AddPatient">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>365</width>
+    <height>251</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <widget class="QWidget" name="layoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>341</width>
+     <height>233</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="mainLayout">
+    <item>
+     <widget class="QLabel" name="addPatientLabel">
+      <property name="text">
+       <string>Add a patient</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <layout class="QVBoxLayout" name="labelsLayout">
+        <item>
+         <widget class="QLabel" name="firstNameLabel">
+          <property name="text">
+           <string>First Name</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="lastNameLabel">
+          <property name="text">
+           <string>Last Name</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="ageLabel">
+          <property name="text">
+           <string>Age</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="phonenumberLabel">
+          <property name="text">
+           <string>Phone Number</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="genderLabel">
+          <property name="text">
+           <string>Gender</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="dobLabel">
+          <property name="text">
+           <string>Date Of Birth</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="inputsLabel">
+        <item>
+         <widget class="QLineEdit" name="firstNameInput"/>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="lastNameInput"/>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="ageInput"/>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="phoneNumberInput"/>
+        </item>
+        <item>
+         <widget class="QComboBox" name="genderComboBox">
+          <item>
+           <property name="text">
+            <string>Male</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Female</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item>
+         <widget class="QDateEdit" name="dateEdit"/>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="QPushButton" name="createButton">
+      <property name="text">
+       <string>Create</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

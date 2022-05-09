@@ -3,7 +3,9 @@
 
 #include <QMainWindow>
 #include <QPixmap>
-#include "addeditpatient.h"
+#include "addeditpatient.h"//to be removed from play
+#include "addpatient.h"
+#include "editpatient.h"
 #include "addmedicine.h"
 #include "database.h"
 

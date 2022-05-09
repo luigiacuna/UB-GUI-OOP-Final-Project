@@ -24,16 +24,17 @@ DoctorView::~DoctorView()
 
 void DoctorView::createNewPatient()
 {
-    AddEditPatient openSen1(1,doctorUsername);
-    openSen1.setModal(true);
-    openSen1.exec();
+    AddPatient addPat(doctorUsername);
+    addPat.setModal(true);
+    addPat.exec();
+
 }
 
 void DoctorView::editPatient()
 {
-    AddEditPatient openSen1(2,doctorUsername);
-    openSen1.setModal(true);
-    openSen1.exec();
+    EditPatient editPat("");
+    editPat.setModal(true);
+    editPat.exec();
 }
 
 void DoctorView::addMedicine()
