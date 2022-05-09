@@ -2,13 +2,10 @@
 #include "ui_adminwindow.h"
 #include <QMessageBox>
 
-AdminWindow::AdminWindow(QString username, QString role, QWidget *parent) :
+AdminWindow::AdminWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::AdminWindow)
 {
-    qDebug()<<"User currently logged in "<<username;
-    qDebug()<<"Just checking if the role is correct = "<<role;
-    qDebug()<<"Full name of this user is: "<<getFullName(username,role);
     ui->setupUi(this);
 
     ui->editUser->setEnabled(false);
@@ -19,8 +16,7 @@ AdminWindow::AdminWindow(QString username, QString role, QWidget *parent) :
     ui->usernameView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);//fit all the contents of the sql query to fit on the table width
     ui->usernameView->setSelectionBehavior(QAbstractItemView::SelectItems);//allows only one item to be selected at a time
     ui->usernameView->setSelectionMode(QAbstractItemView::SingleSelection);//whatever was selected becomes deselectd and the new item clicked becomes seleceted
-
-    //ui->usernameView->setHorizontalHeaderLabels()//pretty up the headers later for that
+    //ui->usernameView->setHorizontalHeaderLabels()//prettu up the headers later for that
     ui->usernameView->setModel(db.adminTable(1));//this will pull only the usernames and make that selectable
 
     //setting properties of the everything else view
@@ -34,29 +30,23 @@ AdminWindow::AdminWindow(QString username, QString role, QWidget *parent) :
     QTimer *timer = new QTimer(this);
     timer->start(1000);
     connect(timer,SIGNAL(timeout()),this,SLOT(updateTime()));
+    QString msg = "Logged in as: "+val;
+    ui->statusbar->showMessage("Logged in as: ",0);
     ui->statusbar->addPermanentWidget(ui->currrenTimeLabel);
     ui->statusbar->addPermanentWidget(ui->actualTimeLabel);
-
-    //add to the statusbar the current user thats logged in name
-    ui->statusbar->showMessage("Logged in as: "+ getFullName(username,role));
 
 
 
 
     connect(ui->resetUserPasswordButton,SIGNAL(clicked()),this,SLOT(startResetUser()));
-
-    //connect for editing a user
-    connect(ui->editUser,SIGNAL(clicked()),this,SLOT(editUser()));
-
-
     connect(ui->actionAbout,SIGNAL(triggered()),this,SLOT(about()));
-
 }
 
 AdminWindow::~AdminWindow()
 {
     delete ui;
 }
+
 
 void AdminWindow::about()
 {
@@ -73,18 +63,8 @@ void AdminWindow::updateTime()
 void AdminWindow::startResetUser()//was going to be lazy and use QInputDialog and use one input but couldn't control cancel button sigh...
 {
     //going to open a new class just to reset a password that feels so ineffcient but oh well going to code it right with two inputs and verify
-    ResetPassword *reset=new ResetPassword(val);
+    ResetPassword *reset=new ResetPassword();
     reset->exec();
-
-}
-
-void AdminWindow::editUser()
-{
-    //this slot will pass in all the selected user info and pass in the editUser Class
-    EditUser edit(val);
-    edit.setModal(true);
-    edit.exec();
-
 }
 
 //had to use the auto connect cause like i couldn't figure out to write it lol idk
@@ -113,4 +93,29 @@ void AdminWindow::on_DeleteUser_clicked()
         qDebug()<<val;
     }
 
+
+}
+
+void AdminWindow::on_createUserButton_clicked()
+{
+    this->close();
+    NewUser newUser;
+    newUser.setModal(true);
+    newUser.exec();
+}
+
+void AdminWindow::on_Logout_clicked()
+{
+    Login login;
+
+    this->close();
+    login.exec();
+}
+
+void AdminWindow::on_editUser_clicked()
+{
+    //this slot will pass in all the selected user info and pass in the editUser Class
+    EditUser edit(val);
+    edit.setModal(true);
+    edit.exec();
 }

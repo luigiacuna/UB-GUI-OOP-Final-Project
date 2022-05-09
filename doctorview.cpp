@@ -6,14 +6,14 @@ DoctorView::DoctorView(QString username, QString role, QWidget *parent) :
     ui(new Ui::DoctorView)
 {
     ui->setupUi(this);
-    doctorUsername = username;
     QPixmap pix("C:/heheboi.jpg");
     ui->companyLogo->setPixmap(pix);
     connect(ui->addPatient,SIGNAL(clicked()),this,SLOT(createNewPatient()));
     connect(ui->viewPatient,SIGNAL(clicked()),this,SLOT(editPatient()));
     connect(ui->addMeds,SIGNAL(clicked()),this,SLOT(addMedicine()));
 
-    ui->statusbar->showMessage("Logged in as: Dr. "+getFullName(username,role));
+    ui->statusbar->showMessage("Logged in as: Dr. "+db.getFullName(username,role));
+
 
 }
 
@@ -27,7 +27,6 @@ void DoctorView::createNewPatient()
     AddPatient addPat(doctorUsername);
     addPat.setModal(true);
     addPat.exec();
-
 }
 
 void DoctorView::editPatient()
@@ -42,4 +41,12 @@ void DoctorView::addMedicine()
     AddMedicine meds;
     meds.setModal(true);
     meds.exec();
+}
+
+
+void DoctorView::on_Logout_clicked()
+{
+    Login login;
+    this->close();
+    login.exec();
 }

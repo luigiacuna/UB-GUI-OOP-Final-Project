@@ -59,23 +59,23 @@ bool Database::addUser(int id,QString username, QString firstName, QString lastN
     int usersCount=0;
     while(qry.next())
     {
-       usersCount=qry.value(0).toInt();
+        usersCount=qry.value(0).toInt();
     }
     qDebug()<<"Number of users in the database: "<<usersCount;
 
     //Everything checksout now to actually add to the database
     if(choice == 1)//used at the newUser class
     {
-         qry.prepare("INSERT INTO users(id,username,fname,lname,password,type) VALUES(?,?,?,?,?,?);");
-         qry.addBindValue(usersCount+1);
-         qry.addBindValue(username);
-         qry.addBindValue(firstName);
-         qry.addBindValue(lastName);
-         qry.addBindValue(password);
-         if(type=="")
-             qry.addBindValue("nurse");
-         else
-             qry.addBindValue(type);
+        qry.prepare("INSERT INTO users(id,username,fname,lname,password,type) VALUES(?,?,?,?,?,?);");
+        qry.addBindValue(usersCount+1);
+        qry.addBindValue(username);
+        qry.addBindValue(firstName);
+        qry.addBindValue(lastName);
+        qry.addBindValue(password);
+        if(type=="")
+            qry.addBindValue("nurse");
+        else
+            qry.addBindValue(type);
     }
     else if(choice == 2)//used by the editUser Class
     {
@@ -117,7 +117,6 @@ bool Database::checkCredentials(QString username, QString password)//get funtion
         qry.exec();
         while(qry.next())
             dbPassword=qry.value(0).toString();//and pass it to QString for validiation
-        qDebug()<<dbPassword;
         if(dbPassword==password)//said validation
         {
             qDebug()<<"Its Gucci";
@@ -138,7 +137,6 @@ bool Database::checkCredentials(QString username, QString password)//get funtion
 
 QString Database::getRole(QString username)//getfuntion
 {
-    //Returns the role of the user that is currently logged in. This function is called from the openRole() function in Login Class
     QSqlQuery qry;
     qry.prepare("SELECT role FROM users WHERE username=:use;");
     qry.bindValue(":use",username);
@@ -172,7 +170,7 @@ QSqlQueryModel* Database::adminTable(int num)//updates the two table widgets in 
 
 }
 
-void Database::resetPassword(QString id, QString newPassword)//setfunction
+void Database::resetPassword(QString newPassword, QString id)//setfunction
 {
     QSqlQuery qry;
     qry.prepare("UPDATE users SET password=:pass WHERE id=:id");
@@ -186,7 +184,6 @@ void Database::resetPassword(QString id, QString newPassword)//setfunction
     {
         qDebug()<<qry.lastError().text();
     }
-
 }
 
 void Database::deleteUser(QString username)
@@ -202,6 +199,33 @@ void Database::deleteUser(QString username)
     qry.prepare("DELETE FROM users WHERE id=:id;");
     qry.bindValue(":id",username);
     qry.exec();
+}
+
+void Database::addPatient(QString firstName, QString lastName, QString age, QString phoneNumber, QString gender, QString dob)
+{
+    QSqlQuery qry;
+    qry.prepare("SELECT COUNT(*) FROM patients;");
+    qry.exec();
+    qry.next();
+    QString count = qry.value(0).toString();
+    //now actually combine them with the first initial of firstname, lastname and the current count
+    QString patientID = firstName.left(0)+lastName.left(0)+count;//use this to bind the value to id
+    qry.clear();
+
+    //QSqlQuery qry;
+    qry.prepare("INSERT INTO patients(id firstName, lastName, age, phonenumber, gender, dob)"
+                " VALUES(:id, :firstName, :lastName, :age, :phonenumber, :gender, :dob);");
+    qry.bindValue(":id", patientID);
+    qry.bindValue(":firstName",firstName);
+    qry.bindValue(":lastName",lastName);
+    qry.bindValue(":age",age);
+    qry.bindValue(":phonenumber",phoneNumber);
+    qry.bindValue(":gender",gender);
+    qry.bindValue(":dob",dob);
+    if(!qry.exec())
+    {
+        qDebug()<<qry.lastError().text();
+    }
 }
 
 QStringList Database::getUserInformation(QString username)
@@ -293,10 +317,9 @@ QStringList Database::getUserInformation(QString username)
         data<<qry.value(0).toString();
     qry.clear();
     return data;
-
 }
 
-QString Database::getPassword(QString username)//used in the editUser Class to grab the current User selected's password
+QString Database::getPassword(QString username)
 {
     QSqlQuery qry;
     qry.prepare("SELECT password FROM users WHERE username=:use");
@@ -307,11 +330,21 @@ QString Database::getPassword(QString username)//used in the editUser Class to g
 
 }
 
+QSqlQueryModel *Database::medList()
+{
+    QSqlQuery *qry = new QSqlQuery();
+    qry->prepare("SELECT med_name FROM medicine");
+    qry->exec();
+
+    QSqlQueryModel *model = new QSqlQueryModel();
+    model->setQuery(std::move(*qry));
+    return model;
+}
+
 void Database::addMeds(QString medicine)
 {
     //create the med_code value
-    int medCount = listAvaliableMeds().count();
-    QString medCode = QString::number(medCount)+medicine.left(3);
+    QString medCode = medicine.chopped(3);
     qDebug()<<"The med code that will be created is "<<medCode<<" which comes from "<<medicine;
 
     //actually push the values with an insert query
@@ -340,7 +373,7 @@ QStringList Database::listAvaliableMeds()
     return data;
 }
 
-QSqlQueryModel* Database::showAvaliableMeds()
+QSqlQueryModel *Database::showAvaliableMeds()
 {
     QSqlQuery *qry = new QSqlQuery();
     QSqlQueryModel *model = new QSqlQueryModel();
@@ -370,7 +403,6 @@ QStringList Database::listAvaliableNurses()
         data<<qry.value(0).toString() + " " + qry.value(1).toString();
     qDebug()<<"List of Avaliable Nurses: "<<data;
     return data;
-
 }
 
 QString Database::getFullName(QString username, QString role)
@@ -403,10 +435,4 @@ QString Database::getFullName(QString username, QString role)
         qry.next();
         return qry.value(0).toString()+" "+qry.value(1).toString();
     }
-
-}
-
-void Database::addPatient(QString, QString, QString, QString, QString, QString, QString)
-{
-
 }

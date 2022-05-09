@@ -6,35 +6,38 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>619</width>
+    <width>899</width>
     <height>520</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QWidget" name="">
+  <widget class="QLabel" name="title">
+   <property name="geometry">
+    <rect>
+     <x>300</x>
+     <y>50</y>
+     <width>101</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Create a new User</string>
+   </property>
+  </widget>
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>36</x>
-     <y>50</y>
-     <width>551</width>
-     <height>411</height>
+     <y>91</y>
+     <width>621</width>
+     <height>341</height>
     </rect>
    </property>
-   <layout class="QVBoxLayout" name="verticalLayout">
+   <layout class="QHBoxLayout" name="horizontalLayout_3">
     <item>
-     <widget class="QLabel" name="title">
-      <property name="text">
-       <string>Create a new User</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <layout class="QHBoxLayout" name="firstNameLayout">
+     <layout class="QVBoxLayout" name="Labels">
       <item>
        <widget class="QLabel" name="firstNameLabel">
         <property name="text">
@@ -43,54 +46,12 @@
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="firstNameInput">
-        <property name="maximumSize">
-         <size>
-          <width>1000</width>
-          <height>16777215</height>
-         </size>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="firstNameRequired">
-        <property name="text">
-         <string>Required</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </item>
-    <item>
-     <layout class="QHBoxLayout" name="lastNameLayout">
-      <item>
        <widget class="QLabel" name="lastNameLabel">
         <property name="text">
          <string>Last Name: </string>
         </property>
        </widget>
       </item>
-      <item>
-       <widget class="QLineEdit" name="lastNameInput">
-        <property name="maximumSize">
-         <size>
-          <width>1000</width>
-          <height>16777215</height>
-         </size>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="lastNameRequired">
-        <property name="text">
-         <string>Required</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </item>
-    <item>
-     <layout class="QHBoxLayout" name="userNameLayout">
       <item>
        <widget class="QLabel" name="userNameLabel">
         <property name="text">
@@ -99,54 +60,12 @@
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="userNameInput">
-        <property name="maximumSize">
-         <size>
-          <width>1000</width>
-          <height>16777215</height>
-         </size>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="userNameRequired">
-        <property name="text">
-         <string>Username already taken</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </item>
-    <item>
-     <layout class="QHBoxLayout" name="passwordLayout">
-      <item>
        <widget class="QLabel" name="passwordLabel">
         <property name="text">
-         <string>Password:</string>
+         <string>Password: </string>
         </property>
        </widget>
       </item>
-      <item>
-       <widget class="QLineEdit" name="passwordInput">
-        <property name="maximumSize">
-         <size>
-          <width>1000</width>
-          <height>16777215</height>
-         </size>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="passwordRequired">
-        <property name="text">
-         <string>Required</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </item>
-    <item>
-     <layout class="QHBoxLayout" name="reneterPasswordLayout">
       <item>
        <widget class="QLabel" name="reneterPasswordLabel">
         <property name="text">
@@ -154,80 +73,147 @@
         </property>
        </widget>
       </item>
-      <item>
-       <widget class="QLineEdit" name="renterPasswordInput"/>
-      </item>
-      <item>
-       <widget class="QLabel" name="renterPasswordRequired">
-        <property name="text">
-         <string>Please reneter password</string>
-        </property>
-       </widget>
-      </item>
      </layout>
     </item>
     <item>
-     <layout class="QHBoxLayout" name="roleLayout">
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
       <item>
-       <widget class="QLabel" name="roleLabel">
-        <property name="text">
-         <string>Role</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QComboBox" name="roleComboBox">
+       <layout class="QHBoxLayout" name="horizontalLayout">
         <item>
-         <property name="text">
-          <string>Doctor</string>
-         </property>
+         <layout class="QVBoxLayout" name="verticalLayout">
+          <item>
+           <layout class="QHBoxLayout" name="firstName">
+            <item>
+             <widget class="QLineEdit" name="firstNameInput"/>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="lastName">
+            <item>
+             <widget class="QLineEdit" name="lastNameInput"/>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="userName">
+            <item>
+             <widget class="QLineEdit" name="userNameInput"/>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_4">
+            <item>
+             <widget class="QLineEdit" name="passwordInput"/>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="renterPassword">
+            <item>
+             <widget class="QLineEdit" name="renterPasswordInput"/>
+            </item>
+           </layout>
+          </item>
+         </layout>
         </item>
-        <item>
-         <property name="text">
-          <string>Nurse</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Administrator</string>
-         </property>
-        </item>
-       </widget>
-      </item>
-      <item>
-       <spacer name="horizontalSpacer">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-     </layout>
-    </item>
-    <item>
-     <layout class="QHBoxLayout" name="buttons">
-      <item>
-       <widget class="QPushButton" name="cancelButton">
-        <property name="text">
-         <string>Cancel</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="okButton">
-        <property name="text">
-         <string>OK</string>
-        </property>
-       </widget>
+       </layout>
       </item>
      </layout>
     </item>
    </layout>
+  </widget>
+  <widget class="QPushButton" name="okButton">
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>460</y>
+     <width>80</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>OK</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="cancelButton">
+   <property name="geometry">
+    <rect>
+     <x>380</x>
+     <y>460</y>
+     <width>80</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Cancel</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="firstNameRequired">
+   <property name="geometry">
+    <rect>
+     <x>690</x>
+     <y>110</y>
+     <width>151</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Required</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lastNameRequired">
+   <property name="geometry">
+    <rect>
+     <x>690</x>
+     <y>180</y>
+     <width>121</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Required</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="passwordRequired">
+   <property name="geometry">
+    <rect>
+     <x>710</x>
+     <y>310</y>
+     <width>126</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Required</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="userNameRequired">
+   <property name="geometry">
+    <rect>
+     <x>690</x>
+     <y>240</y>
+     <width>171</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Username already taken</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="renterPasswordRequired">
+   <property name="geometry">
+    <rect>
+     <x>700</x>
+     <y>380</y>
+     <width>211</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Please reneter password</string>
+   </property>
   </widget>
  </widget>
  <resources/>

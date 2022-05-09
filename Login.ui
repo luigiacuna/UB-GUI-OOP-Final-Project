@@ -81,7 +81,7 @@
     <item>
      <widget class="QPushButton" name="onOkButton">
       <property name="text">
-       <string>OK</string>
+       <string>Login</string>
       </property>
      </widget>
     </item>

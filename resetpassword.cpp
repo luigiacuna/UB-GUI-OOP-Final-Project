@@ -1,16 +1,13 @@
 #include "resetpassword.h"
 #include "ui_resetpassword.h"
-#include "adminwindow.h"
 
-ResetPassword::ResetPassword(QString id,QWidget *parent) :
+ResetPassword::ResetPassword(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::ResetPassword)
 {
     ui->setupUi(this);
-    idNum=id;
     connect(ui->okButton,SIGNAL(clicked()),this,SLOT(okButtonPressed()));
     connect(ui->cancelButton,SIGNAL(clicked()),this,SLOT(cancelButtonPressed()));
-
 
 }
 
@@ -23,7 +20,6 @@ void ResetPassword::okButtonPressed()
 {
     if(ui->newPasswordInput->text()==ui->renterPasswordInput->text())
     {
-        Database db;
         db.resetPassword(idNum,ui->newPasswordInput->text());
         QMessageBox::information(this,"Success","Password Reseted!");
         this->close();
@@ -38,5 +34,7 @@ void ResetPassword::okButtonPressed()
 
 void ResetPassword::cancelButtonPressed()
 {
-    close();
+    AdminWindow admin;
+    this->close();
+    admin.show();
 }

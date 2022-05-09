@@ -8,30 +8,38 @@
 #include <QInputDialog>//unused
 #include "database.h"
 #include "resetpassword.h"
+#include "newuser.h"
+#include "Login.h"
 #include "edituser.h"
-
 namespace Ui {
 class AdminWindow;
 }
 
-class AdminWindow : public QMainWindow, public Database
+class AdminWindow : public QMainWindow
 {
+    friend class ResetPassword;
     Q_OBJECT
 
 public:
-    explicit AdminWindow(QString username, QString role, QWidget *parent = nullptr);
+    explicit AdminWindow(QWidget *parent = nullptr);
     ~AdminWindow();
+
 private slots:
     void about();
     void updateTime();//might need to use in other windows
     void startResetUser();
-    void editUser();
 
     //void on_tableView_activated(const QModelIndex &index);
 
     void on_usernameView_activated(const QModelIndex &index);
 
     void on_DeleteUser_clicked();
+
+    void on_createUserButton_clicked();
+
+    void on_Logout_clicked();
+
+    void on_editUser_clicked();
 
 private:
     Ui::AdminWindow *ui;

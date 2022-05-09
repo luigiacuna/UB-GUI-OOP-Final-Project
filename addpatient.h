@@ -20,6 +20,7 @@ private slots:
 
 private:
     Ui::AddPatient *ui;
+    Database db;
     QString doctorUsername;
 };
 

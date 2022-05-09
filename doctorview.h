@@ -3,30 +3,34 @@
 
 #include <QMainWindow>
 #include <QPixmap>
-#include "addeditpatient.h"//to be removed from play
 #include "addpatient.h"
-#include "editpatient.h"
+#include "Login.h"
 #include "addmedicine.h"
+#include "editpatient.h"
 #include "database.h"
+
 
 namespace Ui {
 class DoctorView;
 }
 
-class DoctorView : public QMainWindow,public Database
+class DoctorView : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    explicit DoctorView(QString,QString,QWidget *parent = nullptr);
+    explicit DoctorView(QString username, QString role, QWidget *parent = nullptr);
     ~DoctorView();
 private slots:
     void createNewPatient();
     void editPatient();
     void addMedicine();
 
+    void on_Logout_clicked();
+
 private:
     Ui::DoctorView *ui;
+    Database db;
     QString doctorUsername;
 };
 

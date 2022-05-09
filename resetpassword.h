@@ -2,18 +2,19 @@
 #define RESETPASSWORD_H
 
 #include <QDialog>
-#include "database.h"
+#include <database.h>
+#include "adminwindow.h"
 
 namespace Ui {
 class ResetPassword;
 }
 
-class ResetPassword : public QDialog, public Database
+class ResetPassword : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit ResetPassword(QString id,QWidget *parent = nullptr);
+    explicit ResetPassword(QWidget *parent = nullptr);
     ~ResetPassword();
 private slots:
     void okButtonPressed();
@@ -21,7 +22,10 @@ private slots:
 
 private:
     Ui::ResetPassword *ui;
+    Database db;
     QString idNum;
+
+
 };
 
 #endif // RESETPASSWORD_H

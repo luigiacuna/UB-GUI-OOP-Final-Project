@@ -21,7 +21,15 @@ void AddPatient::createButtonPressed()
 {
     bool firstNameOK;
     bool lastNameOK;
-    if(ui->firstNameInput->text().isEmpty())
+
+    QString firstName = ui->firstNameInput->text();
+    QString lastName = ui->lastNameInput->text();
+    QString age = ui->ageInput->text();
+    QString phoneNumber = ui->phoneNumberInput->text();
+    QString gender = ui->genderComboBox->currentText();
+    QString dob = ui->dateEdit->text();
+
+    if(firstName.isEmpty())
     {
         qDebug()<<"first name is empty";
         ui->firstNameLabel->setText("First Name (*)");
@@ -42,15 +50,17 @@ void AddPatient::createButtonPressed()
 
 
     qDebug()<<"Preflight Check for adding a patient to the database";
-    qDebug()<<"First Name: "<<ui->firstNameInput->text();
-    qDebug()<<"Last Name: "<<ui->lastNameInput->text();
-    qDebug()<<"Age: "<<ui->ageInput->text();
-    qDebug()<<"Phone Number: "<<ui->phoneNumberInput->text();
-    qDebug()<<"Gender: "<<ui->genderComboBox->currentText();
-    qDebug()<<"Date of Birth: "<<ui->dateEdit->text();
+    qDebug()<<"First Name: "<<firstName;
+    qDebug()<<"Last Name: "<<lastName;
+    qDebug()<<"Age: "<<age;
+    qDebug()<<"Phone Number: "<<phoneNumber;
+    qDebug()<<"Gender: "<<gender;
+    qDebug()<<"Date of Birth: "<<dob;
 
     if(firstNameOK==true&&lastNameOK == true)
     {
-
+        db.addPatient(firstName, lastName, age, phoneNumber, gender, dob);
     }
+
+    this->close();
 }
