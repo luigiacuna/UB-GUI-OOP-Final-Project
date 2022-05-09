@@ -89,7 +89,7 @@ void Login::openRole(QString username)
     {
         qDebug()<<"The big boss has logged in";
         this->close();
-        AdminWindow *adminWin= new AdminWindow(this);
+        AdminWindow *adminWin= new AdminWindow();
         adminWin->show();
     }
     else if(db.getRole(username)=="nurse")

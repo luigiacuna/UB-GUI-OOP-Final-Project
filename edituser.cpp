@@ -130,4 +130,5 @@ void EditUser::okButtonPressed()
 void EditUser::cancelButtonPressed()
 {
     qDebug()<<"Cancel button was pressed";
+    this->close();
 }

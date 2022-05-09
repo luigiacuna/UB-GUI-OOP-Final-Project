@@ -113,7 +113,18 @@
          <widget class="QLineEdit" name="phoneNumberEdit"/>
         </item>
         <item>
-         <widget class="QComboBox" name="genderComboBox"/>
+         <widget class="QComboBox" name="genderComboBox">
+          <item>
+           <property name="text">
+            <string>Male</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Female</string>
+           </property>
+          </item>
+         </widget>
         </item>
         <item>
          <widget class="QDateEdit" name="dobEdit"/>
@@ -244,7 +255,28 @@
            <widget class="QLineEdit" name="intervaValueNum"/>
           </item>
           <item>
-           <widget class="QComboBox" name="intervalValueComboBox"/>
+           <widget class="QComboBox" name="intervalValueComboBox">
+            <item>
+             <property name="text">
+              <string>Hours</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Days</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Mintues</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Seconds</string>
+             </property>
+            </item>
+           </widget>
           </item>
          </layout>
         </item>

@@ -27,6 +27,13 @@
      <item>
       <layout class="QVBoxLayout" name="slideToTheLeft">
        <item>
+        <widget class="QPushButton" name="addMeds">
+         <property name="text">
+          <string>Add Medicine</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="QPushButton" name="addPatient">
          <property name="text">
           <string>Add Patient</string>
@@ -91,13 +98,6 @@
         <widget class="QPushButton" name="seeSchedule">
          <property name="text">
           <string>Nurse Scedule</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="addMeds">
-         <property name="text">
-          <string>Add Medicine</string>
          </property>
         </widget>
        </item>

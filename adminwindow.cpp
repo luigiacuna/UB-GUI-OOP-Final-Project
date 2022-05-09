@@ -98,7 +98,6 @@ void AdminWindow::on_DeleteUser_clicked()
 
 void AdminWindow::on_createUserButton_clicked()
 {
-    this->close();
     NewUser newUser;
     newUser.setModal(true);
     newUser.exec();
