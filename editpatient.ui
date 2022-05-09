@@ -144,7 +144,7 @@
     </rect>
    </property>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>460</x>
@@ -157,7 +157,7 @@
     <item>
      <widget class="QLabel" name="scheduleTitle">
       <property name="text">
-       <string>Add to Pil Schedule</string>
+       <string>Add to Pill Schedule</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>

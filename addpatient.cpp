@@ -34,6 +34,7 @@ void AddPatient::createButtonPressed()
         qDebug()<<"first name is empty";
         ui->firstNameLabel->setText("First Name (*)");
         ui->firstNameLabel->setStyleSheet("font-weight: bold;color: red");
+        ui->firstNameInput->setPlaceholderText("Cannot be empty");
         firstNameOK=false;
     }
     else
@@ -43,6 +44,7 @@ void AddPatient::createButtonPressed()
         qDebug()<<"last name is empty";
         ui->lastNameLabel->setText("Last Name (*)");
         ui->lastNameLabel->setStyleSheet("font-weight: bold;color: red");
+        ui->lastNameInput->setPlaceholderText("Cannot be empty");
         lastNameOK=false;
     }
     else
@@ -60,7 +62,8 @@ void AddPatient::createButtonPressed()
     if(firstNameOK==true&&lastNameOK == true)
     {
         db.addPatient(firstName, lastName, age, phoneNumber, gender, dob);
+        this->close();
     }
 
-    this->close();
+
 }

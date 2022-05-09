@@ -7,11 +7,13 @@ NewUser::NewUser(QWidget *parent) :
     ui(new Ui::NewUser)
 {
     ui->setupUi(this);
-    ui->firstNameRequired->hide();
+    /*ui->firstNameRequired->hide();
     ui->lastNameRequired->hide();
     ui->userNameRequired->hide();
     ui->passwordRequired->hide();
-    ui->renterPasswordRequired->hide();
+    ui->renterPasswordRequired->hide();*/
+
+    ui->userNameInput->installEventFilter(this);
 
     connect(ui->cancelButton,SIGNAL(clicked()),this,SLOT(close()));
     connect(ui->okButton,SIGNAL(clicked()),this,SLOT(onOk()));
@@ -40,32 +42,39 @@ void NewUser::onOk()
     {
         if(ui->firstNameInput->text().isEmpty())//checking if the username has not been filled
         {
-            ui->firstNameRequired->setText("Required");
-            ui->firstNameRequired->show();
+            ui->firstNameLabel->setText("First Name (*)");
+            ui->firstNameLabel->setStyleSheet("font-weight: bold;color:red;");
+            ui->firstNameInput->setPlaceholderText("Cannot be empty");
             okFirstName=false;
         }
         else//if there is something filled preform the neccessary checks
         {
-            ui->firstNameRequired->hide();
+            ui->firstNameLabel->setText("First Name");
+            ui->firstNameLabel->setStyleSheet("font-weight: normal;color:black;");
+            ui->firstNameInput->setPlaceholderText("");
             okFirstName=true;
         }
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
         if(ui->lastNameInput->text().isEmpty())//check if the last name has been filled or not
         {
-            ui->lastNameRequired->setText("Required");
-            ui->lastNameRequired->show();
+            ui->lastNameLabel->setText("First Name (*)");
+            ui->lastNameLabel->setStyleSheet("font-weight: bold;color:red;");
+            ui->lastNameInput->setPlaceholderText("Cannot be empty");
             okLastName=false;
         }
         else
         {
-            ui->lastNameRequired->hide();
+            ui->lastNameLabel->setText("First Name");
+            ui->lastNameLabel->setStyleSheet("font-weight: normal;color:black;");
+            ui->lastNameInput->setPlaceholderText("");
             okLastName=true;
         }
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         if(ui->userNameInput->text().isEmpty())//checks if there is a username has been filled
         {
-            ui->userNameRequired->setText("Required");
-            ui->userNameRequired->show();
+            ui->userNameLabel->setText("Username (*)");
+            ui->userNameLabel->setStyleSheet("font-weight:bold;color:red;");
+            ui->userNameInput->setPlaceholderText("Username field cannot be empty");
             okUsername = false;
         }
         else
@@ -74,15 +83,19 @@ void NewUser::onOk()
             qDebug()<<"Username field has something in it";
             if(db.userNameAvaliabity(ui->userNameInput->text()))
             {
+                ui->userNameLabel->setStyleSheet("font-weight:bold;color:black;");
+                ui->userNameInput->setPlaceholderText("");
                 okUsername = true;
-                ui->userNameRequired->hide();
+
             }
             else
             {
+                ui->userNameLabel->setText("Username (*)");
+                ui->userNameLabel->setStyleSheet("font-weight:bold;color-red;");
+                ui->userNameInput->setPlaceholderText("This username is already in use");
                 okUsername =false;
                 qDebug()<<"Username is in use";
-                ui->userNameRequired->setText("Username in use");
-                ui->userNameRequired->show();
+
             }
 
         }
@@ -91,32 +104,34 @@ void NewUser::onOk()
 
         if(ui->passwordInput->text().isEmpty())
         {
-            ui->passwordRequired->setText("Required");
-            ui->passwordRequired->show();
+            ui->passwordLabel->setText("Password (*)");
+            ui->passwordLabel->setStyleSheet("font-weight:bold;color:red");
         }
         else
         {
             qDebug()<<"Password was entered now to check if the reneter password filled";
             if(ui->renterPasswordInput->text().isEmpty())
             {
-                ui->renterPasswordRequired->setText("Please reneter password");
-                ui->renterPasswordRequired->show();
+                ui->reneterPasswordLabel->setText("Renter Password(*)");
+                ui->reneterPasswordLabel->setStyleSheet("font-weight:bold;color:red;");
+                ui->renterPasswordInput->setPlaceholderText("Renter password");
             }
             else
             {
                 if(ui->passwordInput->text()==ui->renterPasswordInput->text())
                 {
                     qDebug()<<"Passwords are a match";
-                    ui->passwordRequired->hide();
-                    ui->renterPasswordRequired->hide();
+                    ui->passwordLabel->setText("Password");
+                    ui->passwordLabel->setStyleSheet("font-weight:normal;color:black;");
+                    ui->passwordInput->setPlaceholderText("");
+                    ui->reneterPasswordLabel->setText("Renter Password");
+                    ui->reneterPasswordLabel->setStyleSheet("font-weight:normal;color:black;");
+                    ui->renterPasswordInput->setPlaceholderText("");
                     okPassword=true;
 
                 }
                 else
                 {
-                    ui->renterPasswordRequired->setText("Passwords do not match");
-                    ui->renterPasswordRequired->show();
-                    ui->passwordRequired->hide();
                     okPassword=false;
                 }
             }
@@ -128,11 +143,11 @@ void NewUser::onOk()
         if(okFirstName==true&&okLastName==true&&okUsername==true&&okPassword==true)
         {
             credsCheck=true;
-            db.addUser(0,ui->userNameInput->text(),ui->firstNameInput->text(),ui->lastNameInput->text(),ui->passwordInput->text(),"",1);
-            this->close();
-            Login log;
-            log.setModal(true);
-            log.exec();
+            //db.addUser(0,ui->userNameInput->text(),ui->firstNameInput->text(),ui->lastNameInput->text(),ui->passwordInput->text(),"",1);
+            //this->close();
+            //Login log;
+            //log.setModal(true);
+            //log.exec();
         }
         else
         {
@@ -141,3 +156,5 @@ void NewUser::onOk()
         }
     }
 }
+
+

@@ -221,7 +221,7 @@ void Database::addPatient(QString firstName, QString lastName, QString age, QStr
     qry.bindValue(":age",age);
     qry.bindValue(":phonenumber",phoneNumber);
     qry.bindValue(":gender",gender);
-    qry.bindValue(":dob",dob);
+    qry.bindValue(":dob",dob);//im thinking ill have to pass it as QDate or something
     if(!qry.exec())
     {
         qDebug()<<qry.lastError().text();

@@ -89,7 +89,7 @@ void AdminWindow::on_DeleteUser_clicked()
     {
         val = ui->usernameView->model()->data(ui->usernameView->model()->index(ids[i].data().toInt() - 1,0)).toString();
         //Uncomment this to acutally delete a user
-        //db.deleteUser(val);
+        db.deleteUser(val);
         qDebug()<<val;
     }
 
