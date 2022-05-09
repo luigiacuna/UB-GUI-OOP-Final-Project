@@ -143,7 +143,7 @@ void NewUser::onOk()
         if(okFirstName==true&&okLastName==true&&okUsername==true&&okPassword==true)
         {
             credsCheck=true;
-            //db.addUser(0,ui->userNameInput->text(),ui->firstNameInput->text(),ui->lastNameInput->text(),ui->passwordInput->text(),"",1);
+            db.addUser(ui->userNameInput->text(),ui->firstNameInput->text(),ui->lastNameInput->text(),ui->passwordInput->text(),ui->roleComboBox->currentText(),1);
             //this->close();
             //Login log;
             //log.setModal(true);
