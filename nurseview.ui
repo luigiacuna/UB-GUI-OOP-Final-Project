@@ -14,7 +14,7 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="Log">
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -24,16 +24,16 @@
      </rect>
     </property>
     <property name="text">
-     <string>PushButton</string>
+     <string>Log</string>
     </property>
    </widget>
-   <widget class="QChartView" name="graphicsView">
+   <widget class="QTableView" name="schedule">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>30</y>
-      <width>761</width>
-      <height>461</height>
+      <x>30</x>
+      <y>20</y>
+      <width>721</width>
+      <height>471</height>
      </rect>
     </property>
    </widget>
@@ -44,7 +44,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>21</height>
+     <height>20</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -68,13 +68,6 @@
    </property>
   </action>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>QChartView</class>
-   <extends>QGraphicsView</extends>
-   <header>QtCharts</header>
-  </customwidget>
- </customwidgets>
  <resources/>
  <connections/>
 </ui>

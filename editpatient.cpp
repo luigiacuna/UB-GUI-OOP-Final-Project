@@ -96,10 +96,6 @@ void EditPatient::updateButtonPressed()
     }
 
 
-
-
-
-
 }
 
 void EditPatient::on_medComboBox_textActivated(const QString &arg1)

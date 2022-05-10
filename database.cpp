@@ -53,9 +53,6 @@ bool Database::addUser(int id,QString username, QString firstName, QString lastN
     //1 will be for adding user and 2 will be updating user records
 
     QSqlQuery qry;
-    QSqlQuery qry2;
-    QSqlQuery qry3;
-    QSqlQuery qry4;
     //need to get a count of how many users are avaliable to add the correct count to the database
     qry.prepare("SELECT * FROM users;");
     qry.exec();
@@ -66,69 +63,116 @@ bool Database::addUser(int id,QString username, QString firstName, QString lastN
     }
     qDebug()<<"Number of users in the database: "<<usersCount;
 
-    if(choice == 1)//used at the newUser class
-    {
-        //Made these two queries because i wanted to see if i add a doctor if his information will show up on the admin table
-        qry.prepare("INSERT INTO users(id,username,password,role) VALUES(:id,:username,:password,:role);");
+    //qDebug paramter check
+    qDebug()<<"ID number to be assigned: "<<usersCount+1;
+    qDebug()<<"Username: "<<username;
+    qDebug()<<"First Name: "<<firstName;
+    qDebug()<<"Last Name: "<<lastName;
+    qDebug()<<"Password: "<<password;
+    qDebug()<<"Role to be assigned: "<<type;
 
-        qry.addBindValue(usersCount+1);
-        qry.bindValue(":username", username);
-        qry.bindValue(":password", password);
-        qry.bindValue(":role", type);
-
-        if(type == "Doctor")
+    //Sheeeeeeeeeeeeeeeeeeeeeeeeesh
+        if(choice == 1)//used at the newUser class
         {
-            qry2.prepare("INSERT INTO doctor(id, username, firstname, lastname) VALUES(:id, :username, :firstname, :lastname);");
-            qry2.addBindValue(usersCount+1);
-            qry2.bindValue(":username", username);
-            qry2.bindValue(":firstname", firstName);
-            qry2.bindValue(":lastname", lastName);
+            //Made these two queries because i wanted to see if i add a doctor if his information will show up on the admin table
+            qry.prepare("INSERT INTO users(id,username,password,role) VALUES(:id,:username,:password,:role);");
+            qry.addBindValue(usersCount+1);
+            qry.bindValue(":username", username);
+            qry.bindValue(":password", password);
+            //small change here it add correctly and everything just the role is case-sensitive and hold certain spelling so this quick if else will handle it
+            if(type == "Administrator")
+                qry.bindValue(":role", "admin");
+            else if(type == "Doctor")
+                qry.bindValue(":role", "doctor");
+            else if(type == "Nurse")
+                qry.bindValue(":role", "nurse");
+
+            if(qry.exec())
+            {
+                qDebug()<<"Insert at users table success";
+            }
+            else
+            {
+                qDebug()<<"Failure to add to users table first "<<qry.lastError().text();
+            }
+            qry.clear();
+
+            if(type == "Doctor")
+            {
+                qry.prepare("INSERT INTO doctor(id, username, firstname, lastname) VALUES(:id, :username, :firstname, :lastname);");
+                qry.addBindValue(usersCount+1);
+                qry.bindValue(":username", username);
+                qry.bindValue(":firstname", firstName);
+                qry.bindValue(":lastname", lastName);
+                if(qry.exec())
+                {
+                    qDebug()<<"Insert at doctor table success";
+                }
+                else
+                {
+                    qDebug()<<"Failure to add user to the doctor table "<<qry.lastError().text();
+                }
+                qry.clear();
+            }
+            else if(type == "Administrator")
+            {
+                qry.prepare("INSERT INTO admin(id, username, firstname, lastname) VALUES(:id, :username, :firstname, :lastname);");
+                qry.addBindValue(usersCount+1);
+                qry.bindValue(":username", username);
+                qry.bindValue(":firstname", firstName);
+                qry.bindValue(":lastname", lastName);
+                if(qry.exec())
+                {
+                    qDebug()<<"Insert at admin table success";
+                }
+                else
+                {
+                    qDebug()<<"Failure to add user to the admin table "<<qry.lastError().text();
+                }
+                qry.clear();
+            }
+            else if(type == "Nurse")
+            {
+                qry.prepare("INSERT INTO nurse(id, username, firstname, lastname) VALUES(:id, :username, :firstname, :lastname);");
+                qry.addBindValue(usersCount+1);
+                qry.bindValue(":username", username);
+                qry.bindValue(":firstname", firstName);
+                qry.bindValue(":lastname", lastName);
+                if(qry.exec())
+                {
+                    qDebug()<<"Insert at nurse table success";
+                }
+                else
+                {
+                    qDebug()<<"Failure to add user to the nurse table "<<qry.lastError().text();
+                }
+                qry.clear();
+            }
+
+        }
+        else if(choice == 2)//used by the editUser Class
+        {
+            qDebug()<<type;
+            //QString idToString = id
+            qry.prepare("UPDATE users SET fname=:first, lname=:last, username=:use, type=:tipo WHERE id=:intNum;");
+            qry.bindValue(":first",firstName);
+            qry.bindValue(":last",lastName);
+            qry.bindValue(":use",username);
+            qry.bindValue(":tipo",type);
+            qry.bindValue(":intNum",id);
         }
 
-        else if(type == "Admin")
+        if(qry.exec())
         {
-            qry3.prepare("INSERT INTO admin(id, username, firstname, lastname) VALUES(:id, :username, :firstname, :lastname);");
-            qry3.addBindValue(usersCount+1);
-            qry3.bindValue(":username", username);
-            qry3.bindValue(":firstname", firstName);
-            qry3.bindValue(":lastname", lastName);
+            qDebug()<<"New User added/updated.";
+            return true;
+
         }
-
-
-        else if(type == "Nurse")
+        else
         {
-            qry4.prepare("INSERT INTO nurse(id, username, firstname, lastname) VALUES(:id, :username, :firstname, :lastname);");
-            qry4.addBindValue(usersCount+1);
-            qry4.bindValue(":username", username);
-            qry4.bindValue(":firstname", firstName);
-            qry4.bindValue(":lastname", lastName);
+            qDebug()<<qry.lastError().text();
+            return false;
         }
-
-
-    }
-    else if(choice == 2)//used by the editUser Class
-    {
-        qDebug()<<type;
-        //QString idToString = id
-        qry.prepare("UPDATE users SET fname=:first, lname=:last, username=:use, type=:tipo WHERE id=:intNum;");
-        qry.bindValue(":first",firstName);
-        qry.bindValue(":last",lastName);
-        qry.bindValue(":use",username);
-        qry.bindValue(":tipo",type);
-        qry.bindValue(":intNum",id);
-    }
-
-    if(qry.exec() && qry2.exec() && qry3.exec() && qry4.exec())
-    {
-        qDebug()<<"New User added/updated.";
-        return true;
-
-    }
-    else
-    {
-        qDebug()<<qry.lastError().text();
-        return false;
-    }
 }
 
 bool Database::checkCredentials(QString username, QString password)//get funtion
@@ -201,18 +245,29 @@ QSqlQueryModel* Database::adminTable(int num)//updates the two table widgets in 
 
 void Database::resetPassword(QString newPassword, QString id)//setfunction
 {
-    QSqlQuery qry;
-    qry.prepare("UPDATE users SET password=:pass WHERE id=:id");
-    qry.bindValue(":pass",newPassword);
-    qry.bindValue(":id",id);
-    if(qry.exec())
+    try
     {
-        qDebug()<<"Passwords has been reset";
+        QSqlQuery qry;
+        qry.prepare("UPDATE users SET password=:pass WHERE id=:id");
+        qry.bindValue(":pass",newPassword);
+        qry.bindValue(":id",id);
+
+        if(qry.exec())
+        {
+            qDebug()<<"Passwords has been reset";
+        }
+        else
+        {
+            throw 0;
+            qDebug()<<qry.lastError().text();
+        }
     }
-    else
+    catch(int x)
     {
-        qDebug()<<qry.lastError().text();
+        qDebug()<<"ERROR CODE "<< x << " Query did not execute";
     }
+
+
 }
 
 void Database::deleteUser(QString username)
@@ -243,7 +298,7 @@ void Database::addPatient(QString firstName, QString lastName, QString age, QStr
     qry.clear();
 
     //QSqlQuery qry;
-    qry.prepare("INSERT INTO patients(id, firstName, lastName, age, phonenumber, gender, dob,socialsecruity,doctor_id)"
+    qry.prepare("INSERT INTO patients(patient_id, firstName, lastName, age, phonenumber, gender, dob,socialsecruity,doctor_id)"
                 " VALUES(:id, :firstName, :lastName, :age, :phonenumber, :gender, :dob, :ss, :doc);");
     qry.bindValue(":id", patientID);
     qry.bindValue(":firstName",firstName);
@@ -429,10 +484,10 @@ QStringList Database::listAvaliableNurses()
     //since in the database nurse table the first name and last name is seperated this will need to be combined somehow
     QSqlQuery qry;
     QStringList data;
-    qry.prepare("SELECT firstname,lastname FROM nurse");//only grabs whatever was called first and is able to pass in to a StringList
+    qry.prepare("SELECT id, firstname,lastname FROM nurse");//only grabs whatever was called first and is able to pass in to a StringList
     qry.exec();
     while(qry.next())
-        data<<qry.value(0).toString() + " " + qry.value(1).toString();
+        data<<qry.value(0).toString()+" "+qry.value(1).toString() + " " + qry.value(2).toString();
     qDebug()<<"List of Avaliable Nurses: "<<data;
     return data;
 }
@@ -467,4 +522,99 @@ QString Database::getFullName(QString username, QString role)
         qry.next();
         return qry.value(0).toString()+" "+qry.value(1).toString();
     }
+}
+
+QString Database::getUserID(QString username)
+{
+    QSqlQuery qry;
+    qry.prepare("SELECT id FROM users WHERE username=:use");
+    qry.bindValue(":use",username);
+    qry.exec();
+    qry.next();
+    return qry.value(0).toString();
+}
+
+QStringList Database::listAvaliablePatients()
+{
+    QStringList data;
+    QSqlQuery qry;
+    qry.prepare("SELECT patient_id, lastname,firstname FROM patients;");
+    qry.exec();
+    while(qry.next())
+        data<<qry.value(0).toString()+" "+qry.value(1).toString()+", "+qry.value(2).toString();
+    return data;
+}
+
+QStringList Database::selectedPatientInfo(QString patientID)
+{
+    qDebug()<<"Patient ID being pushed in is: "<<patientID;
+    QStringList data;
+    QSqlQuery qry;
+    qry.prepare("SELECT firstname,lastName,age,phonenumber,gender,dob,socialsecruity FROM patients WHERE patient_id=:id;");
+    qry.bindValue(":id",patientID);
+    qry.exec();
+    qry.next();
+    data<<qry.value(0).toString()<<qry.value(1).toString()<<qry.value(2).toString()<<qry.value(3).toString()<<qry.value(4).toString()<<qry.value(5).toString()<<qry.value(6).toString();
+    qry.clear();
+
+    qry.prepare("SELECT doctor.id, doctor.firstname, doctor.lastname FROM doctor WHERE id IN (SELECT doctor_id FROM patients WHERE patient_id=:id);");
+    qry.bindValue(":id",patientID);
+    qry.exec();
+    qry.next();
+    data<<qry.value(0).toString()+" "+qry.value(1).toString()+" "+qry.value(2).toString();
+    qDebug()<<"selected Patient Data: "<<data;
+    return data;
+}
+
+QStringList Database::listAvaliableDoctors()
+{
+    QSqlQuery qry;
+    QStringList data;
+    qry.prepare("SELECT id, firstname,lastname FROM doctor");//only grabs whatever was called first and is able to pass in to a StringList
+    qry.exec();
+    while(qry.next())
+        data<<qry.value(0).toString()+" "+qry.value(1).toString() + " " + qry.value(2).toString();
+    qDebug()<<"List of Avaliable Nurses: "<<data;
+    return data;
+}
+
+void Database::updatePatient(QString id, QString firstname, QString lastname, QString age, QString phone, QString gender, QString dob, QString ss, QString doc_id)
+{
+    QSqlQuery qry;
+    //qry.prepare("UPDATE users SET password=:pass WHERE id=:id");
+    qry.prepare("UPDATE patients SET firstName=:first,"
+                "                    lastName=:last,"
+                "                    age=:num,"
+                "                    phonenumber=:phonenum,"
+                "                    gender=:identifier,"
+                "                    dob=:birth,"
+                "                    socialsecruity=:ssNum,"
+                "                    doctor_id=:doc WHERE patient_id=:id");
+    qry.bindValue(":first",firstname);
+    qry.bindValue(":last",lastname);
+    qry.bindValue(":num",age);
+    qry.bindValue(":phonenum",phone);
+    qry.bindValue(":identifier",gender);
+    qry.bindValue(":birth",dob);
+    qry.bindValue(":ssNum",ss);
+    qry.bindValue(":doc",doc_id);
+    qry.bindValue(":id",id);
+    if(qry.exec())
+    {
+        qDebug()<<"Patient Data successfully updated";
+    }
+    else
+    {
+        qDebug()<<qry.lastError().text();
+    }
+}
+
+QSqlQueryModel *Database::scheduleTable()
+{
+    QSqlQuery *qry = new QSqlQuery();
+    QSqlQueryModel *model=new QSqlQueryModel();
+    qry->prepare("SELECT schedule_id, patient_id, med_id, dosage_in_num, dosage_units, date_start, date_end FROM schedule;");
+    qry->exec();
+    model->setQuery(std::move(*qry));
+    return model;
 }

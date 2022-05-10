@@ -5,6 +5,10 @@
 #include <QSqlError>
 #include <QSqlQueryModel>
 
+#include <iostream>
+
+using namespace std;
+
 
 class Database
 {
@@ -32,6 +36,7 @@ public:
     QStringList selectedPatientInfo(QString);
     QStringList listAvaliableDoctors();
     void updatePatient(QString, QString, QString, QString, QString,QString, QString, QString, QString);
+    QSqlQueryModel* scheduleTable(); //shows schedule in nurse view
 };
 
 #endif // DATABASE_H
