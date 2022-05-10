@@ -200,6 +200,20 @@ void EditPatient::on_patientComboBox_textActivated(const QString &arg1)
         ui->socialSecurityNumberInput->setText(data[6]);
         ui->updateButton->setEnabled(true);
         ui->doctorComboBox->setCurrentText(data[7]);
+        //disabling the add schedling buttons
+        ui->assignedNurseComboBox->setCurrentIndex(-1);//need to update
+        ui->assignedNurseComboBox->setEnabled(true);
+        ui->medComboBox->setCurrentIndex(-1);//need to update
+        ui->medComboBox->setEnabled(true);
+        ui->dosageValueInNum->setEnabled(true);
+        ui->dosageValueInUnits->setEnabled(true);
+        ui->intervaValueNum->setEnabled(true);
+        ui->intervalValueComboBox->setCurrentIndex(-1);//need to update
+        ui->intervalValueComboBox->setEnabled(true);
+        ui->dateBeginLabel_2->setEnabled(true);
+        ui->dateEndInput->setEnabled(true);
+        ui->addToSchedule->setEnabled(true);
+        ui->removeFromSchedule->setEnabled(true);
     }
 }
 
