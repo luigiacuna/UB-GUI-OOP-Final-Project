@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>766</width>
-    <height>812</height>
+    <height>848</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,7 +19,7 @@
      <x>10</x>
      <y>10</y>
      <width>441</width>
-     <height>296</height>
+     <height>323</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="patientInfoLayout">
@@ -93,6 +93,13 @@
           </property>
          </widget>
         </item>
+        <item>
+         <widget class="QLabel" name="doctorLabel">
+          <property name="text">
+           <string>Doctor</string>
+          </property>
+         </widget>
+        </item>
        </layout>
       </item>
       <item>
@@ -127,10 +134,17 @@
          </widget>
         </item>
         <item>
-         <widget class="QDateEdit" name="dobEdit"/>
+         <widget class="QDateEdit" name="dobEdit">
+          <property name="displayFormat">
+           <string>yyyy-MM-dd</string>
+          </property>
+         </widget>
         </item>
         <item>
          <widget class="QLineEdit" name="socialSecurityNumberInput"/>
+        </item>
+        <item>
+         <widget class="QComboBox" name="doctorComboBox"/>
         </item>
        </layout>
       </item>
@@ -149,7 +163,7 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>320</y>
+     <y>350</y>
      <width>741</width>
      <height>481</height>
     </rect>
@@ -161,7 +175,7 @@
      <x>460</x>
      <y>10</y>
      <width>291</width>
-     <height>291</height>
+     <height>321</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="mainSceduleLayout">

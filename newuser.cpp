@@ -83,7 +83,7 @@ void NewUser::onOk()
             qDebug()<<"Username field has something in it";
             if(db.userNameAvaliabity(ui->userNameInput->text()))
             {
-                ui->userNameLabel->setStyleSheet("font-weight:bold;color:black;");
+                ui->userNameLabel->setStyleSheet("font-weight:regular;color:black;");
                 ui->userNameInput->setPlaceholderText("");
                 okUsername = true;
 
@@ -144,10 +144,10 @@ void NewUser::onOk()
         {
             credsCheck=true;
             db.addUser(0,ui->userNameInput->text(),ui->firstNameInput->text(),ui->lastNameInput->text(),ui->passwordInput->text(),ui->roleComboBox->currentText(),1);
-            //this->close();
+            this->close();
             //Login log;
             //log.setModal(true);
-            //log.exec();
+            //log.exec();//testing purpose need to remove new user button from the login screen
         }
         else
         {

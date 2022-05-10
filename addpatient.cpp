@@ -7,6 +7,7 @@ AddPatient::AddPatient(QString doctor, QWidget *parent) :
 {
     ui->setupUi(this);
     doctorUsername = doctor;
+    ui->dateEdit->setDate(QDate::currentDate());
     connect(ui->createButton,SIGNAL(clicked()),this,SLOT(createButtonPressed()));
 
 
@@ -22,14 +23,7 @@ void AddPatient::createButtonPressed()
     bool firstNameOK;
     bool lastNameOK;
 
-    QString firstName = ui->firstNameInput->text();
-    QString lastName = ui->lastNameInput->text();
-    QString age = ui->ageInput->text();
-    QString phoneNumber = ui->phoneNumberInput->text();
-    QString gender = ui->genderComboBox->currentText();
-    QString dob = ui->dateEdit->text();
-
-    if(firstName.isEmpty())
+    if(ui->firstNameInput->text().isEmpty())
     {
         qDebug()<<"first name is empty";
         ui->firstNameLabel->setText("First Name (*)");
