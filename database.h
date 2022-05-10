@@ -27,6 +27,11 @@ public:
     void removeMed(QString);//remove seleted med
     QStringList listAvaliableNurses();
     QString getFullName(QString,QString);
+    QString getUserID(QString);
+    QStringList listAvaliablePatients();
+    QStringList selectedPatientInfo(QString);
+    QStringList listAvaliableDoctors();
+    void updatePatient(QString, QString, QString, QString, QString,QString, QString, QString, QString);
 };
 
 #endif // DATABASE_H

@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include "database.h"
+#include "editpatient.h"
 
 namespace Ui {
 class AddPatient;
@@ -20,7 +21,6 @@ private slots:
 
 private:
     Ui::AddPatient *ui;
-    Database db;
     QString doctorUsername;
 };
 

@@ -29,7 +29,10 @@ void AddMedicine::okButtonPressed()
         if(listAvaliableMeds().contains(ui->addMedsInput->text()))
             QMessageBox::information(this,"Adding Existing Meds","The medicine inputted already exists");
         else
+        {
             addMeds(ui->addMedsInput->text());
+            ui->avaliableMedsView->setModel(showAvaliableMeds());
+        }
     }
     else
     {

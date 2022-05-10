@@ -40,6 +40,7 @@ AdminWindow::AdminWindow(QWidget *parent) :
 
     connect(ui->resetUserPasswordButton,SIGNAL(clicked()),this,SLOT(startResetUser()));
     connect(ui->actionAbout,SIGNAL(triggered()),this,SLOT(about()));
+
 }
 
 AdminWindow::~AdminWindow()
@@ -92,6 +93,11 @@ void AdminWindow::on_DeleteUser_clicked()
         db.deleteUser(val);
         qDebug()<<val;
     }
+    ui->usernameView->setModel(db.adminTable(1));
+    ui->everythingElse->setModel(db.adminTable(2));
+    ui->editUser->setEnabled(false);
+    ui->DeleteUser->setEnabled(false);
+    ui->resetUserPasswordButton->setEnabled(false);
 
 
 }
@@ -101,6 +107,12 @@ void AdminWindow::on_createUserButton_clicked()
     NewUser newUser;
     newUser.setModal(true);
     newUser.exec();
+    ui->usernameView->setModel(db.adminTable(1));
+    ui->everythingElse->setModel(db.adminTable(2));
+    ui->editUser->setEnabled(false);
+    ui->DeleteUser->setEnabled(false);
+    ui->resetUserPasswordButton->setEnabled(false);
+
 }
 
 void AdminWindow::on_Logout_clicked()
@@ -117,4 +129,9 @@ void AdminWindow::on_editUser_clicked()
     EditUser edit(val);
     edit.setModal(true);
     edit.exec();
+    ui->usernameView->setModel(db.adminTable(1));
+    ui->everythingElse->setModel(db.adminTable(2));
+    ui->editUser->setEnabled(false);
+    ui->DeleteUser->setEnabled(false);
+    ui->resetUserPasswordButton->setEnabled(false);
 }
