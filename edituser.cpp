@@ -123,8 +123,6 @@ void EditUser::okButtonPressed()
             break;
     }
 
-
-
 }
 
 void EditUser::cancelButtonPressed()

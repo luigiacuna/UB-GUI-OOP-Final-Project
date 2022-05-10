@@ -53,22 +53,22 @@ NurseView::NurseView(QWidget *parent) :
     //trying with a bar chart to see if this can be achevied
 
     //the patients will be on the y axis and the current time will be on the x axis
-        QLineSeries *series = new QLineSeries;
-        series->append(2023,2);
+//        QLineSeries *series = new QLineSeries;
+//        series->append(2023,2);
 
-        QChart *chart= new QChart();
-        chart->addSeries(series);
-        chart->legend()->hide();
-        chart->setTitle("Nurse's Scedule");
+//        QChart *chart= new QChart();
+//        chart->addSeries(series);
+//        chart->legend()->hide();
+//        chart->setTitle("Nurse's Scedule");
 
-        QDateTimeAxis *axisX = new QDateTimeAxis;
-        axisX->setTickCount(10);
-        axisX->setFormat("MMM yyyy");
-        axisX->setTitleText("Date");
-        chart->addAxis(axisX,Qt::AlignBottom);
-        series->attachAxis(axisX);
+//        QDateTimeAxis *axisX = new QDateTimeAxis;
+//        axisX->setTickCount(10);
+//        axisX->setFormat("MMM yyyy");
+//        axisX->setTitleText("Date");
+//        chart->addAxis(axisX,Qt::AlignBottom);
+//        series->attachAxis(axisX);
         //ui->graphicsView->chart()->addAxis(axisX,Qt::AlignBottom);
-        ui->graphicsView->setChart(chart);
+        //ui->graphicsView->setChart(chart);
 
 
 
@@ -82,9 +82,12 @@ NurseView::NurseView(QWidget *parent) :
 
        //ui->graphicsView->chart()->addAxis(axisX,Qt::AlignBottom);
        //ui->graphicsView->chart()->setAxisX(axisX,series);
-        ui->graphicsView->setChart(chart);
-
-
+        //ui->graphicsView->setChart(chart);
+ui->schedule->verticalHeader()->setVisible(false);
+ui->schedule->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);//fit all the contents of the sql query to fit on the table width
+ui->schedule->setSelectionBehavior(QAbstractItemView::SelectItems);//allows only one item to be selected at a time
+ui->schedule->setSelectionMode(QAbstractItemView::SingleSelection);//whatever was selected becomes deselectd and the new item clicked becomes seleceted
+ui->schedule->setModel(db.scheduleTable());
 
 }
 

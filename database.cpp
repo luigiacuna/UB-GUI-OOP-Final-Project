@@ -245,18 +245,29 @@ QSqlQueryModel* Database::adminTable(int num)//updates the two table widgets in 
 
 void Database::resetPassword(QString newPassword, QString id)//setfunction
 {
-    QSqlQuery qry;
-    qry.prepare("UPDATE users SET password=:pass WHERE id=:id");
-    qry.bindValue(":pass",newPassword);
-    qry.bindValue(":id",id);
-    if(qry.exec())
+    try
     {
-        qDebug()<<"Passwords has been reset";
+        QSqlQuery qry;
+        qry.prepare("UPDATE users SET password=:pass WHERE id=:id");
+        qry.bindValue(":pass",newPassword);
+        qry.bindValue(":id",id);
+
+        if(qry.exec())
+        {
+            qDebug()<<"Passwords has been reset";
+        }
+        else
+        {
+            throw 0;
+            qDebug()<<qry.lastError().text();
+        }
     }
-    else
+    catch(int x)
     {
-        qDebug()<<qry.lastError().text();
+        qDebug()<<"ERROR CODE "<< x << " Query did not execute";
     }
+
+
 }
 
 void Database::deleteUser(QString username)
@@ -596,4 +607,14 @@ void Database::updatePatient(QString id, QString firstname, QString lastname, QS
     {
         qDebug()<<qry.lastError().text();
     }
+}
+
+QSqlQueryModel *Database::scheduleTable()
+{
+    QSqlQuery *qry = new QSqlQuery();
+    QSqlQueryModel *model=new QSqlQueryModel();
+    qry->prepare("SELECT schedule_id, patient_id, med_id, dosage_in_num, dosage_units, date_start, date_end FROM schedule;");
+    qry->exec();
+    model->setQuery(std::move(*qry));
+    return model;
 }

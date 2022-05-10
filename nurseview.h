@@ -8,13 +8,8 @@
 #include <QDateTimeAxis>
 #include <QLineSeries>
 #include <QChart>
-//#include <QScatterSeries>
 
-
-
-
-
-
+#include "database.h"
 
 namespace Ui {
 class NurseView;
@@ -30,6 +25,8 @@ public:
 
 private:
     Ui::NurseView *ui;
+    Database db;
+
 };
 
 #endif // NURSEVIEW_H

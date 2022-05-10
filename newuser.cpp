@@ -40,101 +40,122 @@ void NewUser::onOk()
 
     while(credsCheck==false)//the final ok before executing or preventing addition to the database
     {
-        if(ui->firstNameInput->text().isEmpty())//checking if the username has not been filled
+        try
         {
-            ui->firstNameLabel->setText("First Name (*)");
-            ui->firstNameLabel->setStyleSheet("font-weight: bold;color:red;");
-            ui->firstNameInput->setPlaceholderText("Cannot be empty");
-            okFirstName=false;
-        }
-        else//if there is something filled preform the neccessary checks
-        {
-            ui->firstNameLabel->setText("First Name");
-            ui->firstNameLabel->setStyleSheet("font-weight: normal;color:black;");
-            ui->firstNameInput->setPlaceholderText("");
-            okFirstName=true;
-        }
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        if(ui->lastNameInput->text().isEmpty())//check if the last name has been filled or not
-        {
-            ui->lastNameLabel->setText("First Name (*)");
-            ui->lastNameLabel->setStyleSheet("font-weight: bold;color:red;");
-            ui->lastNameInput->setPlaceholderText("Cannot be empty");
-            okLastName=false;
-        }
-        else
-        {
-            ui->lastNameLabel->setText("First Name");
-            ui->lastNameLabel->setStyleSheet("font-weight: normal;color:black;");
-            ui->lastNameInput->setPlaceholderText("");
-            okLastName=true;
-        }
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        if(ui->userNameInput->text().isEmpty())//checks if there is a username has been filled
-        {
-            ui->userNameLabel->setText("Username (*)");
-            ui->userNameLabel->setStyleSheet("font-weight:bold;color:red;");
-            ui->userNameInput->setPlaceholderText("Username field cannot be empty");
-            okUsername = false;
-        }
-        else
-        {
-            //username is filled now to check if its avaliable to use
-            qDebug()<<"Username field has something in it";
-            if(db.userNameAvaliabity(ui->userNameInput->text()))
+            if(ui->firstNameInput->text().isEmpty())//checking if the username has not been filled
             {
-                ui->userNameLabel->setStyleSheet("font-weight:regular;color:black;");
+                ui->firstNameLabel->setText("First Name (*)");
+                ui->firstNameLabel->setStyleSheet("font-weight: bold;color:red;");
+                ui->firstNameInput->setPlaceholderText("Cannot be empty");
+                okFirstName=false;
+                throw 1;
+            }
+            else//if there is something filled preform the neccessary checks
+            {
+                ui->firstNameLabel->setText("First Name");
+                ui->firstNameLabel->setStyleSheet("font-weight: normal;color:black;");
+                ui->firstNameInput->setPlaceholderText("");
+                okFirstName=true;
+            }
+        }
+        catch (int x)
+        {
+            qDebug()<<"ERROR CODE"<<x<<"Empty field First Name";
+        }
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        try
+        {
+            if(ui->lastNameInput->text().isEmpty())//check if the last name has been filled or not
+            {
+                ui->lastNameLabel->setText("First Name (*)");
+                ui->lastNameLabel->setStyleSheet("font-weight: bold;color:red;");
+                ui->lastNameInput->setPlaceholderText("Cannot be empty");
+                okLastName=false;
+                throw 1;
+            }
+            else
+            {
+                ui->lastNameLabel->setText("First Name");
+                ui->lastNameLabel->setStyleSheet("font-weight: normal;color:black;");
+                ui->lastNameInput->setPlaceholderText("");
+                okLastName=true;
+            }
+        }
+
+        catch (int x)
+        {
+            qDebug()<<"ERROR CODE"<<x<<"Empty field Last Name";
+        }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        try
+        {
+            if(ui->userNameInput->text().isEmpty())//checks if there is a username has been filled
+            {
+                ui->userNameLabel->setText("Username (*)");
+                ui->userNameLabel->setStyleSheet("font-weight:bold;color:red;");
+                ui->userNameInput->setPlaceholderText("Username field cannot be empty");
+                okUsername = false;
+            }
+            else if(db.userNameAvaliabity(ui->userNameInput->text()))
+            {
+                ui->userNameLabel->setStyleSheet("font-weight:bold;color:black;");
                 ui->userNameInput->setPlaceholderText("");
                 okUsername = true;
-
             }
+
             else
             {
                 ui->userNameLabel->setText("Username (*)");
                 ui->userNameLabel->setStyleSheet("font-weight:bold;color-red;");
                 ui->userNameInput->setPlaceholderText("This username is already in use");
                 okUsername =false;
-                qDebug()<<"Username is in use";
-
+                throw 2;
             }
-
         }
+        catch (int x)
+        {
+            qDebug()<<"ERROR CODE"<<x<<"Username is in use";
+        }
+
+
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        //password badness
 
-        if(ui->passwordInput->text().isEmpty())
+        try
         {
-            ui->passwordLabel->setText("Password (*)");
-            ui->passwordLabel->setStyleSheet("font-weight:bold;color:red");
-        }
-        else
-        {
-            qDebug()<<"Password was entered now to check if the reneter password filled";
-            if(ui->renterPasswordInput->text().isEmpty())
+            if(ui->passwordInput->text().isEmpty())
+            {
+                ui->passwordLabel->setText("Password (*)");
+                ui->passwordLabel->setStyleSheet("font-weight:bold;color:red");
+            }
+            else if(ui->renterPasswordInput->text().isEmpty())
             {
                 ui->reneterPasswordLabel->setText("Renter Password(*)");
                 ui->reneterPasswordLabel->setStyleSheet("font-weight:bold;color:red;");
                 ui->renterPasswordInput->setPlaceholderText("Renter password");
             }
+            else if(ui->passwordInput->text()==ui->renterPasswordInput->text())
+            {
+                qDebug()<<"Passwords are a match";
+                ui->passwordLabel->setText("Password");
+                ui->passwordLabel->setStyleSheet("font-weight:normal;color:black;");
+                ui->passwordInput->setPlaceholderText("");
+                ui->reneterPasswordLabel->setText("Renter Password");
+                ui->reneterPasswordLabel->setStyleSheet("font-weight:normal;color:black;");
+                ui->renterPasswordInput->setPlaceholderText("");
+                okPassword=true;
+            }
             else
             {
-                if(ui->passwordInput->text()==ui->renterPasswordInput->text())
-                {
-                    qDebug()<<"Passwords are a match";
-                    ui->passwordLabel->setText("Password");
-                    ui->passwordLabel->setStyleSheet("font-weight:normal;color:black;");
-                    ui->passwordInput->setPlaceholderText("");
-                    ui->reneterPasswordLabel->setText("Renter Password");
-                    ui->reneterPasswordLabel->setStyleSheet("font-weight:normal;color:black;");
-                    ui->renterPasswordInput->setPlaceholderText("");
-                    okPassword=true;
-
-                }
-                else
-                {
-                    okPassword=false;
-                }
+                throw 3;
+                okPassword=false;
             }
+        }
+        catch(int x)
+        {
+            qDebug()<<"ERROR CODE"<<x<<"Password do not match";
         }
 
 
@@ -147,7 +168,7 @@ void NewUser::onOk()
             this->close();
             //Login log;
             //log.setModal(true);
-            //log.exec();//testing purpose need to remove new user button from the login screen
+            //log.exec();
         }
         else
         {
