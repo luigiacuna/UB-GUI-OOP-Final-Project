@@ -658,7 +658,7 @@ void Database::addSchedule(QString patientID, QString medID, QString dosageNum, 
 QString Database::medChart()
 {
     QSqlQuery qry;
-    qry.prepare("SELECT med_id, COUNT(med_id) FROM schedule GROUP BY med_id;");
+    qry.prepare("SELECT med_id, COUNT(*) FROM schedule GROUP BY med_id;");
     qry.exec();
     qry.next();
 
