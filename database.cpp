@@ -655,14 +655,17 @@ void Database::addSchedule(QString patientID, QString medID, QString dosageNum, 
 
 }
 
-QString Database::medChart()
+QList<int> Database::medChart()
 {
     QSqlQuery qry;
+    QList<int> data;
     qry.prepare("SELECT med_id, COUNT(med_id) FROM schedule GROUP BY med_id;");
     qry.exec();
-    qry.next();
+    while(qry.next())
+        data<<qry.value(1).toInt();
 
-    return qry.value(0).toString();
+    //return qry.value(0).toString();
+    return data;
 }
 
 QStringList Database::medCategory()
