@@ -59,11 +59,9 @@ void DoctorView::on_reportsButton_clicked()
     QBarSet * set2 = new QBarSet(db.medChart());
     QBarSet * set3 = new QBarSet(db.medChart());
     QBarSet * set4 = new QBarSet(db.medChart());*/
-    QBarSet * set0 = new QBarSet("Medicine frequent");
-    //*set0<<1<<2<<3<<4;
+    QBarSet * set0 = new QBarSet("Medicine frequently used by patients");
     QList<int> values=db.medChart();
     qDebug()<<"Values figures: "<<values;
-    //int count =0;
    for(int count =0;count<values.size();count++)
    {
        qDebug()<<values[count];
@@ -79,11 +77,8 @@ void DoctorView::on_reportsButton_clicked()
 
     QChart *chart = new QChart();
     chart->addSeries(series);
-    chart->setTitle("Simple Barchart Example");
+    chart->setTitle("Medicine Report");
     chart->setAnimationOptions(QChart::SeriesAnimations);
-
-//    QStringList categories;
-//    categories << "Jan" << "Feb" << "Mar" << "Apr" << "May" << "Jun";
 
     QBarCategoryAxis *axisX = new QBarCategoryAxis();
     axisX->append(db.medCategory());

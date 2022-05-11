@@ -659,7 +659,7 @@ QList<int> Database::medChart()
 {
     QSqlQuery qry;
     QList<int> data;
-    qry.prepare("SELECT med_id, COUNT(med_id) FROM schedule GROUP BY med_id;");
+    qry.prepare("SELECT medicine.med_id,COUNT(schedule.med_id) AS MedCount FROM medicine LEFT JOIN schedule ON schedule.med_id = medicine.med_id GROUP BY med_id;");
     qry.exec();
     while(qry.next())
         data<<qry.value(1).toInt();
