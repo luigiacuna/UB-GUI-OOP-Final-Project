@@ -658,6 +658,9 @@ void Database::addSchedule(QString patientID, QString medID, QString dosageNum, 
 QList<int> Database::medChart()
 {
     QSqlQuery qry;
+
+    qry.prepare("SELECT med_id, COUNT(*) FROM schedule GROUP BY med_id;");
+
     QList<int> data;
     qry.prepare("SELECT medicine.med_id,COUNT(schedule.med_id) AS MedCount FROM medicine LEFT JOIN schedule ON schedule.med_id = medicine.med_id GROUP BY med_id;");
     qry.exec();

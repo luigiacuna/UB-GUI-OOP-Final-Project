@@ -54,12 +54,21 @@ void DoctorView::on_Logout_clicked()
 
 void DoctorView::on_reportsButton_clicked()
 {
+<<<<<<< HEAD
     /*QBarSet * set0 = new QBarSet(db.medChart());
     QBarSet * set1 = new QBarSet(db.medChart());
     QBarSet * set2 = new QBarSet(db.medChart());
     QBarSet * set3 = new QBarSet(db.medChart());
     QBarSet * set4 = new QBarSet(db.medChart());*/
     QBarSet * set0 = new QBarSet("Medicine frequently used by patients");
+=======
+
+//    QBarSet * set0 = new QBarSet(db.medChart())
+//    QBarSeries *series = new QBarSeries();
+//    series->append(set0);
+
+    QBarSet * set0 = new QBarSet("Medicine frequent");
+>>>>>>> 177d2bfe8385ce233a6357a72b61b44708073b31
     QList<int> values=db.medChart();
     qDebug()<<"Values figures: "<<values;
    for(int count =0;count<values.size();count++)
@@ -70,10 +79,7 @@ void DoctorView::on_reportsButton_clicked()
 
     QBarSeries *series = new QBarSeries();
     series->append(set0);
-    /*series->append(set1);
-    series->append(set2);
-    series->append(set3);
-    series->append(set4);*/
+
 
     QChart *chart = new QChart();
     chart->addSeries(series);
