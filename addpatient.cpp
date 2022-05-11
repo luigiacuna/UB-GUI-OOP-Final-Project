@@ -7,8 +7,10 @@ AddPatient::AddPatient(QString doctor, QWidget *parent) :
 {
     ui->setupUi(this);
     doctorUsername = doctor;
+    //ui->genderComboBox->setEditable(true);
     ui->dateEdit->setDate(QDate::currentDate());
     connect(ui->createButton,SIGNAL(clicked()),this,SLOT(createButtonPressed()));
+    //connect(ui->genderComboBox->lineEdit(), SIGNAL(editingFinished()), SLOT(editingFinished()));
 
 
 }
@@ -56,13 +58,13 @@ void AddPatient::createButtonPressed()
     if(firstNameOK==true&&lastNameOK == true)
     {
         addPatient(ui->firstNameInput->text(),
-                      ui->lastNameInput->text(),
-                      ui->ageInput->text(),
-                      ui->phoneNumberInput->text(),
-                      ui->genderComboBox->currentText(),
-                      ui->dateEdit->text(),
-                      ui->ssNumInput->text(),
-                      getUserID(doctorUsername));
+                   ui->lastNameInput->text(),
+                   ui->ageInput->text(),
+                   ui->phoneNumberInput->text(),
+                   ui->genderComboBox->currentText(),
+                   ui->dateEdit->text(),
+                   ui->ssNumInput->text(),
+                   getUserID(doctorUsername));
         this->close();
         EditPatient editPat("");
         editPat.setModal(true);
@@ -71,3 +73,99 @@ void AddPatient::createButtonPressed()
 
 
 }
+
+void AddPatient::on_firstNameInput_editingFinished()
+{
+    QFile txt("./PatientLog.txt");
+    txt.open(QIODevice::WriteOnly | QIODevice::Text | QFile::Append);
+    QApplication::processEvents();
+
+    QTextStream out(&txt);
+    QString fName;
+    fName = ui->firstNameInput->text();
+
+    out<<"////////////////////////Patient Log////////////////////////"<<"\n";
+    out<<"Patient Name: ";
+    out<<fName<<" ";
+}
+
+void AddPatient::on_lastNameInput_editingFinished()
+{
+    QFile txt("./PatientLog.txt");
+    txt.open(QIODevice::WriteOnly | QIODevice::Text | QFile::Append);
+    QApplication::processEvents();
+
+    QTextStream out(&txt);
+    QString lName;
+    lName = ui->lastNameInput->text();
+    out<<lName<<"\n";
+}
+
+void AddPatient::on_ageInput_editingFinished()
+{
+    QFile txt("./PatientLog.txt");
+    txt.open(QIODevice::WriteOnly | QIODevice::Text | QFile::Append);
+    QApplication::processEvents();
+
+    QTextStream out(&txt);
+    QString age;
+    age = ui->ageInput->text();
+    out<<"Patient Age: ";
+    out<<age<<"\n";
+}
+
+void AddPatient::on_phoneNumberInput_editingFinished()
+{
+    QFile txt("./PatientLog.txt");
+    txt.open(QIODevice::WriteOnly | QIODevice::Text | QFile::Append);
+    QApplication::processEvents();
+
+    QTextStream out(&txt);
+    QString number;
+    number = ui->phoneNumberInput->text();
+    out<<"Patient Number: ";
+    out<<number<<"\n";
+}
+
+void AddPatient::on_genderComboBox_textActivated(const QString &arg1)
+{
+    QFile txt("./PatientLog.txt");
+    txt.open(QIODevice::WriteOnly | QIODevice::Text | QFile::Append);
+    QApplication::processEvents();
+
+    QTextStream out(&txt);
+    QString gender;
+    gender = ui->genderComboBox->currentText();
+    out<<"Patient Gender: ";
+    out<<gender<<"\n";
+}
+
+void AddPatient::on_dateEdit_editingFinished()
+{
+    QFile txt("./PatientLog.txt");
+    txt.open(QIODevice::WriteOnly | QIODevice::Text | QFile::Append);
+    QApplication::processEvents();
+
+    QTextStream out(&txt);
+    QString date;
+    date = ui->dateEdit->text();
+    out<<"Date: ";
+    out<<date<<"\n";
+}
+
+void AddPatient::on_ssNumInput_editingFinished()
+{
+    QFile txt("./PatientLog.txt");
+    txt.open(QIODevice::WriteOnly | QIODevice::Text | QFile::Append);
+    QApplication::processEvents();
+
+    QTextStream out(&txt);
+    QString socialS;
+    socialS = ui->ssNumInput->text();
+    out<<"Patient Social Security: ";
+    out<<socialS<<"\n";
+
+    out<<"////////////////////////Patient Log////////////////////////"<<"\n"<<"\n";
+}
+
+
