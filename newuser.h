@@ -11,7 +11,7 @@ namespace Ui {
 class NewUser;
 }
 
-class NewUser : public QDialog
+class NewUser : public QDialog, public Database
 {
     Q_OBJECT
 
@@ -22,7 +22,6 @@ private slots:
     void onOk();
 private:
     Ui::NewUser *ui;
-    Database db;
 
 };
 

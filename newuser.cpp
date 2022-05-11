@@ -99,7 +99,7 @@ void NewUser::onOk()
                 ui->userNameInput->setPlaceholderText("Username field cannot be empty");
                 okUsername = false;
             }
-            else if(db.userNameAvaliabity(ui->userNameInput->text()))
+            else if(userNameAvaliabity(ui->userNameInput->text()))
             {
                 ui->userNameLabel->setStyleSheet("font-weight:bold;color:black;");
                 ui->userNameInput->setPlaceholderText("");
@@ -164,7 +164,7 @@ void NewUser::onOk()
         if(okFirstName==true&&okLastName==true&&okUsername==true&&okPassword==true)
         {
             credsCheck=true;
-            db.addUser(0,ui->userNameInput->text(),ui->firstNameInput->text(),ui->lastNameInput->text(),ui->passwordInput->text(),ui->roleComboBox->currentText(),1);
+            addUser(0,ui->userNameInput->text(),ui->firstNameInput->text(),ui->lastNameInput->text(),ui->passwordInput->text(),ui->roleComboBox->currentText(),choice);
             this->close();
             //Login log;
             //log.setModal(true);

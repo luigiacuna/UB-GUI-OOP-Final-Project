@@ -116,7 +116,7 @@ void EditUser::okButtonPressed()
 
         if(okFirstName==true&&okLastName==true&&okUsername==true)
         {
-            addUser(idNum,ui->usernameInput->text(),ui->firstNameInput->text(),ui->lastNameInput->text(),pass,roleType,2);
+            addUser(idNum,ui->usernameInput->text(),ui->firstNameInput->text(),ui->lastNameInput->text(),pass,roleType,choice2);
             credsOK=true;
         }
         else

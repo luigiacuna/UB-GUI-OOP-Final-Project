@@ -37,6 +37,10 @@ public:
     QStringList listAvaliableDoctors();
     void updatePatient(QString, QString, QString, QString, QString,QString, QString, QString, QString);
     QSqlQueryModel* scheduleTable(); //shows schedule in nurse view
+
+protected:
+    int choice = 1;
+    int choice2 = 2;
 };
 
 #endif // DATABASE_H
