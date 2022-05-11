@@ -36,27 +36,32 @@ CREATE TABLE patients(patient_id varchar (50) UNIQUE NOT NULL,
 					  dob DATE,
 					  socialsecruity VARCHAR(9),
 					  doctor_id INT,
-					  nurse_id INT,
-					  FOREIGN KEY (doctor_id) REFERENCES doctor (id),
-					  FOREIGN KEY (nurse_id) REFERENCES nurse (id)
+					  FOREIGN KEY (doctor_id) REFERENCES doctor (id)
 
 
 );#the patients table will hold all the patient info that will be used and or created by doctors in which in turn will create their pill schedule
 
-CREATE TABLE schedule(schedule_id int,
+CREATE TABLE schedule(schedule_id int PRIMARY KEY,
 	                  patient_id varchar (50),
 					  med_id varchar(5) UNIQUE,
 	                  dosage_in_num int,
 	                  dosage_units varchar(5),
 				      date_start DATE,
 				      date_end DATE,
-				      FOREIGN KEY (patient_id) REFERENCES patients (patient_id)
+					  nurse_id int,
+				      FOREIGN KEY (patient_id) REFERENCES patients (patient_id),
+					  FOREIGN KEY (nurse_id) REFERENCES nurse (id)
 );#the schedule table will actually hold the scheduling information needed to create the actual pill distributio 
 
 CREATE TABLE medicine(med_id varchar(5) PRIMARY KEY UNIQUE,
 					  med_name varchar(25)
 );
 #the meds table will hold all the meds that can be prescribed by the doctor, also the doctor can also add meds that are not in this TABLE
+
+CREATE TABLE logs (schedule_id int PRIMARY KEY,
+                   logData VARCHAR(5475),
+				   FOREIGN KEY (schedule_id) REFERENCES schedule (schedule_id)
+);
 
 
 #this section of the file will fill the tables will neccessary table for the users, admin, doctors, and nurses only at program runtime then will patients and schedules are made
