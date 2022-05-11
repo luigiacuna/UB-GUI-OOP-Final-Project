@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>766</width>
+    <width>902</width>
     <height>848</height>
    </rect>
   </property>
@@ -164,7 +164,7 @@
     <rect>
      <x>10</x>
      <y>350</y>
-     <width>741</width>
+     <width>881</width>
      <height>481</height>
     </rect>
    </property>
@@ -174,7 +174,7 @@
     <rect>
      <x>460</x>
      <y>10</y>
-     <width>291</width>
+     <width>431</width>
      <height>321</height>
     </rect>
    </property>
@@ -250,14 +250,14 @@
           <item>
            <widget class="QLineEdit" name="dosageValueInNum">
             <property name="text">
-             <string>Value</string>
+             <string/>
             </property>
            </widget>
           </item>
           <item>
            <widget class="QLineEdit" name="dosageValueInUnits">
             <property name="text">
-             <string>Units</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -295,10 +295,18 @@
          </layout>
         </item>
         <item>
-         <widget class="QDateEdit" name="dateBeginLabel_2"/>
+         <widget class="QDateEdit" name="dateBeginInput">
+          <property name="displayFormat">
+           <string>yyyy-MM-dd</string>
+          </property>
+         </widget>
         </item>
         <item>
-         <widget class="QDateEdit" name="dateEndInput"/>
+         <widget class="QDateEdit" name="dateEndInput">
+          <property name="displayFormat">
+           <string>yyyy-MM-dd</string>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>
@@ -310,6 +318,13 @@
        <widget class="QPushButton" name="addToSchedule">
         <property name="text">
          <string>Add</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="updateScheduleButton">
+        <property name="text">
+         <string>Update</string>
         </property>
        </widget>
       </item>

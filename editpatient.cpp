@@ -9,12 +9,16 @@ EditPatient::EditPatient(QString patient, QWidget *parent) :
     ui->dobEdit->setDate(QDate::currentDate());
     //pushing items that are already established in the database
     ui->assignedNurseComboBox->addItems(listAvaliableNurses());
+    ui->assignedNurseComboBox->setCurrentIndex(0);
     ui->medComboBox->addItems(listAvaliableMeds());
+    ui->medComboBox->setCurrentIndex(0);
     ui->medComboBox->addItem("Add Medicine");
     //filling the patient combo box with the avaliable patients that have been created
     ui->patientComboBox->addItem("Select a patient");
     ui->patientComboBox->addItems(listAvaliablePatients());//to be grabbed from the patient data portion need to create db function
     ui->doctorComboBox->addItems(listAvaliableDoctors());
+    ui->dateBeginInput->setDate(QDate::currentDate());
+    ui->dateEndInput->setDate(QDate::currentDate());
     if(patient == "")//disbale all buttons at startup if no patient is passed in
     {
         ui->updateButton->setEnabled(false);
@@ -39,14 +43,16 @@ EditPatient::EditPatient(QString patient, QWidget *parent) :
         ui->intervaValueNum->setEnabled(false);
         ui->intervalValueComboBox->setCurrentIndex(-1);
         ui->intervalValueComboBox->setEnabled(false);
-        ui->dateBeginLabel_2->setEnabled(false);
+        ui->dateBeginInput->setEnabled(false);
         ui->dateEndInput->setEnabled(false);
         ui->addToSchedule->setEnabled(false);
+        ui->updateScheduleButton->setEnabled(false);
         ui->removeFromSchedule->setEnabled(false);
 
 
     }
     connect(ui->updateButton,SIGNAL(clicked()),this,SLOT(updateButtonPressed()));
+    connect(ui->addToSchedule,SIGNAL(clicked()),this,SLOT(addButtonPressed()));
 }
 
 EditPatient::~EditPatient()
@@ -98,6 +104,101 @@ void EditPatient::updateButtonPressed()
 
 }
 
+void EditPatient::addButtonPressed()
+{
+    qDebug()<<"Add to Schedule has been pressed";
+    //when the add button is pressed it will push the apporiate schedule data to the db
+    bool dosageNumOK;
+    bool dosageValueUnitsOK;
+    bool intervalValueNumOK;
+    bool assignNurseOK;
+    bool medOK;
+
+
+    if(ui->dosageValueInNum->text().isEmpty())
+    {
+        ui->dosageValueInNum->setPlaceholderText("Cannot be empty");
+        ui->dosageLabel->setText("Dosage (*)");
+        ui->dosageLabel->setStyleSheet("font-weight:bold;color:red;");
+    }
+    else
+    {
+        ui->dosageValueInNum->setPlaceholderText("Value");
+        ui->dosageLabel->setText("Dosage");
+        ui->dosageLabel->setStyleSheet("font-weight:normal;color:black;");
+        dosageNumOK=true;
+    }
+
+    if(ui->dosageValueInUnits->text().isEmpty())
+    {
+       ui->dosageValueInUnits->setPlaceholderText("Cannot be empty");
+       ui->dosageLabel->setText("Dosage (*)");
+       ui->dosageLabel->setStyleSheet("font-weight:bold;color:red;");
+    }
+    else
+    {
+        ui->dosageValueInUnits->setPlaceholderText("Units");
+        ui->dosageLabel->setText("Dosage");
+        ui->dosageLabel->setStyleSheet("font-weight:normal;color:black;");
+        dosageValueUnitsOK=true;
+    }
+
+    if(ui->intervaValueNum->text().isEmpty())
+    {
+        ui->intervaValueNum->setPlaceholderText("Cannot be Empty");
+        ui->intervalLabel->setText("Interval(*)");
+        ui->intervalLabel->setStyleSheet("font-weight:bold;color:red;");
+    }
+    else
+    {
+        ui->intervaValueNum->setPlaceholderText("Value");
+        ui->intervalLabel->setText("Interval(*)");
+        ui->intervalLabel->setStyleSheet("font-weight:normal;color:black;");
+        intervalValueNumOK=true;
+    }
+    if(ui->assignedNurseComboBox->currentText()=="")
+    {
+        ui->assignedNurseLabel->setText("Select Nurse(*)");
+        ui->assignedNurseLabel->setStyleSheet("font-weight:bold;color:red;");
+    }
+    else
+    {
+        ui->assignedNurseLabel->setText("Assigned Nurse");
+        ui->assignedNurseLabel->setStyleSheet("font-weight:normal;color:black;");
+        assignNurseOK=true;
+    }
+
+    if(ui->medComboBox->currentText() == "")
+    {
+        ui->medLabel->setText("Select Medicine(*)");
+        ui->medLabel->setStyleSheet("font-weight:bold;color:red;");
+    }
+    else
+    {
+        ui->medLabel->setText("Medicine");
+        ui->medLabel->setStyleSheet("font-weight:normal;color:black;");
+        medOK=true;
+    }
+
+   //now that all checks is done now to get specfics so it can be passed into the db function
+   //Nurse ID, MedID, Patient ID, dosage in num, dosage in units, intervals in num, intervals in units
+    if(dosageNumOK == true && dosageValueUnitsOK== true && intervalValueNumOK == true && assignNurseOK == true && medOK==true)
+    {
+        addSchedule(ui->patientComboBox->currentText().split(" ").at(0),          /*PatientID*/
+                    ui->medComboBox->currentText().split(" ").at(0),              /*medID*/
+                    ui->dosageValueInNum->text(),                                 /*dosage_in_num*/
+                    ui->dosageValueInUnits->text(),                               /*dosage_units*/
+                    ui->dateBeginInput->text(),                                   /*date_start*/
+                    ui->dateEndInput->text(),                                     /*date_end*/
+                    ui->assignedNurseComboBox->currentText().split(" ").at(0),    /*nurse_id*/
+                    ui->intervaValueNum->text(),                                  /*interval_in_num*/
+                    ui->intervalValueComboBox->currentText()                      /*interval_in_units*/
+                    );
+    }
+
+
+}
+
 void EditPatient::on_medComboBox_textActivated(const QString &arg1)
 {
     //allows doctors to quiclky add medicine albeilt this quick action still have to follow the same rules as addMedicine class
@@ -117,8 +218,10 @@ void EditPatient::on_medComboBox_textActivated(const QString &arg1)
                else
                {
                    addMeds(addMedMsg);
+                   ui->medComboBox->clear();
                    ui->medComboBox->addItems(listAvaliableMeds());
-                   ui->medComboBox->setCurrentText(addMedMsg);
+                   ui->medComboBox->addItem("Add Medicine");
+                   ui->medComboBox->setCurrentText(addMedMsg);//need to fix back to set to newly added meds
                }
            }
            else
@@ -168,13 +271,41 @@ void EditPatient::on_patientComboBox_textActivated(const QString &arg1)
         ui->intervaValueNum->setEnabled(false);
         ui->intervalValueComboBox->setCurrentIndex(-1);
         ui->intervalValueComboBox->setEnabled(false);
-        ui->dateBeginLabel_2->setEnabled(false);
+        ui->dateBeginInput->setEnabled(false);
         ui->dateEndInput->setEnabled(false);
         ui->addToSchedule->setEnabled(false);
         ui->removeFromSchedule->setEnabled(false);
+
+        //fix up the schedule section back to stock
+        ui->dosageValueInNum->setPlaceholderText("Value");
+        ui->dosageValueInNum->setText("");
+        ui->dosageLabel->setText("Dosage");
+        ui->dosageLabel->setStyleSheet("font-weight:normal;color:black;");
+
+        ui->dosageValueInUnits->setPlaceholderText("Units");
+        ui->dosageValueInUnits->setText("");
+        ui->dosageLabel->setText("Dosage");
+        ui->dosageLabel->setStyleSheet("font-weight:normal;color:black;");
+
+        ui->intervaValueNum->setPlaceholderText("Value");
+        ui->intervaValueNum->setText("");
+        ui->intervalLabel->setText("Interval(*)");
+        ui->intervalLabel->setStyleSheet("font-weight:normal;color:black;");
+
+        ui->assignedNurseLabel->setText("Assigned Nurse");
+        ui->assignedNurseLabel->setStyleSheet("font-weight:normal;color:black;");
+
+        ui->medLabel->setText("Medicine");
+        ui->medLabel->setStyleSheet("font-weight:normal;color:black;");
+
+
     }
     else
     {
+        qDebug()<<ui->medComboBox->currentText();//ok comes out as blank see if i can use that to my advantage
+        qDebug()<<ui->medComboBox->currentText();
+        ui->updateScheduleButton->setEnabled(false);
+        ui->removeFromSchedule->setEnabled(false);
         ui->firstNameEdit->setEnabled(true);
         ui->lastNameEdit->setEnabled(true);
         ui->ageInput->setEnabled(true);
@@ -196,6 +327,23 @@ void EditPatient::on_patientComboBox_textActivated(const QString &arg1)
         ui->socialSecurityNumberInput->setText(data[6]);
         ui->updateButton->setEnabled(true);
         ui->doctorComboBox->setCurrentText(data[7]);
+        //disabling the add schedling buttons
+        ui->assignedNurseComboBox->setCurrentIndex(-1);//need to update
+        ui->assignedNurseComboBox->setEnabled(true);
+        ui->medComboBox->setCurrentIndex(-1);//need to update
+        ui->medComboBox->setEnabled(true);
+        ui->dosageValueInNum->setEnabled(true);
+        ui->dosageValueInNum->setPlaceholderText("Value");
+        ui->dosageValueInUnits->setEnabled(true);
+        ui->dosageValueInUnits->setPlaceholderText("Units");
+        ui->intervaValueNum->setEnabled(true);
+        ui->intervaValueNum->setPlaceholderText("Value");
+        ui->intervalValueComboBox->setCurrentIndex(-1);//need to update
+        ui->intervalValueComboBox->setEnabled(true);
+        ui->dateBeginInput->setEnabled(true);
+        ui->dateEndInput->setEnabled(true);
+        ui->addToSchedule->setEnabled(true);
+        ui->removeFromSchedule->setEnabled(true);
     }
 }
 

@@ -430,14 +430,18 @@ QSqlQueryModel *Database::medList()
 
 void Database::addMeds(QString medicine)
 {
-    //create the med_code value
-    QString medCode = medicine.chopped(3);
-    qDebug()<<"The med code that will be created is "<<medCode<<" which comes from "<<medicine;
-
-    //actually push the values with an insert query
+    //create the med_code value from a count
     QSqlQuery qry;
+    qry.prepare("SELECT COUNT(*) FROM medicine");
+    qry.exec();
+    int medCount=0;
+    while(qry.next())
+    {
+        medCount=qry.value(0).toInt();
+    }
+    //actually push the values with an insert query
     qry.prepare("INSERT INTO medicine(med_id,med_name) VALUES(?,?);");
-    qry.addBindValue(medCode);
+    qry.addBindValue(medCount);
     qry.addBindValue(medicine);
     if(qry.exec())
     {
@@ -453,10 +457,10 @@ QStringList Database::listAvaliableMeds()
 {
     QStringList data;
     QSqlQuery qry;
-    qry.prepare("SELECT med_name FROM medicine");
+    qry.prepare("SELECT med_id, med_name FROM medicine");
     qry.exec();
     while(qry.next())
-        data<<qry.value(0).toString();
+        data<<qry.value(0).toString()+" "+qry.value(1).toString();
     return data;
 }
 
@@ -617,4 +621,36 @@ QSqlQueryModel *Database::scheduleTable()
     qry->exec();
     model->setQuery(std::move(*qry));
     return model;
+}
+
+void Database::addSchedule(QString patientID, QString medID, QString dosageNum, QString dosageUnit, QString dateStart, QString dateEnd, QString  nurseID, QString intervalNum, QString intervalUnit)
+{
+    QSqlQuery qry;
+    //prepare the schedule id that will be created
+    qry.prepare("SELECT COUNT(*) FROM schedule");
+    qry.exec();
+    qry.next();
+    int scheduleCount = qry.value(0).toInt();
+    qDebug()<<"Current Amount of schedules overall: "<<scheduleCount;
+    qry.clear();
+    //now to push the apporiate data into the db
+    qry.prepare("INSERT INTO schedule (schedule_id,patient_id,med_id,dosage_in_num,dosage_units,date_start,date_end,nurse_id,interval_in_num,interval_in_units)"
+                "VALUES (:sid,:pid,:mid,:dosageNum,:dosageUnits,:start,:end,:nid,:intervalNum,:intervalUnits);");
+    qry.bindValue(":sid",scheduleCount);
+    qry.bindValue(":pid",patientID);
+    qry.bindValue(":mid",medID);
+    qry.bindValue(":dosageNum",dosageNum);
+    qry.bindValue(":dosageUnits",dosageUnit);
+    qry.bindValue(":start",dateStart);
+    qry.bindValue(":end",dateEnd);
+    qry.bindValue(":nid",nurseID);
+    qry.bindValue(":intervalNum",intervalNum);
+    qry.bindValue(":intervalUnits",intervalUnit);
+    if(qry.exec())
+        qDebug()<<"Schedule successfully added";
+    else
+        qDebug()<<"Insert Schedule error: "<<qry.lastError().text();
+
+
+
 }

@@ -20,6 +20,7 @@ public:
 
 private slots:
     void updateButtonPressed();
+    void addButtonPressed();
     void on_medComboBox_textActivated(const QString &arg1);
 
     void on_patientComboBox_textActivated(const QString &arg1);

@@ -11,8 +11,8 @@ int main(int argc, char *argv[])
     db.setHostName("127.0.0.1");
     db.setUserName("root");
     db.setPassword("");//XAMPS Username
-    db.setDatabaseName("adminv3.0");//Josiah Login
-    //db.setDatabaseName("gui");
+    //db.setDatabaseName("adminv3.0");//Josiah Login
+    db.setDatabaseName("finalmaybe");
 
     if(!db.open())
     {
@@ -29,6 +29,6 @@ int main(int argc, char *argv[])
     Login w;
     w.show();
     return a.exec();
-    //just needed something
+    //just needed something agin
 
 }
