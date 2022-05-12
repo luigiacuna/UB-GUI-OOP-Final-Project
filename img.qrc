@@ -11,5 +11,8 @@
         <file>img/logout.png</file>
         <file>img/minus.png</file>
         <file>img/plus.png</file>
+        <file>img/report.png</file>
+        <file>img/illness.png</file>
+        <file>img/about.png</file>
     </qresource>
 </RCC>

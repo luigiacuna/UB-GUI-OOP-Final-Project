@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>427</width>
-    <height>283</height>
+    <width>709</width>
+    <height>482</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -23,7 +23,7 @@
      <x>10</x>
      <y>20</y>
      <width>401</width>
-     <height>241</height>
+     <height>256</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="mainLayout">
@@ -152,6 +152,22 @@
      </layout>
     </item>
    </layout>
+  </widget>
+  <widget class="QLabel" name="userpic">
+   <property name="geometry">
+    <rect>
+     <x>100</x>
+     <y>20</y>
+     <width>51</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap resource="img.qrc">:/img/img/username.png</pixmap>
+   </property>
   </widget>
  </widget>
  <resources>
