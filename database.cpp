@@ -667,7 +667,6 @@ QList<int> Database::medChart()
     while(qry.next())
         data<<qry.value(1).toInt();
 
-    //return qry.value(0).toString();
     return data;
 }
 

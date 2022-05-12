@@ -25,7 +25,7 @@ public:
     ~Login();
 private slots:
     void onOK();
-    void createNewUser();
+    //void createNewUser();
 private:
     Ui::Login *ui;
     Database db;

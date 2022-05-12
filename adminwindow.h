@@ -11,6 +11,10 @@
 #include "newuser.h"
 #include "Login.h"
 #include "edituser.h"
+
+#include <QTranslator>
+#include <QActionGroup>
+
 namespace Ui {
 class AdminWindow;
 }
@@ -41,10 +45,13 @@ private slots:
 
     void on_editUser_clicked();
 
+    void switchLanguage(QAction *);
+
 private:
     Ui::AdminWindow *ui;
     Database db;
     QString val;
+    QTranslator appTranslator;
 };
 
 #endif // ADMINWINDOW_H

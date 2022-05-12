@@ -35,6 +35,16 @@ AdminWindow::AdminWindow(QWidget *parent) :
     ui->statusbar->addPermanentWidget(ui->currrenTimeLabel);
     ui->statusbar->addPermanentWidget(ui->actualTimeLabel);
 
+    //Creating a QActionGroup to hold the english and spanish actions.
+    QActionGroup *languageActionGroup = new QActionGroup(ui->menuLanguage);
+
+    //Adding the English and Spanish action to a group.
+    //languageActionGroup->addAction(ui->actionEnglish);
+    languageActionGroup->addAction(ui->actionSpanish);
+
+    //Connecting the switchLanguage slot to the languageActionGroup
+    connect(languageActionGroup, SIGNAL (triggered(QAction*)), this, SLOT (switchLanguage(QAction*)));
+
 
 
 
@@ -135,3 +145,26 @@ void AdminWindow::on_editUser_clicked()
     ui->DeleteUser->setEnabled(false);
     ui->resetUserPasswordButton->setEnabled(false);
 }
+
+void AdminWindow::switchLanguage(QAction *action)
+{
+    qApp->removeTranslator(&appTranslator);
+
+    QString locale;
+
+    if (action->text() == "Spanish" || action->text() == "Espanol")
+        locale = "es";
+    else
+        locale = "en";
+
+    if (appTranslator.load(":/test_" + locale + ".qm"))
+        qApp->installTranslator(&appTranslator);
+
+    ui->retranslateUi(this);
+
+    QString Lang = action->text();
+    ui->statusbar->showMessage(tr("Language has changed to %1").arg(Lang), 1000);
+
+    setWindowIcon(action->icon());
+}
+
