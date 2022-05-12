@@ -8,7 +8,7 @@ Login::Login(QWidget *parent)
     ui->setupUi(this);
     //connects
     connect(ui->onOkButton,SIGNAL(clicked()),this,SLOT(onOK())); //check login credentials and stuff
-    connect(ui->newUser,SIGNAL(clicked()),this,SLOT(createNewUser())); //create a new user and stuff
+    //connect(ui->newUser,SIGNAL(clicked()),this,SLOT(createNewUser())); //create a new user and stuff
 
 }
 
@@ -66,20 +66,20 @@ void Login::onOK()//works like a set function
     //using a database class to seprate all the queries just cause more issues than answers so all queries happen in classes it needs to happen-> got it fixed now
 }
 
-void Login::createNewUser()//this can be probably be inhereitented since the doctor will have to be able to do this for patients
-{
-    //opens the newuser window to allow new users to create users neccessary?? not sure not will implement just in case
-    this->close();
-    NewUser newUser;
-    newUser.setModal(true);
-    newUser.exec();
+//void Login::createNewUser()//this can be probably be inhereitented since the doctor will have to be able to do this for patients
+//{
+//    //opens the newuser window to allow new users to create users neccessary?? not sure not will implement just in case
+//    this->close();
+//    NewUser newUser;
+//    newUser.setModal(true);
+//    newUser.exec();
 
-    //cause a potencial memory leak due to restablishing a connection to the db need a way to fix this
-    /*QSqlDatabasePrivate::removeDatabase: connection 'qt_sql_default_connection' is still in use, all queries will cease to work.
-    QSqlDatabasePrivate::addDatabase: duplicate connection name 'qt_sql_default_connection', old connection removed.*/
-    //April 18 2022 database was fixed until i realize it was still broken
-    //April 20 2022 fixed all database issues for sure now *knock wood*
-}
+//    //cause a potencial memory leak due to restablishing a connection to the db need a way to fix this
+//    /*QSqlDatabasePrivate::removeDatabase: connection 'qt_sql_default_connection' is still in use, all queries will cease to work.
+//    QSqlDatabasePrivate::addDatabase: duplicate connection name 'qt_sql_default_connection', old connection removed.*/
+//    //April 18 2022 database was fixed until i realize it was still broken
+//    //April 20 2022 fixed all database issues for sure now *knock wood*
+//}
 
 void Login::openRole(QString username)
 {

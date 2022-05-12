@@ -54,9 +54,16 @@ void DoctorView::on_Logout_clicked()
 
 void DoctorView::on_reportsButton_clicked()
 {
+    /*QBarSet * set0 = new QBarSet(db.medChart());
+    QBarSet * set1 = new QBarSet(db.medChart());
+    QBarSet * set2 = new QBarSet(db.medChart());
+    QBarSet * set3 = new QBarSet(db.medChart());
+    QBarSet * set4 = new QBarSet(db.medChart());*/
+    //QBarSet * set0 = new QBarSet("Medicine frequently used by patients");
 
 
-    QBarSet * set0 = new QBarSet("Medicine frequently used by patients");
+
+    QBarSet * set0 = new QBarSet("Medicine frequent");
     QList<int> values=db.medChart();
     qDebug()<<"Values figures: "<<values;
    for(int count =0;count<values.size();count++)
