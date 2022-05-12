@@ -50,8 +50,8 @@
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>53</y>
+     <x>10</x>
+     <y>0</y>
      <width>802</width>
      <height>726</height>
     </rect>
