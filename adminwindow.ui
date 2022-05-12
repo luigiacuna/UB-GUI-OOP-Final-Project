@@ -71,12 +71,20 @@
        <property name="text">
         <string>Edit User</string>
        </property>
+       <property name="icon">
+        <iconset resource="img.qrc">
+         <normaloff>:/img/img/username.png</normaloff>:/img/img/username.png</iconset>
+       </property>
       </widget>
      </item>
      <item>
       <widget class="QPushButton" name="createUserButton">
        <property name="text">
         <string>Create User</string>
+       </property>
+       <property name="icon">
+        <iconset resource="img.qrc">
+         <normaloff>:/img/img/new.png</normaloff>:/img/img/new.png</iconset>
        </property>
       </widget>
      </item>
@@ -85,12 +93,20 @@
        <property name="text">
         <string>Reset User Password</string>
        </property>
+       <property name="icon">
+        <iconset resource="img.qrc">
+         <normaloff>:/img/img/passkey.png</normaloff>:/img/img/passkey.png</iconset>
+       </property>
       </widget>
      </item>
      <item>
       <widget class="QPushButton" name="DeleteUser">
        <property name="text">
         <string>Delete User</string>
+       </property>
+       <property name="icon">
+        <iconset resource="img.qrc">
+         <normaloff>:/img/img/wrong.png</normaloff>:/img/img/wrong.png</iconset>
        </property>
       </widget>
      </item>
@@ -128,6 +144,10 @@
     <property name="text">
      <string>Logout</string>
     </property>
+    <property name="icon">
+     <iconset resource="img.qrc">
+      <normaloff>:/img/img/logout.png</normaloff>:/img/img/logout.png</iconset>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -136,7 +156,7 @@
      <x>0</x>
      <y>0</y>
      <width>542</width>
-     <height>20</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -166,6 +186,8 @@
    </property>
   </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="img.qrc"/>
+ </resources>
  <connections/>
 </ui>

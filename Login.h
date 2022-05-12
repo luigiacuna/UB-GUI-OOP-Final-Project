@@ -4,12 +4,13 @@
 #include <QDialog>
 #include <QSqlDatabase>
 #include <QSqlQuery>
-#include<QSqlError>
+#include <QSqlError>
 #include "newuser.h"
 #include "database.h"
 #include "adminwindow.h"
 #include "doctorview.h"
 #include "nurseview.h"
+#include <QPushButton>
 
 
 QT_BEGIN_NAMESPACE

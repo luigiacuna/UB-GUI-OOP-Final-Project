@@ -1,0 +1,15 @@
+<RCC>
+    <qresource prefix="/img">
+        <file>img/bg.png</file>
+        <file>img/correct.png</file>
+        <file>img/wrong.png</file>
+        <file>img/login.png</file>
+        <file>img/new.png</file>
+        <file>img/passkey.png</file>
+        <file>img/password.png</file>
+        <file>img/username.png</file>
+        <file>img/logout.png</file>
+        <file>img/minus.png</file>
+        <file>img/plus.png</file>
+    </qresource>
+</RCC>

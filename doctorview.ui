@@ -31,6 +31,10 @@
          <property name="text">
           <string>Add Medicine</string>
          </property>
+         <property name="icon">
+          <iconset resource="img.qrc">
+           <normaloff>:/img/img/plus.png</normaloff>:/img/img/plus.png</iconset>
+         </property>
         </widget>
        </item>
        <item>
@@ -38,12 +42,20 @@
          <property name="text">
           <string>Add Patient</string>
          </property>
+         <property name="icon">
+          <iconset resource="img.qrc">
+           <normaloff>:/img/img/new.png</normaloff>:/img/img/new.png</iconset>
+         </property>
         </widget>
        </item>
        <item>
         <widget class="QPushButton" name="viewPatient">
          <property name="text">
           <string>View Patient</string>
+         </property>
+         <property name="icon">
+          <iconset resource="img.qrc">
+           <normaloff>:/img/img/username.png</normaloff>:/img/img/username.png</iconset>
          </property>
         </widget>
        </item>
@@ -92,12 +104,16 @@
          <property name="text">
           <string>Logout</string>
          </property>
+         <property name="icon">
+          <iconset resource="img.qrc">
+           <normaloff>:/img/img/logout.png</normaloff>:/img/img/logout.png</iconset>
+         </property>
         </widget>
        </item>
        <item>
         <widget class="QPushButton" name="seeSchedule">
          <property name="text">
-          <string>Nurse Scedule</string>
+          <string>Nurse Schedule</string>
          </property>
         </widget>
        </item>
@@ -143,6 +159,8 @@
    </property>
   </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="img.qrc"/>
+ </resources>
  <connections/>
 </ui>

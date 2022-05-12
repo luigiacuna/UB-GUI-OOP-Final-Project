@@ -141,6 +141,10 @@
       <property name="text">
        <string>Update</string>
       </property>
+      <property name="icon">
+       <iconset resource="img.qrc">
+        <normaloff>:/img/img/correct.png</normaloff>:/img/img/correct.png</iconset>
+      </property>
      </widget>
     </item>
    </layout>
@@ -297,12 +301,20 @@
         <property name="text">
          <string>Add</string>
         </property>
+        <property name="icon">
+         <iconset resource="img.qrc">
+          <normaloff>:/img/img/plus.png</normaloff>:/img/img/plus.png</iconset>
+        </property>
        </widget>
       </item>
       <item>
        <widget class="QPushButton" name="removeFromSchedule">
         <property name="text">
          <string>Remove</string>
+        </property>
+        <property name="icon">
+         <iconset resource="img.qrc">
+          <normaloff>:/img/img/minus.png</normaloff>:/img/img/minus.png</iconset>
         </property>
        </widget>
       </item>
@@ -311,6 +323,8 @@
    </layout>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="img.qrc"/>
+ </resources>
  <connections/>
 </ui>

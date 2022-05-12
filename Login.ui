@@ -6,24 +6,34 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>917</width>
-    <height>600</height>
+    <width>830</width>
+    <height>474</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Login</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="img.qrc">
+    <normaloff>:/img/img/bg.png</normaloff>:/img/img/bg.png</iconset>
+  </property>
   <widget class="QLabel" name="tempLabel">
    <property name="geometry">
     <rect>
-     <x>380</x>
-     <y>120</y>
-     <width>151</width>
-     <height>31</height>
+     <x>390</x>
+     <y>130</y>
+     <width>61</width>
+     <height>41</height>
     </rect>
    </property>
    <property name="text">
-    <string>Final Project Login Layout</string>
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap resource="img.qrc">:/img/img/login.png</pixmap>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
    </property>
   </widget>
   <widget class="QWidget" name="layoutWidget">
@@ -41,7 +51,7 @@
       <item>
        <widget class="QLabel" name="userNameLabel">
         <property name="text">
-         <string>Username: </string>
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Username: &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
        </widget>
       </item>
@@ -62,7 +72,7 @@
       <item>
        <widget class="QLabel" name="passwordLabel">
         <property name="text">
-         <string>Password: </string>
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Password: &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
        </widget>
       </item>
@@ -83,6 +93,10 @@
       <property name="text">
        <string>Login</string>
       </property>
+      <property name="icon">
+       <iconset resource="img.qrc">
+        <normaloff>:/img/img/login.png</normaloff>:/img/img/login.png</iconset>
+      </property>
      </widget>
     </item>
     <item>
@@ -91,6 +105,10 @@
        <widget class="QPushButton" name="newUser">
         <property name="text">
          <string>New User</string>
+        </property>
+        <property name="icon">
+         <iconset resource="img.qrc">
+          <normaloff>:/img/img/new.png</normaloff>:/img/img/new.png</iconset>
         </property>
        </widget>
       </item>
@@ -140,7 +158,48 @@
     <string/>
    </property>
   </widget>
+  <widget class="QLabel" name="background">
+   <property name="geometry">
+    <rect>
+     <x>-2</x>
+     <y>-5</y>
+     <width>1011</width>
+     <height>491</height>
+    </rect>
+   </property>
+   <property name="autoFillBackground">
+    <bool>true</bool>
+   </property>
+   <property name="pixmap">
+    <pixmap resource="img.qrc">:/img/img/bg.png</pixmap>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignJustify|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="loginscreen">
+   <property name="geometry">
+    <rect>
+     <x>460</x>
+     <y>130</y>
+     <width>61</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; font-weight:700;&quot;&gt;LOGIN&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </widget>
+  <zorder>background</zorder>
+  <zorder>tempLabel</zorder>
+  <zorder>layoutWidget</zorder>
+  <zorder>userNameError</zorder>
+  <zorder>incorrectAnything</zorder>
+  <zorder>passwordError</zorder>
+  <zorder>loginscreen</zorder>
  </widget>
- <resources/>
+ <resources>
+  <include location="img.qrc"/>
+ </resources>
  <connections/>
 </ui>

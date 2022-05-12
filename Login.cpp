@@ -1,11 +1,19 @@
 #include "Login.h"
 #include "ui_Login.h"
 
+
 Login::Login(QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::Login)
 {
     ui->setupUi(this);
+    //picture for login screen
+   // QPixmap pic("C:/Users/malac/OneDrive/Documents/GitHub/UB-GUI-OOP-Final-Project/img"); //C:\Users\malac\OneDrive\Documents\GitHub\UB-GUI-OOP-Final-Project\img |:/img/bg.png
+   // ui->background->setPixmap(pic);
+
+    //second option
+    //(QPixmap(":/img/bg.png"));
+
     //connects
     connect(ui->onOkButton,SIGNAL(clicked()),this,SLOT(onOK())); //check login credentials and stuff
     connect(ui->newUser,SIGNAL(clicked()),this,SLOT(createNewUser())); //create a new user and stuff
@@ -111,4 +119,6 @@ void Login::openRole(QString username)
         qDebug()<<"It should not get here at all all checks has passed validation and inserted in the database with no null values";
     }
 }
+
+//adding beauty to the brains
 

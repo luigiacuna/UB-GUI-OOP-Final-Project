@@ -138,11 +138,17 @@
       <property name="text">
        <string>Create</string>
       </property>
+      <property name="icon">
+       <iconset resource="img.qrc">
+        <normaloff>:/img/img/new.png</normaloff>:/img/img/new.png</iconset>
+      </property>
      </widget>
     </item>
    </layout>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="img.qrc"/>
+ </resources>
  <connections/>
 </ui>
