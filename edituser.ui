@@ -6,18 +6,27 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>809</width>
-    <height>725</height>
+<<<<<<< Updated upstream
+    <width>582</width>
+    <height>470</height>
+=======
+    <width>896</width>
+    <height>871</height>
+>>>>>>> Stashed changes
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Edit User</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="img.qrc">
+    <normaloff>:/img/img/username.png</normaloff>:/img/img/username.png</iconset>
   </property>
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>300</y>
+     <x>50</x>
+     <y>370</y>
      <width>331</width>
      <height>26</height>
     </rect>
@@ -47,30 +56,24 @@
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="layoutWidget">
+  <widget class="QWidget" name="widget" native="true">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>53</y>
-     <width>802</width>
-     <height>726</height>
+     <x>10</x>
+     <y>20</y>
+     <width>411</width>
+     <height>331</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
-    <item>
-     <widget class="QLabel" name="editpic">
-      <property name="text">
-       <string/>
-      </property>
-      <property name="pixmap">
-       <pixmap resource="img.qrc">:/img/img/username.png</pixmap>
-      </property>
-     </widget>
-    </item>
-    <item>
+    <item alignment="Qt::AlignHCenter">
      <widget class="QLabel" name="editUserMainLabel">
       <property name="text">
-       <string/>
+<<<<<<< Updated upstream
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt; font-weight:700;&quot;&gt;Edit User&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+=======
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; font-weight:700;&quot;&gt;Edit User&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+>>>>>>> Stashed changes
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -78,34 +81,34 @@
      </widget>
     </item>
     <item>
-     <layout class="QHBoxLayout" name="horizontalLayout">
+     <layout class="QHBoxLayout" name="horizontalLayout" stretch="0,0">
       <item>
        <layout class="QVBoxLayout" name="labelsLayout">
         <item>
          <widget class="QLabel" name="firstNameLabel">
           <property name="text">
-           <string>First Name:</string>
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;First Name:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="lastNameLabel">
           <property name="text">
-           <string>Last Name: </string>
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Last Name: &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="userNameLabel">
           <property name="text">
-           <string>Username: </string>
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Username: &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="roleLabel">
           <property name="text">
-           <string>Role: </string>
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Role: &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
          </widget>
         </item>
@@ -153,8 +156,13 @@
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>370</x>
-     <y>170</y>
+<<<<<<< Updated upstream
+     <x>410</x>
+     <y>210</y>
+=======
+     <x>430</x>
+     <y>70</y>
+>>>>>>> Stashed changes
      <width>71</width>
      <height>81</height>
     </rect>
@@ -192,6 +200,30 @@
     </item>
    </layout>
   </widget>
+  <widget class="QLabel" name="edituserpic">
+   <property name="geometry">
+    <rect>
+     <x>18</x>
+     <y>35</y>
+     <width>461</width>
+<<<<<<< Updated upstream
+     <height>321</height>
+=======
+     <height>371</height>
+>>>>>>> Stashed changes
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap resource="img.qrc">:/img/img/background.png</pixmap>
+   </property>
+  </widget>
+  <zorder>edituserpic</zorder>
+  <zorder>layoutWidget</zorder>
+  <zorder>widget</zorder>
+  <zorder>layoutWidget</zorder>
  </widget>
  <resources>
   <include location="img.qrc"/>

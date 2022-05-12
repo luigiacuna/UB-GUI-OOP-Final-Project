@@ -26,7 +26,7 @@
     <item>
      <widget class="QLabel" name="patientInformation">
       <property name="text">
-       <string>Patient Information</string>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Patient Information&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -40,63 +40,63 @@
         <item>
          <widget class="QLabel" name="patientNameLabel">
           <property name="text">
-           <string>Patient</string>
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Patient&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="firstNameLabel">
           <property name="text">
-           <string>First Name</string>
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;First Name&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="lastNameLabel">
           <property name="text">
-           <string>Last Name</string>
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Last Name&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="ageLabel">
           <property name="text">
-           <string>Age</string>
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Age&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="phoneNumberLabel">
           <property name="text">
-           <string>Phone Number</string>
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Phone Number&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="genderLabel">
           <property name="text">
-           <string>Gender</string>
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Gender&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="dobLabel">
           <property name="text">
-           <string>DOB</string>
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;DOB&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="ssNumLabel">
           <property name="text">
-           <string>Social Security Number</string>
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Social Security Number&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="doctorLabel">
           <property name="text">
-           <string>Doctor</string>
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Doctor&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
          </widget>
         </item>
@@ -168,8 +168,8 @@
     <rect>
      <x>110</x>
      <y>350</y>
-     <width>781</width>
-     <height>481</height>
+     <width>761</width>
+     <height>261</height>
     </rect>
    </property>
   </widget>
@@ -186,7 +186,7 @@
     <item>
      <widget class="QLabel" name="scheduleTitle">
       <property name="text">
-       <string>Add to Pill Schedule</string>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Add to Pill Schedule&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -200,42 +200,42 @@
         <item>
          <widget class="QLabel" name="assignedNurseLabel">
           <property name="text">
-           <string>Assigned Nurse</string>
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Assigned Nurse&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="medLabel">
           <property name="text">
-           <string>Medicine</string>
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Medicine&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="dosageLabel">
           <property name="text">
-           <string>Dosage</string>
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Dosage&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="intervalLabel">
           <property name="text">
-           <string>Intervals</string>
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Intervals&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="dateBeginLabel">
           <property name="text">
-           <string>Begin</string>
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Begin&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="dateEndLabel">
           <property name="text">
-           <string>End</string>
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;End&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
          </widget>
         </item>
@@ -334,6 +334,10 @@
         <property name="text">
          <string>Update</string>
         </property>
+        <property name="icon">
+         <iconset resource="img.qrc">
+          <normaloff>:/img/img/correct.png</normaloff>:/img/img/correct.png</iconset>
+        </property>
        </widget>
       </item>
       <item>
@@ -357,17 +361,17 @@
      <x>10</x>
      <y>350</y>
      <width>101</width>
-     <height>481</height>
+     <height>261</height>
     </rect>
    </property>
   </widget>
   <widget class="QLabel" name="userpic">
    <property name="geometry">
     <rect>
-     <x>50</x>
+     <x>200</x>
      <y>-50</y>
-     <width>881</width>
-     <height>571</height>
+     <width>577</width>
+     <height>433</height>
     </rect>
    </property>
    <property name="text">
@@ -378,10 +382,10 @@
    </property>
   </widget>
   <zorder>userpic</zorder>
+  <zorder>idScheduleView</zorder>
   <zorder>layoutWidget</zorder>
   <zorder>scheduleView</zorder>
   <zorder>layoutWidget</zorder>
-  <zorder>tableView</zorder>
  </widget>
  <resources>
   <include location="img.qrc"/>

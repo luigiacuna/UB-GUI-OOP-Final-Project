@@ -152,6 +152,8 @@
      </layout>
     </item>
    </layout>
+<<<<<<< Updated upstream
+=======
   </widget>
   <widget class="QLabel" name="userpic">
    <property name="geometry">
@@ -168,6 +170,7 @@
    <property name="pixmap">
     <pixmap resource="img.qrc">:/img/img/username.png</pixmap>
    </property>
+>>>>>>> Stashed changes
   </widget>
   <widget class="QLabel" name="userpic_2">
    <property name="geometry">
@@ -187,7 +190,6 @@
   </widget>
   <zorder>userpic_2</zorder>
   <zorder>widget</zorder>
-  <zorder>userpic</zorder>
  </widget>
  <resources>
   <include location="img.qrc"/>
