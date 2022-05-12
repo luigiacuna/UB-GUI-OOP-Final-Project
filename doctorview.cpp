@@ -62,9 +62,6 @@ void DoctorView::on_reportsButton_clicked()
     //QBarSet * set0 = new QBarSet("Medicine frequently used by patients");
 
 
-//    QBarSet * set0 = new QBarSet(db.medChart())
-//    QBarSeries *series = new QBarSeries();
-//    series->append(set0);
 
     QBarSet * set0 = new QBarSet("Medicine frequent");
     QList<int> values=db.medChart();
