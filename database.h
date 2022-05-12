@@ -42,6 +42,7 @@ public:
     QStringList medCategory();
     QSqlQueryModel *showSchedule(QString,int);
     QSqlQueryModel *showScheduleID(QString, int);
+    void removeSchedule(QString);
 
 protected:
     int choice = 1;

@@ -58,8 +58,17 @@ EditPatient::EditPatient(QString patient, QWidget *parent) :
     ui->scheduleView->setModel(showSchedule("",2));
 
 
+    ui->idScheduleView->verticalHeader()->setVisible(false);
+    ui->idScheduleView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    ui->idScheduleView->setSelectionBehavior(QAbstractItemView::SelectItems);
+    ui->idScheduleView->setSelectionMode(QAbstractItemView::SingleSelection);
+    ui->idScheduleView->setModel(showScheduleID("",2));
+
+
+
     connect(ui->updateButton,SIGNAL(clicked()),this,SLOT(updateButtonPressed()));
     connect(ui->addToSchedule,SIGNAL(clicked()),this,SLOT(addButtonPressed()));
+    connect(ui->removeFromSchedule,SIGNAL(clicked()),this,SLOT(removeFromSchedulePressed()));
 }
 
 EditPatient::~EditPatient()
@@ -106,6 +115,9 @@ void EditPatient::updateButtonPressed()
         QString patientID = ui->patientComboBox->currentText().split(" ").at(0);//for the patient id to be correctly matched
         QString doctorID = ui->doctorComboBox->currentText().split(" ").at(0);
         updatePatient(patientID,ui->firstNameEdit->text(),ui->lastNameEdit->text(),ui->ageInput->text(),ui->phoneNumberEdit->text(),ui->genderComboBox->currentText(),ui->dobEdit->text(),ui->socialSecurityNumberInput->text(),doctorID);
+        ui->updateScheduleButton->setEnabled(false);
+        ui->removeFromSchedule->setEnabled(false);
+        ui->addToSchedule->setEnabled(true);
     }
 
 
@@ -159,7 +171,7 @@ void EditPatient::addButtonPressed()
     else
     {
         ui->intervaValueNum->setPlaceholderText("Value");
-        ui->intervalLabel->setText("Interval(*)");
+        ui->intervalLabel->setText("Interval");
         ui->intervalLabel->setStyleSheet("font-weight:normal;color:black;");
         intervalValueNumOK=true;
     }
@@ -201,7 +213,41 @@ void EditPatient::addButtonPressed()
                     ui->intervaValueNum->text(),                                  /*interval_in_num*/
                     ui->intervalValueComboBox->currentText()                      /*interval_in_units*/
                     );
+        ui->scheduleView->setModel(showSchedule(ui->patientComboBox->currentText().split(" ").at(0),1));
+        ui->idScheduleView->setModel(showScheduleID(ui->patientComboBox->currentText().split(" ").at(0),1));
+        ui->dosageValueInNum->setPlaceholderText("Value");
+        ui->dosageValueInNum->setText("");
+        ui->dosageLabel->setText("Dosage");
+        ui->dosageLabel->setStyleSheet("font-weight:normal;color:black;");
+
+        ui->dosageValueInUnits->setPlaceholderText("Units");
+        ui->dosageValueInUnits->setText("");
+        ui->dosageLabel->setText("Dosage");
+        ui->dosageLabel->setStyleSheet("font-weight:normal;color:black;");
+
+        ui->intervaValueNum->setPlaceholderText("Value");
+        ui->intervaValueNum->setText("");
+        ui->intervalLabel->setText("Interval");
+        ui->intervalLabel->setStyleSheet("font-weight:normal;color:black;");
+
+        ui->assignedNurseLabel->setText("Assigned Nurse");
+        ui->assignedNurseLabel->setStyleSheet("font-weight:normal;color:black;");
+
+        ui->medLabel->setText("Medicine");
+        ui->medLabel->setStyleSheet("font-weight:normal;color:black;");
+        ui->assignedNurseComboBox->setCurrentIndex(-1);
+        ui->medComboBox->setCurrentIndex(-1);
     }
+
+
+}
+
+void EditPatient::removeFromSchedulePressed()
+{
+    qDebug()<<"Removal of Schedule begin";
+    removeSchedule(sID);
+    ui->scheduleView->setModel(showSchedule(ui->patientComboBox->currentText().split(" ").at(0),1));
+    ui->idScheduleView->setModel(showScheduleID(ui->patientComboBox->currentText().split(" ").at(0),1));
 
 
 }
@@ -305,6 +351,7 @@ void EditPatient::on_patientComboBox_textActivated(const QString &arg1)
         ui->medLabel->setText("Medicine");
         ui->medLabel->setStyleSheet("font-weight:normal;color:black;");
         ui->scheduleView->setModel(showSchedule("",2));
+        ui->idScheduleView->setModel(showScheduleID("",2));
 
 
     }
@@ -353,9 +400,20 @@ void EditPatient::on_patientComboBox_textActivated(const QString &arg1)
         ui->addToSchedule->setEnabled(true);
         //now that all inputs are disable and enabled accoridiately grab the scedule for that particular partient
         ui->scheduleView->setModel(showSchedule(ui->patientComboBox->currentText().split(" ").at(0),1));
+        ui->idScheduleView->setModel(showScheduleID(ui->patientComboBox->currentText().split(" ").at(0),1));
     }
 }
 
 
 
+
+
+void EditPatient::on_idScheduleView_activated(const QModelIndex &index)
+{
+    ui->addToSchedule->setEnabled(false);
+    ui->updateScheduleButton->setEnabled(true);
+    ui->removeFromSchedule->setEnabled(true);
+    sID=ui->idScheduleView->model()->data(index).toString();
+    qDebug()<<"I have been summoned "<<sID;
+}
 
