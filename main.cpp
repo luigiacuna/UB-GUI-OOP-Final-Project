@@ -12,8 +12,8 @@ int main(int argc, char *argv[])
     db.setUserName("root");
     db.setPassword("");//XAMPS Username
     //db.setDatabaseName("adminv4.0");//Josiah Login
-    db.setDatabaseName("finalmaybe"); //Luigi Login
-    //db.setDatabaseName("final");//Abi Login
+   // db.setDatabaseName("finalmaybe"); //Luigi Login
+    db.setDatabaseName("final");//Abi Login
 
     if(!db.open())
     {

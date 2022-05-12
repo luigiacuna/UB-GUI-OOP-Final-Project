@@ -79,16 +79,6 @@
       </spacer>
      </item>
      <item>
-      <widget class="QLabel" name="editpic">
-       <property name="text">
-        <string/>
-       </property>
-       <property name="pixmap">
-        <pixmap resource="img.qrc">:/img/img/background.png</pixmap>
-       </property>
-      </widget>
-     </item>
-     <item>
       <widget class="QLabel" name="companyLogo">
        <property name="text">
         <string>Company Logo</string>
