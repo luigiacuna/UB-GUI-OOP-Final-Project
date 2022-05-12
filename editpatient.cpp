@@ -51,6 +51,13 @@ EditPatient::EditPatient(QString patient, QWidget *parent) :
 
 
     }
+    ui->scheduleView->verticalHeader()->setVisible(false);
+    ui->scheduleView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    ui->scheduleView->setSelectionBehavior(QAbstractItemView::SelectItems);
+    ui->scheduleView->setSelectionMode(QAbstractItemView::SingleSelection);
+    ui->scheduleView->setModel(showSchedule("",2));
+
+
     connect(ui->updateButton,SIGNAL(clicked()),this,SLOT(updateButtonPressed()));
     connect(ui->addToSchedule,SIGNAL(clicked()),this,SLOT(addButtonPressed()));
 }
@@ -297,6 +304,7 @@ void EditPatient::on_patientComboBox_textActivated(const QString &arg1)
 
         ui->medLabel->setText("Medicine");
         ui->medLabel->setStyleSheet("font-weight:normal;color:black;");
+        ui->scheduleView->setModel(showSchedule("",2));
 
 
     }
@@ -343,7 +351,11 @@ void EditPatient::on_patientComboBox_textActivated(const QString &arg1)
         ui->dateBeginInput->setEnabled(true);
         ui->dateEndInput->setEnabled(true);
         ui->addToSchedule->setEnabled(true);
-        ui->removeFromSchedule->setEnabled(true);
+        //now that all inputs are disable and enabled accoridiately grab the scedule for that particular partient
+        ui->scheduleView->setModel(showSchedule(ui->patientComboBox->currentText().split(" ").at(0),1));
     }
 }
+
+
+
 

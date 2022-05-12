@@ -159,12 +159,12 @@
     </item>
    </layout>
   </widget>
-  <widget class="QTableView" name="tableView">
+  <widget class="QTableView" name="scheduleView">
    <property name="geometry">
     <rect>
-     <x>10</x>
+     <x>110</x>
      <y>350</y>
-     <width>881</width>
+     <width>781</width>
      <height>481</height>
     </rect>
    </property>
@@ -338,6 +338,16 @@
      </layout>
     </item>
    </layout>
+  </widget>
+  <widget class="QTableView" name="tableView">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>350</y>
+     <width>101</width>
+     <height>481</height>
+    </rect>
+   </property>
   </widget>
  </widget>
  <resources/>

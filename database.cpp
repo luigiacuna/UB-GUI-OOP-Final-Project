@@ -683,3 +683,66 @@ QStringList Database::medCategory()
     }
     return data;
 }
+
+QSqlQueryModel *Database::showSchedule(QString patientID, int senario)//used in the editPatient Class to show the schedule for the selected patient
+{
+    QSqlQuery *qry = new QSqlQuery();
+    QSqlQueryModel *model = new QSqlQueryModel();
+    if(senario==1)
+    {
+    qry->prepare("SELECT schedule.schedule_id,"
+                 " patients.firstname,"
+                 " patients.lastname,"
+                 " medicine.med_name,"
+                 " schedule.dosage_in_num,"
+                 " schedule.dosage_units,"
+                 " schedule.date_start,"
+                 " schedule.date_end,"
+                 " schedule.interval_in_num,"
+                 " schedule.interval_in_units,"
+                 " nurse.firstname,"
+                 " nurse.lastname "
+                 "FROM schedule, patients, medicine, nurse "
+                 "WHERE patients.patient_id=:pid AND schedule.patient_id=:pid "
+                 "GROUP BY schedule.schedule_id;");
+    qry->bindValue(":pid",patientID);
+    qry->bindValue(":spid",patientID);
+    if(qry->exec())
+    {
+        qDebug()<<"Show schdeule success on edit patient";
+    }
+    else
+    {
+        qDebug()<<"showSchedule Error: "<<qry->lastError().text();
+    }
+    model->setQuery(std::move(*qry));
+    return model;
+    }
+    else if(senario == 2)
+    {
+        qry->prepare("SELECT schedule.schedule_id,"
+                     " patients.firstname,"
+                     " patients.lastname,"
+                     " medicine.med_name,"
+                     " schedule.dosage_in_num,"
+                     " schedule.dosage_units,"
+                     " schedule.date_start,"
+                     " schedule.date_end,"
+                     " schedule.interval_in_num,"
+                     " schedule.interval_in_units,"
+                     " nurse.firstname,"
+                     " nurse.lastname "
+                     "FROM schedule, patients, medicine, nurse "
+                     "WHERE patients.patient_id=:pid AND schedule.patient_id=:pid "
+                     "GROUP BY schedule.schedule_id;");
+        qry->exec();
+        model->setQuery(std::move(*qry));
+        return model;
+    }
+
+}
+
+QSqlQueryModel *Database::showScheduleID(QString, int)
+{
+
+}

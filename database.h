@@ -40,6 +40,8 @@ public:
     void addSchedule(QString,QString,QString,QString,QString,QString,QString,QString,QString);
     QList<int> medChart();
     QStringList medCategory();
+    QSqlQueryModel *showSchedule(QString,int);
+    QSqlQueryModel *showScheduleID(QString, int);
 
 protected:
     int choice = 1;

@@ -14,6 +14,7 @@ int main(int argc, char *argv[])
     //db.setDatabaseName("adminv4.0");//Josiah Login
     db.setDatabaseName("finalmaybe");//Luigi Login
 
+
     if(!db.open())
     {
         qDebug()<<"Database not open";

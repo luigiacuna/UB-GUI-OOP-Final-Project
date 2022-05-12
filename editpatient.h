@@ -25,6 +25,7 @@ private slots:
 
     void on_patientComboBox_textActivated(const QString &arg1);
 
+
 private:
     Ui::EditPatient *ui;
 };
