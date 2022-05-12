@@ -361,6 +361,27 @@
     </rect>
    </property>
   </widget>
+  <widget class="QLabel" name="userpic">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>-50</y>
+     <width>881</width>
+     <height>571</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap resource="img.qrc">:/img/img/background.png</pixmap>
+   </property>
+  </widget>
+  <zorder>userpic</zorder>
+  <zorder>layoutWidget</zorder>
+  <zorder>scheduleView</zorder>
+  <zorder>layoutWidget</zorder>
+  <zorder>tableView</zorder>
  </widget>
  <resources>
   <include location="img.qrc"/>

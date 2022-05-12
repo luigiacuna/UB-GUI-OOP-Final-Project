@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>516</width>
-    <height>280</height>
+    <width>594</width>
+    <height>446</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,7 +19,7 @@
      <x>10</x>
      <y>10</y>
      <width>491</width>
-     <height>263</height>
+     <height>494</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="mainLayout">
@@ -30,6 +30,16 @@
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="editpic">
+      <property name="text">
+       <string/>
+      </property>
+      <property name="pixmap">
+       <pixmap resource="img.qrc">:/img/img/username.png</pixmap>
       </property>
      </widget>
     </item>

@@ -58,6 +58,16 @@
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
+     <widget class="QLabel" name="editpic">
+      <property name="text">
+       <string/>
+      </property>
+      <property name="pixmap">
+       <pixmap resource="img.qrc">:/img/img/username.png</pixmap>
+      </property>
+     </widget>
+    </item>
+    <item>
      <widget class="QLabel" name="editUserMainLabel">
       <property name="text">
        <string/>
@@ -139,6 +149,8 @@
      </layout>
     </item>
    </layout>
+   <zorder>editpic</zorder>
+   <zorder>editUserMainLabel</zorder>
   </widget>
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">

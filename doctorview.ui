@@ -11,7 +11,11 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>DoctorView</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="img.qrc">
+    <normaloff>:/img/img/doctor.png</normaloff>:/img/img/doctor.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QWidget" name="layoutWidget">
@@ -19,7 +23,7 @@
      <rect>
       <x>40</x>
       <y>40</y>
-      <width>721</width>
+      <width>1058</width>
       <height>471</height>
      </rect>
     </property>
@@ -75,6 +79,16 @@
       </spacer>
      </item>
      <item>
+      <widget class="QLabel" name="editpic">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap resource="img.qrc">:/img/img/background.png</pixmap>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QLabel" name="companyLogo">
        <property name="text">
         <string>Company Logo</string>
@@ -115,12 +129,20 @@
          <property name="text">
           <string>Nurse Schedule</string>
          </property>
+         <property name="icon">
+          <iconset resource="img.qrc">
+           <normaloff>:/img/img/nurse.png</normaloff>:/img/img/nurse.png</iconset>
+         </property>
         </widget>
        </item>
        <item>
         <widget class="QPushButton" name="reportsButton">
          <property name="text">
           <string>Reports</string>
+         </property>
+         <property name="icon">
+          <iconset resource="img.qrc">
+           <normaloff>:/img/img/report.png</normaloff>:/img/img/report.png</iconset>
          </property>
         </widget>
        </item>
@@ -135,7 +157,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>20</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">

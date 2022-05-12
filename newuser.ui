@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>424</width>
+    <width>484</width>
     <height>285</height>
    </rect>
   </property>
@@ -17,7 +17,7 @@
    <iconset resource="img.qrc">
     <normaloff>:/img/img/new.png</normaloff>:/img/img/new.png</iconset>
   </property>
-  <widget class="QWidget" name="layoutWidget">
+  <widget class="QWidget" name="widget" native="true">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -30,7 +30,7 @@
     <item>
      <widget class="QLabel" name="mainTitle">
       <property name="text">
-       <string>Create a new User</string>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Create a new User&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -126,6 +126,13 @@
      </layout>
     </item>
     <item>
+     <widget class="QLabel" name="label">
+      <property name="text">
+       <string>TextLabel</string>
+      </property>
+     </widget>
+    </item>
+    <item>
      <layout class="QHBoxLayout" name="buttonsLayout">
       <item>
        <widget class="QPushButton" name="okButton">
@@ -156,10 +163,10 @@
   <widget class="QLabel" name="userpic">
    <property name="geometry">
     <rect>
-     <x>100</x>
+     <x>-30</x>
      <y>20</y>
-     <width>51</width>
-     <height>41</height>
+     <width>451</width>
+     <height>261</height>
     </rect>
    </property>
    <property name="text">
@@ -169,6 +176,25 @@
     <pixmap resource="img.qrc">:/img/img/username.png</pixmap>
    </property>
   </widget>
+  <widget class="QLabel" name="userpic_2">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>10</y>
+     <width>481</width>
+     <height>271</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap resource="img.qrc">:/img/img/background.png</pixmap>
+   </property>
+  </widget>
+  <zorder>userpic_2</zorder>
+  <zorder>widget</zorder>
+  <zorder>userpic</zorder>
  </widget>
  <resources>
   <include location="img.qrc"/>

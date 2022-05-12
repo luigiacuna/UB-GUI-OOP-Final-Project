@@ -63,6 +63,16 @@
      </layout>
     </item>
     <item>
+     <widget class="QLabel" name="medpic">
+      <property name="text">
+       <string/>
+      </property>
+      <property name="pixmap">
+       <pixmap resource="img.qrc">:/img/img/pills.png</pixmap>
+      </property>
+     </widget>
+    </item>
+    <item>
      <widget class="QTableView" name="avaliableMedsView"/>
     </item>
     <item>

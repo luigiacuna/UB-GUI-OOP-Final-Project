@@ -100,19 +100,7 @@
      </widget>
     </item>
     <item>
-     <layout class="QHBoxLayout" name="horizontalLayout">
-      <item>
-       <widget class="QPushButton" name="newUser">
-        <property name="text">
-         <string>New User</string>
-        </property>
-        <property name="icon">
-         <iconset resource="img.qrc">
-          <normaloff>:/img/img/new.png</normaloff>:/img/img/new.png</iconset>
-        </property>
-       </widget>
-      </item>
-     </layout>
+     <layout class="QHBoxLayout" name="horizontalLayout"/>
     </item>
    </layout>
   </widget>
@@ -171,7 +159,7 @@
     <bool>true</bool>
    </property>
    <property name="pixmap">
-    <pixmap resource="img.qrc">:/img/img/bg.png</pixmap>
+    <pixmap resource="img.qrc">:/img/img/background.png</pixmap>
    </property>
    <property name="alignment">
     <set>Qt::AlignJustify|Qt::AlignTop</set>
