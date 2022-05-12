@@ -351,7 +351,7 @@
     </item>
    </layout>
   </widget>
-  <widget class="QTableView" name="tableView">
+  <widget class="QTableView" name="idScheduleView">
    <property name="geometry">
     <rect>
      <x>10</x>

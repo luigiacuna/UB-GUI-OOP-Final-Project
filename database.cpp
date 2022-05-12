@@ -627,10 +627,11 @@ void Database::addSchedule(QString patientID, QString medID, QString dosageNum, 
 {
     QSqlQuery qry;
     //prepare the schedule id that will be created
-    qry.prepare("SELECT COUNT(*) FROM schedule");
+    //qry.prepare("SELECT COUNT(*) FROM schedule");
+    qry.prepare("SELECT schedule_id FROM schedule ORDER BY schedule_id DESC LIMIT 1");
     qry.exec();
     qry.next();
-    int scheduleCount = qry.value(0).toInt();
+    int scheduleCount = qry.value(0).toInt()+1;
     qDebug()<<"Current Amount of schedules overall: "<<scheduleCount;
     qry.clear();
     //now to push the apporiate data into the db
@@ -689,7 +690,7 @@ QSqlQueryModel *Database::showSchedule(QString patientID, int senario)//used in 
     QSqlQueryModel *model = new QSqlQueryModel();
     if(senario==1)
     {
-    qry->prepare("SELECT schedule.schedule_id,"
+    qry->prepare("SELECT "
                  " patients.firstname,"
                  " patients.lastname,"
                  " medicine.med_name,"
@@ -719,7 +720,7 @@ QSqlQueryModel *Database::showSchedule(QString patientID, int senario)//used in 
     }
     else if(senario == 2)
     {
-        qry->prepare("SELECT schedule.schedule_id,"
+        qry->prepare("SELECT "
                      " patients.firstname,"
                      " patients.lastname,"
                      " medicine.med_name,"
@@ -741,7 +742,52 @@ QSqlQueryModel *Database::showSchedule(QString patientID, int senario)//used in 
 
 }
 
-QSqlQueryModel *Database::showScheduleID(QString, int)
+QSqlQueryModel *Database::showScheduleID(QString patientID, int senario)
 {
+    QSqlQuery *qry = new QSqlQuery();
+    QSqlQueryModel *model = new QSqlQueryModel();
+    if(senario == 1)
+    {
+        qry->prepare("SELECT schedule_id FROM schedule WHERE patient_id=:id ORDER BY schedule_id ASC;");
+        qry->bindValue(":id",patientID);
+        if(qry->exec())
+        {
+            qDebug()<<"Schedule ID with nothing in it success";
+        }
+        else
+        {
+            qDebug()<<"Schedule ID with nothing in it error: "<<qry->lastError().text();
+        }
+        model->setQuery(std::move(*qry));
+        return model;
+    }
+    else if(senario == 2)
+    {
+        qry->prepare("SELECT schedule_id FROM schedule WHERE schedule_id = -1 ORDER BY schedule_id ASC;");
+        if(qry->exec())
+        {
+            qDebug()<<"Schedule ID with nothing in it success";
+        }
+        else
+        {
+            qDebug()<<"Schedule ID with nothing in it error: "<<qry->lastError().text();
+        }
+        model->setQuery(std::move(*qry));
+        return model;
+    }
+}
 
+void Database::removeSchedule(QString scheduleID)
+{
+    QSqlQuery qry;
+    qry.prepare("DELETE FROM schedule WHERE schedule_id=:id");
+    qry.bindValue(":id",scheduleID);
+    if(qry.exec())
+    {
+        qDebug()<<"Schedule successfully removed from table";
+    }
+    else
+    {
+        qDebug()<<"Schedule removal failed "<<qry.lastError().text();
+    }
 }

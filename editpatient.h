@@ -21,13 +21,17 @@ public:
 private slots:
     void updateButtonPressed();
     void addButtonPressed();
+    void removeFromSchedulePressed();
     void on_medComboBox_textActivated(const QString &arg1);
 
     void on_patientComboBox_textActivated(const QString &arg1);
 
 
+    void on_idScheduleView_activated(const QModelIndex &index);
+
 private:
     Ui::EditPatient *ui;
+    QString sID;
 };
 
 #endif // EDITPATIENT_H
