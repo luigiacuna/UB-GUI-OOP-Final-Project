@@ -5,6 +5,7 @@
 #include <database.h>
 #include "adminwindow.h"
 
+
 namespace Ui {
 class ResetPassword;
 }

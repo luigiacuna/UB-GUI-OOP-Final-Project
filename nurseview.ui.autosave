@@ -14,19 +14,6 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="Log">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>520</y>
-      <width>80</width>
-      <height>24</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Log</string>
-    </property>
-   </widget>
    <widget class="QTableView" name="schedule">
     <property name="geometry">
      <rect>
@@ -54,7 +41,7 @@
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
-     <string>Herpes Me</string>
+     <string>Help</string>
     </property>
     <addaction name="actionAbout"/>
    </widget>

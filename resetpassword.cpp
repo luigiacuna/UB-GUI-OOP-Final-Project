@@ -18,18 +18,19 @@ ResetPassword::~ResetPassword()
 
 void ResetPassword::okButtonPressed()
 {
-    if(ui->newPasswordInput->text()==ui->renterPasswordInput->text())
-    {
-        db.resetPassword(idNum,ui->newPasswordInput->text());
-        QMessageBox::information(this,"Success","Password Reseted!");
-        this->close();
+        if(ui->newPasswordInput->text()==ui->renterPasswordInput->text())
+        {
+            db.resetPassword(idNum,ui->newPasswordInput->text());
+            QMessageBox::information(this,"Success","Password Reseted!");
+            this->close();
 
-    }
-    else
-    {
-        //complain to the user that the two passwords do not match and go again
-        QMessageBox::warning(this,"Warning","These Passwords do not match");
-    }
+        }
+        else
+        {
+            //throw 99;
+            //complain to the user that the two passwords do not match and go again
+            QMessageBox::warning(this,"Warning","These Passwords do not match");
+        }
 }
 
 void ResetPassword::cancelButtonPressed()

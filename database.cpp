@@ -79,7 +79,14 @@ bool Database::addUser(int id,QString username, QString firstName, QString lastN
             qry.addBindValue(usersCount+1);
             qry.bindValue(":username", username);
             qry.bindValue(":password", password);
-            qry.bindValue(":role", type);
+            //small change here it add correctly and everything just the role is case-sensitive and hold certain spelling so this quick if else will handle it
+            if(type == "Administrator")
+                qry.bindValue(":role", "admin");
+            else if(type == "Doctor")
+                qry.bindValue(":role", "doctor");
+            else if(type == "Nurse")
+                qry.bindValue(":role", "nurse");
+
             if(qry.exec())
             {
                 qDebug()<<"Insert at users table success";
@@ -238,18 +245,29 @@ QSqlQueryModel* Database::adminTable(int num)//updates the two table widgets in 
 
 void Database::resetPassword(QString newPassword, QString id)//setfunction
 {
-    QSqlQuery qry;
-    qry.prepare("UPDATE users SET password=:pass WHERE id=:id");
-    qry.bindValue(":pass",newPassword);
-    qry.bindValue(":id",id);
-    if(qry.exec())
+    try
     {
-        qDebug()<<"Passwords has been reset";
+        QSqlQuery qry;
+        qry.prepare("UPDATE users SET password=:pass WHERE id=:id");
+        qry.bindValue(":pass",newPassword);
+        qry.bindValue(":id",id);
+
+        if(qry.exec())
+        {
+            qDebug()<<"Passwords has been reset";
+        }
+        else
+        {
+            throw 0;
+            qDebug()<<qry.lastError().text();
+        }
     }
-    else
+    catch(int x)
     {
-        qDebug()<<qry.lastError().text();
+        qDebug()<<"ERROR CODE "<< x << " Query did not execute";
     }
+
+
 }
 
 void Database::deleteUser(QString username)
@@ -412,14 +430,18 @@ QSqlQueryModel *Database::medList()
 
 void Database::addMeds(QString medicine)
 {
-    //create the med_code value
-    QString medCode = medicine.chopped(3);
-    qDebug()<<"The med code that will be created is "<<medCode<<" which comes from "<<medicine;
-
-    //actually push the values with an insert query
+    //create the med_code value from a count
     QSqlQuery qry;
+    qry.prepare("SELECT COUNT(*) FROM medicine");
+    qry.exec();
+    int medCount=0;
+    while(qry.next())
+    {
+        medCount=qry.value(0).toInt();
+    }
+    //actually push the values with an insert query
     qry.prepare("INSERT INTO medicine(med_id,med_name) VALUES(?,?);");
-    qry.addBindValue(medCode);
+    qry.addBindValue(medCount);
     qry.addBindValue(medicine);
     if(qry.exec())
     {
@@ -435,10 +457,10 @@ QStringList Database::listAvaliableMeds()
 {
     QStringList data;
     QSqlQuery qry;
-    qry.prepare("SELECT med_name FROM medicine");
+    qry.prepare("SELECT med_id, med_name FROM medicine");
     qry.exec();
     while(qry.next())
-        data<<qry.value(0).toString();
+        data<<qry.value(0).toString()+" "+qry.value(1).toString();
     return data;
 }
 
@@ -466,10 +488,10 @@ QStringList Database::listAvaliableNurses()
     //since in the database nurse table the first name and last name is seperated this will need to be combined somehow
     QSqlQuery qry;
     QStringList data;
-    qry.prepare("SELECT firstname,lastname FROM nurse");//only grabs whatever was called first and is able to pass in to a StringList
+    qry.prepare("SELECT id, firstname,lastname FROM nurse");//only grabs whatever was called first and is able to pass in to a StringList
     qry.exec();
     while(qry.next())
-        data<<qry.value(0).toString() + " " + qry.value(1).toString();
+        data<<qry.value(0).toString()+" "+qry.value(1).toString() + " " + qry.value(2).toString();
     qDebug()<<"List of Avaliable Nurses: "<<data;
     return data;
 }
@@ -520,9 +542,206 @@ QStringList Database::listAvaliablePatients()
 {
     QStringList data;
     QSqlQuery qry;
-    qry.prepare("SELECT lastname,firstname FROM patients;");
+    qry.prepare("SELECT patient_id, lastname,firstname FROM patients;");
     qry.exec();
     while(qry.next())
-        data<<qry.value(0).toString()+", "+qry.value(1).toString();
+        data<<qry.value(0).toString()+" "+qry.value(1).toString()+", "+qry.value(2).toString();
     return data;
+}
+
+QStringList Database::selectedPatientInfo(QString patientID)
+{
+    qDebug()<<"Patient ID being pushed in is: "<<patientID;
+    QStringList data;
+    QSqlQuery qry;
+    qry.prepare("SELECT firstname,lastName,age,phonenumber,gender,dob,socialsecruity FROM patients WHERE patient_id=:id;");
+    qry.bindValue(":id",patientID);
+    qry.exec();
+    qry.next();
+    data<<qry.value(0).toString()<<qry.value(1).toString()<<qry.value(2).toString()<<qry.value(3).toString()<<qry.value(4).toString()<<qry.value(5).toString()<<qry.value(6).toString();
+    qry.clear();
+
+    qry.prepare("SELECT doctor.id, doctor.firstname, doctor.lastname FROM doctor WHERE id IN (SELECT doctor_id FROM patients WHERE patient_id=:id);");
+    qry.bindValue(":id",patientID);
+    qry.exec();
+    qry.next();
+    data<<qry.value(0).toString()+" "+qry.value(1).toString()+" "+qry.value(2).toString();
+    qDebug()<<"selected Patient Data: "<<data;
+    return data;
+}
+
+QStringList Database::listAvaliableDoctors()
+{
+    QSqlQuery qry;
+    QStringList data;
+    qry.prepare("SELECT id, firstname,lastname FROM doctor");//only grabs whatever was called first and is able to pass in to a StringList
+    qry.exec();
+    while(qry.next())
+        data<<qry.value(0).toString()+" "+qry.value(1).toString() + " " + qry.value(2).toString();
+    qDebug()<<"List of Avaliable Nurses: "<<data;
+    return data;
+}
+
+void Database::updatePatient(QString id, QString firstname, QString lastname, QString age, QString phone, QString gender, QString dob, QString ss, QString doc_id)
+{
+    QSqlQuery qry;
+    //qry.prepare("UPDATE users SET password=:pass WHERE id=:id");
+    qry.prepare("UPDATE patients SET firstName=:first,"
+                "                    lastName=:last,"
+                "                    age=:num,"
+                "                    phonenumber=:phonenum,"
+                "                    gender=:identifier,"
+                "                    dob=:birth,"
+                "                    socialsecruity=:ssNum,"
+                "                    doctor_id=:doc WHERE patient_id=:id");
+    qry.bindValue(":first",firstname);
+    qry.bindValue(":last",lastname);
+    qry.bindValue(":num",age);
+    qry.bindValue(":phonenum",phone);
+    qry.bindValue(":identifier",gender);
+    qry.bindValue(":birth",dob);
+    qry.bindValue(":ssNum",ss);
+    qry.bindValue(":doc",doc_id);
+    qry.bindValue(":id",id);
+    if(qry.exec())
+    {
+        qDebug()<<"Patient Data successfully updated";
+    }
+    else
+    {
+        qDebug()<<qry.lastError().text();
+    }
+}
+
+QSqlQueryModel *Database::scheduleTable()
+{
+    QSqlQuery *qry = new QSqlQuery();
+    QSqlQueryModel *model=new QSqlQueryModel();
+    qry->prepare("SELECT schedule_id, patient_id, med_id, dosage_in_num, dosage_units, date_start, date_end FROM schedule;");
+    qry->exec();
+    model->setQuery(std::move(*qry));
+    return model;
+}
+
+void Database::addSchedule(QString patientID, QString medID, QString dosageNum, QString dosageUnit, QString dateStart, QString dateEnd, QString  nurseID, QString intervalNum, QString intervalUnit)
+{
+    QSqlQuery qry;
+    //prepare the schedule id that will be created
+    qry.prepare("SELECT COUNT(*) FROM schedule");
+    qry.exec();
+    qry.next();
+    int scheduleCount = qry.value(0).toInt();
+    qDebug()<<"Current Amount of schedules overall: "<<scheduleCount;
+    qry.clear();
+    //now to push the apporiate data into the db
+    qry.prepare("INSERT INTO schedule (schedule_id,patient_id,med_id,dosage_in_num,dosage_units,date_start,date_end,nurse_id,interval_in_num,interval_in_units)"
+                "VALUES (:sid,:pid,:mid,:dosageNum,:dosageUnits,:start,:end,:nid,:intervalNum,:intervalUnits);");
+    qry.bindValue(":sid",scheduleCount);
+    qry.bindValue(":pid",patientID);
+    qry.bindValue(":mid",medID);
+    qry.bindValue(":dosageNum",dosageNum);
+    qry.bindValue(":dosageUnits",dosageUnit);
+    qry.bindValue(":start",dateStart);
+    qry.bindValue(":end",dateEnd);
+    qry.bindValue(":nid",nurseID);
+    qry.bindValue(":intervalNum",intervalNum);
+    qry.bindValue(":intervalUnits",intervalUnit);
+    if(qry.exec())
+        qDebug()<<"Schedule successfully added";
+    else
+        qDebug()<<"Insert Schedule error: "<<qry.lastError().text();
+
+
+
+}
+
+QList<int> Database::medChart()
+{
+    QSqlQuery qry;
+
+    qry.prepare("SELECT med_id, COUNT(*) FROM schedule GROUP BY med_id;");
+
+    QList<int> data;
+    qry.prepare("SELECT medicine.med_id,COUNT(schedule.med_id) AS MedCount FROM medicine LEFT JOIN schedule ON schedule.med_id = medicine.med_id GROUP BY med_id;");
+    qry.exec();
+    while(qry.next())
+        data<<qry.value(1).toInt();
+
+    return data;
+}
+
+QStringList Database::medCategory()
+{
+    QSqlQuery qry;
+    QStringList data;
+    qry.prepare("SELECT med_name FROM medicine");
+    qry.exec();
+    while(qry.next())
+    {
+        data<<qry.value(0).toStringList();
+    }
+    return data;
+}
+
+QSqlQueryModel *Database::showSchedule(QString patientID, int senario)//used in the editPatient Class to show the schedule for the selected patient
+{
+    QSqlQuery *qry = new QSqlQuery();
+    QSqlQueryModel *model = new QSqlQueryModel();
+    if(senario==1)
+    {
+    qry->prepare("SELECT schedule.schedule_id,"
+                 " patients.firstname,"
+                 " patients.lastname,"
+                 " medicine.med_name,"
+                 " schedule.dosage_in_num,"
+                 " schedule.dosage_units,"
+                 " schedule.date_start,"
+                 " schedule.date_end,"
+                 " schedule.interval_in_num,"
+                 " schedule.interval_in_units,"
+                 " nurse.firstname,"
+                 " nurse.lastname "
+                 "FROM schedule, patients, medicine, nurse "
+                 "WHERE patients.patient_id=:pid AND schedule.patient_id=:pid "
+                 "GROUP BY schedule.schedule_id;");
+    qry->bindValue(":pid",patientID);
+    qry->bindValue(":spid",patientID);
+    if(qry->exec())
+    {
+        qDebug()<<"Show schdeule success on edit patient";
+    }
+    else
+    {
+        qDebug()<<"showSchedule Error: "<<qry->lastError().text();
+    }
+    model->setQuery(std::move(*qry));
+    return model;
+    }
+    else if(senario == 2)
+    {
+        qry->prepare("SELECT schedule.schedule_id,"
+                     " patients.firstname,"
+                     " patients.lastname,"
+                     " medicine.med_name,"
+                     " schedule.dosage_in_num,"
+                     " schedule.dosage_units,"
+                     " schedule.date_start,"
+                     " schedule.date_end,"
+                     " schedule.interval_in_num,"
+                     " schedule.interval_in_units,"
+                     " nurse.firstname,"
+                     " nurse.lastname "
+                     "FROM schedule, patients, medicine, nurse "
+                     "WHERE patients.patient_id=:pid AND schedule.patient_id=:pid "
+                     "GROUP BY schedule.schedule_id;");
+        qry->exec();
+        model->setQuery(std::move(*qry));
+        return model;
+    }
+
+}
+
+QSqlQueryModel *Database::showScheduleID(QString, int)
+{
+
 }

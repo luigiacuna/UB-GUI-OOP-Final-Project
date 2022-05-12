@@ -171,8 +171,15 @@
     </property>
     <addaction name="actionAbout"/>
    </widget>
+   <widget class="QMenu" name="menuLanguage">
+    <property name="title">
+     <string>Language</string>
+    </property>
+    <addaction name="actionSpanish"/>
+   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuHelp"/>
+   <addaction name="menuLanguage"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionAbout">
@@ -183,6 +190,11 @@
   <action name="actionExit">
    <property name="text">
     <string>Exit</string>
+   </property>
+  </action>
+  <action name="actionSpanish">
+   <property name="text">
+    <string>Spanish</string>
    </property>
   </action>
  </widget>
