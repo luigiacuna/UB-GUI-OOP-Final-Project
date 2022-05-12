@@ -152,8 +152,8 @@
    <widget class="QLabel" name="admin">
     <property name="geometry">
      <rect>
-      <x>0</x>
-      <y>0</y>
+      <x>150</x>
+      <y>310</y>
       <width>800</width>
       <height>237</height>
      </rect>
@@ -181,6 +181,15 @@
      <pixmap resource="img.qrc">:/img/img/background.png</pixmap>
     </property>
    </widget>
+   <zorder>background</zorder>
+   <zorder>currrenTimeLabel</zorder>
+   <zorder>actualTimeLabel</zorder>
+   <zorder>adminLabel</zorder>
+   <zorder>layoutWidget</zorder>
+   <zorder>usernameView</zorder>
+   <zorder>everythingElse</zorder>
+   <zorder>Logout</zorder>
+   <zorder>admin</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

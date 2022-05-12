@@ -159,6 +159,8 @@
      </layout>
     </item>
    </layout>
+   <zorder>label</zorder>
+   <zorder>mainTitle</zorder>
   </widget>
   <widget class="QLabel" name="userpic">
    <property name="geometry">
